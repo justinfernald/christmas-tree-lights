@@ -5,7 +5,11 @@ export class Light {
     location: Vector3;
     color: Color;
 
-    update?: (timeMs: number, deltaMs: number |  null) => Color | void;
+    update?: (
+        timeMs: number,
+        deltaMs: number | null,
+        iteration: number
+    ) => Color | void;
 
     constructor(location: Vector3, color: Color) {
         this.location = location;
