@@ -1,6 +1,7 @@
 import { Runner } from "./Runner";
+import ws281x from "rpi-ws281x-native";
 
-class LightRunner extends Runner {
+export class LightRunner extends Runner {
     fps = 60;
     channel: ReturnType<typeof ws281x>;
 
@@ -27,5 +28,7 @@ class LightRunner extends Runner {
         for (const [i, light] of this.lights.entries()) {
             this.channel.array[i] = light.color.toInt();
         }
+
+        ws281x.render();
     }
 }
