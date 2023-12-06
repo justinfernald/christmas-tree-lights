@@ -1,13 +1,21 @@
 {
-    "compilerOptions": {
-        "target": "ES2022",
-        "module": "commonjs",
-        "outDir": "dist",
-        "rootDir": "src",
-        "strict": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "rootDirs": ["src", "animations"]
-    },
-    "include": ["src/**/*", "animations/**/*"]
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "commonjs",
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "rootDirs": ["src", "animations"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "sourceMap": true,
+    "types": ["vite/client", "@emotion/react/types/css-prop"]
+  },
+  "include": ["src", "animations"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -3,6 +3,7 @@ import { Light } from "../utils/Light";
 import { Vector3 } from "../utils/Vector3";
 
 import locations from "../locations.json";
+import { sleep } from "../utils/Time";
 
 export abstract class Runner {
     abstract fps: number;
@@ -15,25 +16,56 @@ export abstract class Runner {
             new Light(Vector3.fromObject(location), new Color(255, 0, 0))
     );
 
-    startTime: number | null = null;
-    lastRun: number | null = null;
+    time: number | null = null;
 
-    run(iteration = 0) {
-        if (iteration === 0) {
-            this.startTime = Date.now();
-            this.setup?.();
+    iteration = 0;
+
+    running = false;
+
+    async run() {
+        if (!this.running || this.time === null) {
+            this.time = 0;
+            this.running = true;
         }
 
-        const time = this.startTime ? Date.now() - this.startTime : 0;
-        const delta = this.lastRun ? time - this.lastRun : null;
-        this.lastRun = time;
+        while (true) {
+            if (!this.running) {
+                break;
+            }
 
-        this.update?.(time, delta, iteration);
-        this.lightUpdate(time, delta, iteration);
+            const delta = 1000 / this.fps;
 
-        this.draw?.();
+            this.iteration++;
+            this.time += delta;
 
-        setTimeout(() => this.run(iteration + 1), 1000 / this.fps);
+            this.update?.(this.time, delta, this.iteration);
+            this.lightUpdate(this.time, delta, this.iteration);
+
+            this.draw();
+
+            await sleep(delta);
+        }
+    }
+
+    reset() {
+        this.iteration = 0;
+        this.running = false;
+        this.time = null;
+    }
+
+    pause() {
+        this.running = false;
+    }
+
+    play() {
+        this.running = true;
+        this.run();
+    }
+
+    step() {
+        this.running = true;
+        this.run();
+        this.running = false;
     }
 
     lightUpdate(time: number, delta: number | null, iteration: number) {

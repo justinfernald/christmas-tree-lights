@@ -2,21 +2,24 @@ const ws281x = require('rpi-ws281x-native');
 
 const NUM_LEDS = 500;
 
-const channel = ws281x(NUM_LEDS, {stripType: ws281x.stripType.WS2811_RGB, brightness: 255 * 0.1});
+const channel = ws281x(NUM_LEDS, {
+  stripType: ws281x.stripType.WS2811_RGB,
+  brightness: 255 * 0.1,
+});
 
 // ---- trap the SIGINT and reset before exit
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
   ws281x.reset();
   ws281x.finalize();
 
-  process.nextTick(function() {
+  process.nextTick(function () {
     process.exit(0);
   });
 });
 
 // ---- animation-loop
 let offset = 0;
-setInterval(function() {
+setInterval(function () {
   for (let i = 0; i < NUM_LEDS; i++) {
     channel.array[i] = colorwheel((offset + i) % 256);
   }

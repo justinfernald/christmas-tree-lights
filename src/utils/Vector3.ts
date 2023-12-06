@@ -123,6 +123,7 @@ export class Vector3 {
         return new Vector3(-this.x, -this.y, -this.z);
     }
 
+    /** In radians */
     rotateXYZ(angles: { x: number; y: number; z: number }): Vector3 {
         const { x, y, z } = angles;
 
@@ -147,6 +148,7 @@ export class Vector3 {
         return new Vector3(rotatedX, rotatedY, rotatedZ);
     }
 
+    /** In radians */
     rotateXY(angle: number): Vector3 {
         const cosTheta = Math.cos(angle);
         const sinTheta = Math.sin(angle);
@@ -218,10 +220,6 @@ export class Vector3 {
 
         const scalar = dotProduct / magnitudeSquared;
         return v.scale(scalar);
-    }
-
-    rejectFrom(v: Vector3): Vector3 {
-        return this.sub(this.projectOnto(v));
     }
 
     midpoint(v: Vector3): Vector3 {

@@ -1,11 +1,4 @@
-import { Color } from "./utils/Color";
-import { LocalRunner } from "./runners/LocalRunner";
-import { LightRunner } from "./runners/LightRunner";
-
-const local: boolean = false;
-
-const runner = local ? new LocalRunner() : new LightRunner(0.1);
-
+export const example = `
 runner.setup = () => {
     for (const [i, light] of runner.lights.entries()) {
         light.update = (time, delta) => {
@@ -19,3 +12,4 @@ runner.update = (time, delta) => {
 };
 
 runner.play();
+`;
