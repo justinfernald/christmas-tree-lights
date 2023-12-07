@@ -1,25 +1,69 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import { inject } from './example';
 
-import { absolute, flex, flex1, fullHeight, fullSize } from './styles';
+import {
+  absolute,
+  flex,
+  flex1,
+  flexColumn,
+  fullHeight,
+  fullSize,
+  fullWidth,
+} from './styles';
 import Editor, { useMonaco } from '@monaco-editor/react';
+import { Uri, editor } from 'monaco-editor';
 
 function App() {
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const monaco = useMonaco();
   const [declarationLib, setDeclarationLib] = useState<string | null>(null);
   const [example, setExample] = useState<string | null>(null);
+  const [rerender, setRerender] = useState(0);
+
+  const [tsProxy, setTsProxy] = useState<ts.IMonacoTypeScriptServiceProxy | null>(null);
+
+  async function compile() {
+    if (!editorRef.current || !tsProxy || !monaco) {
+      console.log('not running compile');
+      return;
+    }
+
+    const editor = editorRef.current;
+
+    // tsProxy.getEmitOutput(editor.getModel()!.uri.toString()).then((r) => {
+    //   console.log(r);
+    // });
+
+    const uri = editor.getModel()!.uri.toString();
+    const monacoUri = Uri.parse(uri);
+
+    const worker = await monaco.languages.typescript.getTypeScriptWorker();
+    const client = await worker(monacoUri);
+    const result = await client.getEmitOutput(uri.toString());
+
+    console.log(result);
+  }
 
   useEffect(() => {
-    if (monaco && declarationLib) {
+    console.log({ monaco, declarationLib, editorRef });
+    if (monaco && declarationLib && editorRef.current) {
+      const editor = editorRef.current;
       console.log('here is the monaco instance:', monaco);
+
+      monaco.languages.typescript.getTypeScriptWorker().then(function (
+        worker: (...v: Uri[]) => Promise<any>,
+      ) {
+        worker(editor.getModel()!.uri).then(function (proxy) {
+          setTsProxy(proxy);
+        });
+      });
 
       monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
         target: monaco.languages.typescript.ScriptTarget.ES2016,
         allowNonTsExtensions: true,
         moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
         module: monaco.languages.typescript.ModuleKind.CommonJS,
-        noEmit: true,
+        noEmit: false,
         typeRoots: ['node_modules/@types'],
       });
 
@@ -31,7 +75,7 @@ function App() {
 
       console.log(declarationLib);
     }
-  }, [monaco, declarationLib]);
+  }, [monaco, declarationLib, editorRef.current, rerender]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -64,15 +108,24 @@ function App() {
   return (
     <div css={[absolute(0, 0, 0, 0)]}>
       <div css={[flex(), fullSize]}>
-        <div css={[flex1, fullHeight]}>
-          {example && (
-            <Editor
-              theme="vs-dark"
-              options={{ minimap: { enabled: false } }}
-              defaultLanguage="typescript"
-              defaultValue={example}
-            />
-          )}
+        <div css={[flex1, fullHeight, flexColumn]}>
+          <div>
+            <button onClick={compile}>Compile</button>
+          </div>
+          <div css={[fullWidth, flex1]}>
+            {example && (
+              <Editor
+                onMount={(editor) => {
+                  editorRef.current = editor;
+                  setRerender((r) => r + 1);
+                }}
+                theme="vs-dark"
+                options={{ minimap: { enabled: false } }}
+                defaultLanguage="typescript"
+                defaultValue={example}
+              />
+            )}
+          </div>
         </div>
         <Display />
       </div>
