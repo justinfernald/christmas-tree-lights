@@ -1,21 +1,4 @@
-export const example = `import {runner, Color} from "christmas-tree"
-
-runner.setup = () => {
-    for (const [i, light] of runner.lights.entries()) {
-        light.update = (time, delta) => {
-            return Color.fromHSL((i + time * 0.1) % 360, 100, 50);
-        };
-    }
-};
-
-runner.update = (time, delta) => {
-    // console.log(runner.lights);
-};
-
-runner.play();
-`;
-
-export const inject = `declare module 'christmas-tree/animations/randomPlane' {
+declare module 'christmas-tree/animations/randomPlane' {
 
 }
 declare module 'christmas-tree/animations/test' {
@@ -363,4 +346,4 @@ declare module 'christmas-tree/src/utils/Vector3' {
 declare module 'christmas-tree' {
   import main = require('christmas-tree/src/editor-exports');
   export = main;
-}`;
+}

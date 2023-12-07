@@ -9,14 +9,10 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    // "noEmit": true,
     "declaration": true,
-    "rootDirs": ["src", "animations"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
-    "sourceMap": true,
-    "types": ["vite/client", "@emotion/react/types/css-prop"]
+    "rootDirs": ["src"],
+    "sourceMap": true
   },
-  "include": ["src", "animations"],
+  "include": ["src/editor/library.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
