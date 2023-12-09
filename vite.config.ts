@@ -11,8 +11,19 @@ async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
       apply: 'build',
 
       async buildStart() {
+        const builtCode = await fs.readFile(
+          path.resolve(__dirname, 'dist', 'lib.js'),
+          'utf-8',
+        );
+
+        this.emitFile({
+          type: 'asset',
+          fileName: 'lib.js',
+          source: builtCode,
+        });
+
         const libDeclaration = await fs.readFile(
-          path.resolve(__dirname, 'src', 'editor', 'lib.d.ts'),
+          path.resolve(__dirname, 'dist', 'lib.d.ts'),
           'utf-8',
         );
 
@@ -38,9 +49,24 @@ async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
       name: 'custom-server',
       configureServer(server) {
         server.middlewares.use(async (req, res, next) => {
+          if (req.method === 'GET' && req.url === '/lib.js') {
+            const builtCode = await fs.readFile(
+              path.resolve(__dirname, 'dist', 'lib.js'),
+              'utf-8',
+            );
+
+            res.setHeader('Content-Type', 'application/json');
+            // allow cors for all sites
+            res.setHeader('Access-Control-Allow-Origin', '*');
+
+            res.end(builtCode);
+
+            return;
+          }
+
           if (req.method === 'GET' && req.url === '/lib.d.ts') {
             const libDeclaration = await fs.readFile(
-              path.resolve(__dirname, 'src', 'editor', 'lib.d.ts'),
+              path.resolve(__dirname, 'dist', 'lib.d.ts'),
               'utf-8',
             );
 

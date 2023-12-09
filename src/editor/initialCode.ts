@@ -9,6 +9,7 @@ runner.setup = () => {
 };
 
 runner.update = (time, delta) => {
+  console.log(time, delta);
   // console.log(runner.lights);
 };
 

@@ -8,9 +8,10 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/editor/library.ts'),
-      name: 'lib',
+      name: 'christmas-tree',
       // the proper extensions will be added
       fileName: 'lib',
+      formats: ['es', 'umd', 'cjs'],
     },
   },
   plugins: [dts({ rollupTypes: true })],
