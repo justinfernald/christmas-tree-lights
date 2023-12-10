@@ -3,9 +3,9 @@ import * as ColorLib from '../utils/Color';
 import * as LightLib from '../utils/Light';
 import * as MathUtils from '../utils/Math';
 import * as Time from '../utils/Time';
-import * as AppLib from '../runners/App';
+import { LocalRunner } from '../runners/LocalRunner';
 
-const runner = AppLib.runner;
+const runner = new LocalRunner();
 const Vector3 = Vector3Lib.Vector3;
 const Color = ColorLib.Color;
 const colors = ColorLib.colors;

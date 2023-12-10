@@ -1,8 +1,4 @@
-// import { LightRunner } from './LightRunner';
-import { LocalRunner } from './LocalRunner';
+import { LightRunner } from './LightRunner';
 import { Runner } from './Runner';
 
-// const isLocal = true;
-
-// export const runner: Runner = isLocal ? new LocalRunner() : new LightRunner(0.1);
-export const runner = new LocalRunner();
+export const runner: Runner = new LightRunner(0.1);

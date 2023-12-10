@@ -11,7 +11,7 @@ export default defineConfig({
       name: 'christmas-tree',
       // the proper extensions will be added
       fileName: 'lib',
-      formats: ['es', 'umd', 'cjs'],
+      formats: ['umd', 'cjs'],
     },
   },
   plugins: [dts({ rollupTypes: true })],

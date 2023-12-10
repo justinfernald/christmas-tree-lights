@@ -42,7 +42,7 @@ function App() {
     const result = await client.getEmitOutput(uri.toString());
 
     const code = result.outputFiles[0].text;
-    const newCode = code.replace(`require("christmas-tree");`, 'exports');
+    const newCode = code.replace(`require("christmas-tree");`, 'exports;');
 
     const lib = await fetch('/lib.js').then((res) => res.text());
 
@@ -53,7 +53,13 @@ function App() {
 
     ${newCode}`;
 
-    eval(codeStub);
+    // eval(codeStub);
+
+    console.log('sending message');
+
+    const iframeElement = document.getElementById('frame') as HTMLIFrameElement;
+
+    iframeElement.contentWindow?.postMessage({ type: 'code', data: codeStub }, '*');
   }
 
   useEffect(() => {
@@ -143,7 +149,17 @@ function App() {
 }
 
 function Display() {
-  return <div css={flex1}>HI</div>;
+  return (
+    <div css={flex1}>
+      <iframe
+        sandbox="allow-scripts"
+        id="frame"
+        width={'100%'}
+        height={'100%'}
+        src={'/frame.html'}
+      />
+    </div>
+  );
 }
 
 export default App;
