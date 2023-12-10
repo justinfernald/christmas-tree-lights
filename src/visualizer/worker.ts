@@ -29,6 +29,21 @@ onmessage = (e) => {
     console.log('running play');
     runner.play();
   }
+
+  if (type === 'pause') {
+    if (!runner) return;
+    runner.pause();
+  }
+
+  if (type === 'reset') {
+    if (!runner) return;
+    runner.reset();
+  }
+
+  if (type === 'step') {
+    if (!runner) return;
+    runner.step();
+  }
 };
 
 main();
