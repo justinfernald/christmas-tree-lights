@@ -18,11 +18,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 import { fragmentShader, vertexShader } from './shaders';
 
-import { Color } from '../utils/Color';
-
 import locations from '../locations.json';
 import flarePng from './flare.png';
 import { Light } from '../utils/Light';
+import { AppModel } from '../models/AppModel';
 
 const coords = locations.map((location) => {
   return new Vector3(
@@ -59,22 +58,28 @@ export class MainApp {
 
   private accumulatedTime = 0;
   private previousTime = -1;
-  private fpsControl: HTMLInputElement;
+  // private fpsControl: HTMLInputElement;
 
   fps = 60;
 
-  constructor() {
-    this.fpsControl = document.querySelector<HTMLInputElement>('#fpsLabel')!;
-
-    console.log(this.fpsControl);
-
-    this.fpsControl.oninput = () => {
-      const value = Number(this.fpsControl.value);
-      if (!this.fpsControl.validity.valid) {
-        return;
+  constructor(public appModel: AppModel) {
+    appModel.worker.addEventListener('message', (e) => {
+      if (e.data.type === 'update') {
+        this.setLights(e.data.lights.map((light: any) => Light.fromDto(light)));
       }
-      this.fps = value;
-    };
+    });
+
+    // this.fpsControl = document.querySelector<HTMLInputElement>('#fpsLabel')!;
+
+    // console.log(this.fpsControl);
+
+    // this.fpsControl.oninput = () => {
+    //   const value = Number(this.fpsControl.value);
+    //   if (!this.fpsControl.validity.valid) {
+    //     return;
+    //   }
+    //   this.fps = value;
+    // };
 
     const canvas = document.querySelector<HTMLCanvasElement>('#mainCanvas')!;
     this.scene = new Scene();

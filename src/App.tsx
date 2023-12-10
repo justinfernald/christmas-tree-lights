@@ -10,154 +10,102 @@ import {
   fullSize,
   fullWidth,
 } from './styles';
-import Editor, { useMonaco } from '@monaco-editor/react';
-import { Uri, editor } from 'monaco-editor';
+import { MainApp } from './visualizer/display';
+import { AppContext, AppModel, useAppModel } from './models/AppModel';
+import { CodeEditor, CodeEditorRef } from './components/CodeEditor';
+import { observer } from 'mobx-react-lite';
 
-function App() {
-  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const monaco = useMonaco();
-  const [declarationLib, setDeclarationLib] = useState<string | null>(null);
-  const [example, setExample] = useState<string | null>(null);
-  const [rerender, setRerender] = useState(0);
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { useViewModelConstructor } from './utils/ViewModel';
 
-  const [tsProxy, setTsProxy] = useState<ts.IMonacoTypeScriptServiceProxy | null>(null);
+const queryClient = new QueryClient();
 
-  async function compile() {
-    if (!editorRef.current || !tsProxy || !monaco) {
-      console.log('not running compile');
-      return;
-    }
-
-    const editor = editorRef.current;
-
-    // tsProxy.getEmitOutput(editor.getModel()!.uri.toString()).then((r) => {
-    //   console.log(r);
-    // });
-
-    const uri = editor.getModel()!.uri.toString();
-    const monacoUri = Uri.parse(uri);
-
-    const worker = await monaco.languages.typescript.getTypeScriptWorker();
-    const client = await worker(monacoUri);
-    const result = await client.getEmitOutput(uri.toString());
-
-    const code = result.outputFiles[0].text;
-    const newCode = code.replace(`require("christmas-tree");`, 'exports;');
-
-    const lib = await fetch('/lib.js').then((res) => res.text());
-
-    const codeStub = `
-    const exports = {};
-
-    ${lib}
-
-    ${newCode}`;
-
-    // eval(codeStub);
-
-    console.log('sending message');
-
-    const iframeElement = document.getElementById('frame') as HTMLIFrameElement;
-
-    iframeElement.contentWindow?.postMessage({ type: 'code', data: codeStub }, '*');
-  }
-
-  useEffect(() => {
-    if (monaco && declarationLib && editorRef.current) {
-      const editor = editorRef.current;
-
-      monaco.languages.typescript.getTypeScriptWorker().then(function (
-        worker: (...v: Uri[]) => Promise<any>,
-      ) {
-        worker(editor.getModel()!.uri).then(function (proxy) {
-          setTsProxy(proxy);
-        });
-      });
-
-      monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-        target: monaco.languages.typescript.ScriptTarget.ES2016,
-        allowNonTsExtensions: true,
-
-        moduleResolution: monaco.languages.typescript.ModuleResolutionKind.Classic,
-        module: monaco.languages.typescript.ModuleKind.CommonJS,
-        noEmit: false,
-        typeRoots: ['node_modules/@types'],
-      });
-
-      const libUri = 'global.d.ts';
-
-      const stub = `declare module 'christmas-tree' {${declarationLib}}`;
-
-      monaco.languages.typescript.typescriptDefaults.addExtraLib(stub, libUri);
-    }
-  }, [monaco, declarationLib, editorRef.current, rerender]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    try {
-      fetch('/initialCode.ts', { signal: controller.signal })
-        .then((res) => res.text())
-        .then((text) => setExample(text));
-    } catch (e) {}
-
-    return () => {
-      controller.abort();
-    };
+const App = observer(() => {
+  const codeEditorRef = useRef<CodeEditorRef | null>(null);
+  const appModel = useViewModelConstructor(AppModel, {
+    codeEditor: codeEditorRef.current,
   });
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    try {
-      fetch('/lib.d.ts', { signal: controller.signal })
-        .then((res) => res.text())
-        .then((text) => setDeclarationLib(text));
-    } catch (e) {}
-
-    return () => {
-      controller.abort();
-    };
-  });
+  const [hasCode, setHasCode] = useState(false);
 
   return (
-    <div css={[absolute(0, 0, 0, 0)]}>
-      <div css={[flex(), fullSize]}>
-        <div css={[flex1, fullHeight, flexColumn]}>
-          <div>
-            <button onClick={compile}>Compile</button>
+    <QueryClientProvider client={queryClient}>
+      <AppContext.Provider value={appModel}>
+        <div css={[absolute(0, 0, 0, 0), flexColumn]}>
+          <div css={[flex('row')]}>
+            <button
+              onClick={() => {
+                appModel.compile();
+                setHasCode(true);
+              }}
+            >
+              Run
+            </button>
+            <button disabled={!hasCode} onClick={appModel.play}>
+              Play
+            </button>
+            <button disabled={!hasCode} onClick={appModel.pause}>
+              Pause
+            </button>
+            <button disabled={!hasCode} onClick={appModel.step}>
+              Step
+            </button>
+            <button disabled={!hasCode} onClick={appModel.reset}>
+              Reset
+            </button>
           </div>
-          <div css={[fullWidth, flex1]}>
-            {example && (
-              <Editor
-                onMount={(editor) => {
-                  editorRef.current = editor;
-                  setRerender((r) => r + 1);
-                }}
-                theme="vs-dark"
-                options={{ minimap: { enabled: false } }}
-                defaultLanguage="typescript"
-                defaultValue={example}
-              />
-            )}
+          <div css={[flex(), fullWidth, flex1]}>
+            <div css={[flex1, fullHeight, flexColumn]}>
+              <CodeEditor ref={codeEditorRef} />
+            </div>
+            <Display />
           </div>
         </div>
-        <Display />
-      </div>
-    </div>
+      </AppContext.Provider>
+    </QueryClientProvider>
   );
-}
+});
 
 function Display() {
+  const appModel = useAppModel();
+
+  const [app, setApp] = useState<MainApp | null>(null);
+
+  useEffect(() => {
+    console.log('hi');
+
+    const listener = (event: MessageEvent) => {
+      const { data } = event;
+      console.log(data);
+
+      // if (data.type === 'code') {
+      //   console.log(data.data);
+      //   app.updateCode(data.data);
+      // }
+    };
+
+    appModel.worker.addEventListener('message', listener, false);
+
+    // window.updateLights = (lights: any) => {
+    //   // console.log(lights);
+    //   app.setLights(lights);
+    // };
+
+    return () => {
+      appModel.worker.removeEventListener('message', listener);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!appModel) return;
+
+    setApp(new MainApp(appModel));
+  }, [appModel]);
+  // add iframe lister for messages from the parent
+
   return (
     <div css={flex1}>
-      <iframe
-        sandbox="allow-scripts"
-        id="frame"
-        width={'100%'}
-        height={'100%'}
-        src={'/frame.html'}
-      />
+      <canvas id="mainCanvas"></canvas>
     </div>
   );
 }
