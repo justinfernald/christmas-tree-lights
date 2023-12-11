@@ -6,7 +6,7 @@
     "dev": "vite",
     "build-editor": "vite -c vite.editor.config.ts build",
     "build-app": "vite build",
-    "build": "npm run build-editor & npm run build-app",
+    "build": "npm run build-editor && npm run build-app",
     "upload": "gh-pages -d dist",
     "serve": "vite preview",
     "lint:check": "eslint .",
