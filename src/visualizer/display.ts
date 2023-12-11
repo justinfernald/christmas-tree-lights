@@ -63,6 +63,8 @@ export class MainApp {
 
   fps = 60;
 
+  destroyers: (() => void)[] = [];
+
   constructor(public appModel: AppModel) {
     const listener = (e: MessageEvent<any>) => {
       if (e.data.type === 'update') {
@@ -70,7 +72,7 @@ export class MainApp {
       }
     };
 
-    reaction(
+    const reactionDisposer = reaction(
       () => appModel.worker,
       (worker, prevWorker) => {
         if (prevWorker) {
@@ -82,6 +84,8 @@ export class MainApp {
         fireImmediately: true,
       },
     );
+
+    this.destroyers.push(reactionDisposer);
 
     // this.fpsControl = document.querySelector<HTMLInputElement>('#fpsLabel')!;
 
@@ -136,6 +140,14 @@ export class MainApp {
 
     updateSize();
     window.onresize = updateSize;
+  }
+
+  destructor() {
+    for (const destroyer of this.destroyers) {
+      destroyer();
+    }
+
+    this.destroyers = [];
   }
 
   updateCode(code: string) {

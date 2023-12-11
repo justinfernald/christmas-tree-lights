@@ -12,6 +12,10 @@ export class AppModel extends BaseViewModel<{ codeEditor: CodeEditorRef | null }
     makeSimpleAutoObservable(this, {}, { autoBind: true });
   }
 
+  postSetProps(updatedProps: Partial<{ codeEditor: CodeEditorRef | null }>): void {
+    console.log(updatedProps);
+  }
+
   compile() {
     if (!this.props.codeEditor) throw new Error('codeEditor is null');
 

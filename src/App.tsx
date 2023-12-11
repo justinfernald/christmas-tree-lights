@@ -11,6 +11,7 @@ import {
   flexColumn,
   fullHeight,
   fullWidth,
+  relative,
 } from './styles';
 import { MainApp } from './visualizer/display';
 import { AppContext, AppModel, useAppModel } from './models/AppModel';
@@ -30,7 +31,7 @@ const App = observer(() => {
   return (
     <QueryClientProvider client={queryClient}>
       <AppContext.Provider value={appModel}>
-        <div css={[absolute(0, 0, 0, 0), flexColumn, { overflow: 'hidden' }]}>
+        <div css={[absolute(0, 0, 0, 0), { height: '100vh' }, flexColumn]}>
           <ControlBar />
           <div css={[flex(), fullWidth, flex1]}>
             <div css={[flex1, fullHeight, flexColumn]}>
@@ -106,13 +107,19 @@ function Display() {
   useEffect(() => {
     if (!appModel) return;
 
-    setApp(new MainApp(appModel));
+    const app = new MainApp(appModel);
+
+    () => {
+      app.destructor();
+    };
   }, [appModel]);
   // add iframe lister for messages from the parent
 
   return (
-    <div css={flex1}>
-      <canvas id="mainCanvas" />
+    <div css={[flex1, relative()]}>
+      <div css={[absolute(0, 0, 0, 0), { overflow: 'hidden' }]}>
+        <canvas id="mainCanvas" />
+      </div>
     </div>
   );
 }

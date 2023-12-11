@@ -12,7 +12,7 @@ async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
 
       async buildStart() {
         const builtCode = await fs.readFile(
-          path.resolve(__dirname, 'dist', 'lib.js'),
+          path.resolve(__dirname, 'editor-dist', 'lib.js'),
           'utf-8',
         );
 
@@ -23,7 +23,7 @@ async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
         });
 
         const libDeclaration = await fs.readFile(
-          path.resolve(__dirname, 'dist', 'lib.d.ts'),
+          path.resolve(__dirname, 'editor-dist', 'lib.d.ts'),
           'utf-8',
         );
 
@@ -40,7 +40,7 @@ async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
 
         this.emitFile({
           type: 'asset',
-          fileName: 'lib.d.ts',
+          fileName: 'initialCode.ts',
           source: initialCode,
         });
       },
@@ -51,7 +51,7 @@ async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
         server.middlewares.use(async (req, res, next) => {
           if (req.method === 'GET' && req.url === '/lib.js') {
             const builtCode = await fs.readFile(
-              path.resolve(__dirname, 'dist', 'lib.js'),
+              path.resolve(__dirname, 'editor-dist', 'lib.js'),
               'utf-8',
             );
 
@@ -66,7 +66,7 @@ async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
 
           if (req.method === 'GET' && req.url === '/lib.d.ts') {
             const libDeclaration = await fs.readFile(
-              path.resolve(__dirname, 'dist', 'lib.d.ts'),
+              path.resolve(__dirname, 'editor-dist', 'lib.d.ts'),
               'utf-8',
             );
 
@@ -103,6 +103,7 @@ async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   build: {
     sourcemap: true,
   },

@@ -36,7 +36,7 @@ export class CodeEditorViewModel extends BaseViewModel<CodeEditorViewModelProps>
     const code = result.outputFiles[0].text;
     const newCode = code.replace(`require("christmas-tree");`, 'exports;');
 
-    const lib = await fetch('/lib.js').then((res) => res.text());
+    const lib = await fetch('./lib.js').then((res) => res.text());
 
     const codeStub = `
     const exports = {};
@@ -74,13 +74,13 @@ export const CodeEditor = observer(
     });
 
     const { data: example } = useQuery('initialCode.ts', async () => {
-      const res = await fetch('/initialCode.ts');
+      const res = await fetch('./initialCode.ts');
       const text = await res.text();
       return text;
     });
 
     const { data: declarationLib } = useQuery('lib.d.ts', async () => {
-      const res = await fetch('/lib.d.ts');
+      const res = await fetch('./lib.d.ts');
       const text = await res.text();
       return text;
     });
