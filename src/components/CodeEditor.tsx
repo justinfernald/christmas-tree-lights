@@ -3,14 +3,11 @@ import { flex1, fullWidth } from '../styles';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { editor, Uri } from 'monaco-editor';
 import { observer } from 'mobx-react-lite';
-import { makeAutoObservable } from 'mobx';
 import { BaseViewModel, useViewModelConstructor } from '../utils/ViewModel';
 import { useQuery } from 'react-query';
 import { makeSimpleAutoObservable } from '../utils/mobx';
-import { AppModel, useAppModel } from '../models/AppModel';
 
 export interface CodeEditorViewModelProps {
-  appModel: AppModel;
   editor: editor.IStandaloneCodeEditor | null;
   monaco: typeof import('monaco-editor') | null;
 }
@@ -49,12 +46,6 @@ export class CodeEditorViewModel extends BaseViewModel<CodeEditorViewModelProps>
     ${newCode}
     `;
 
-    // eval(codeStub);
-
-    console.log('sending message');
-
-    this.props.appModel.worker.postMessage({ type: 'code', data: codeStub }, []);
-
     return { code, newCode, codeStub };
   }
 }
@@ -73,16 +64,11 @@ export interface CodeEditorRef {
 
 export const CodeEditor = observer(
   forwardRef<CodeEditorRef>(function CodeEditor(props, ref) {
-    const appModel = useAppModel();
-
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
     const monaco = useMonaco();
-    // const [declarationLib, setDeclarationLib] = useState<string | null>(null);
-    // const [example, setExample] = useState<string | null>(null);
     const [rerender, setRerender] = useState(0);
 
     const viewModel = useViewModelConstructor(CodeEditorViewModel, {
-      appModel,
       editor: editorRef.current,
       monaco,
     });
@@ -93,39 +79,11 @@ export const CodeEditor = observer(
       return text;
     });
 
-    // useEffect(() => {
-    //   const controller = new AbortController();
-
-    //   try {
-    //     fetch('/initialCode.ts', { signal: controller.signal })
-    //       .then((res) => res.text())
-    //       .then((text) => setExample(text));
-    //   } catch (e) {}
-
-    //   return () => {
-    //     controller.abort();
-    //   };
-    // });
-
     const { data: declarationLib } = useQuery('lib.d.ts', async () => {
       const res = await fetch('/lib.d.ts');
       const text = await res.text();
       return text;
     });
-
-    // useEffect(() => {
-    //   const controller = new AbortController();
-
-    //   try {
-    //     fetch('/lib.d.ts', { signal: controller.signal })
-    //       .then((res) => res.text())
-    //       .then((text) => setDeclarationLib(text));
-    //   } catch (e) {}
-
-    //   return () => {
-    //     controller.abort();
-    //   };
-    // });
 
     useEffect(() => {
       if (monaco && declarationLib && editorRef.current) {

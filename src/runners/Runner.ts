@@ -49,7 +49,6 @@ export abstract class Runner {
 
   reset() {
     this.iteration = 0;
-    this.running = false;
     this.time = null;
   }
 

@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { ButtonHTMLAttributes, useEffect, useRef, useState } from 'react';
 import './App.css';
 
 import {
   absolute,
   flex,
   flex1,
+  flexBetween,
+  flexCenter,
+  flexCenterVertical,
   flexColumn,
   fullHeight,
-  fullSize,
   fullWidth,
 } from './styles';
 import { MainApp } from './visualizer/display';
@@ -25,35 +27,11 @@ const App = observer(() => {
   const appModel = useViewModelConstructor(AppModel, {
     codeEditor: codeEditorRef.current,
   });
-
-  const [hasCode, setHasCode] = useState(false);
-
   return (
     <QueryClientProvider client={queryClient}>
       <AppContext.Provider value={appModel}>
-        <div css={[absolute(0, 0, 0, 0), flexColumn]}>
-          <div css={[flex('row')]}>
-            <button
-              onClick={() => {
-                appModel.compile();
-                setHasCode(true);
-              }}
-            >
-              Run
-            </button>
-            <button disabled={!hasCode} onClick={appModel.play}>
-              Play
-            </button>
-            <button disabled={!hasCode} onClick={appModel.pause}>
-              Pause
-            </button>
-            <button disabled={!hasCode} onClick={appModel.step}>
-              Step
-            </button>
-            <button disabled={!hasCode} onClick={appModel.reset}>
-              Reset
-            </button>
-          </div>
+        <div css={[absolute(0, 0, 0, 0), flexColumn, { overflow: 'hidden' }]}>
+          <ControlBar />
           <div css={[flex(), fullWidth, flex1]}>
             <div css={[flex1, fullHeight, flexColumn]}>
               <CodeEditor ref={codeEditorRef} />
@@ -66,35 +44,64 @@ const App = observer(() => {
   );
 });
 
+const Button = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button
+      {...props}
+      css={[
+        {
+          background: '#777',
+          cursor: 'pointer',
+          borderRadius: 5,
+          height: 30,
+          padding: 10,
+          textAlign: 'center',
+          border: '1px solid #00000050',
+        },
+        flexCenter,
+      ]}
+    />
+  );
+};
+
+const ControlBar = () => {
+  const appModel = useAppModel();
+  const [hasCode, setHasCode] = useState(false);
+
+  return (
+    <div css={[flex('row'), flexBetween, { height: 50, background: '#333', padding: 5 }]}>
+      <div css={[flex('row'), flexCenterVertical, { gap: 5 }]}>
+        <Button
+          onClick={() => {
+            appModel.setupCode();
+            setHasCode(true);
+          }}
+        >
+          Load
+        </Button>
+      </div>
+      <div css={[flex('row'), flexCenterVertical, { gap: 5 }]}>
+        <Button disabled={!hasCode} onClick={appModel.play}>
+          Play
+        </Button>
+        <Button disabled={!hasCode} onClick={appModel.pause}>
+          Pause
+        </Button>
+        <Button disabled={!hasCode} onClick={appModel.step}>
+          Step
+        </Button>
+        <Button disabled={!hasCode} onClick={appModel.reset}>
+          Reset
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 function Display() {
   const appModel = useAppModel();
 
   const [app, setApp] = useState<MainApp | null>(null);
-
-  useEffect(() => {
-    console.log('hi');
-
-    const listener = (event: MessageEvent) => {
-      const { data } = event;
-      console.log(data);
-
-      // if (data.type === 'code') {
-      //   console.log(data.data);
-      //   app.updateCode(data.data);
-      // }
-    };
-
-    appModel.worker.addEventListener('message', listener, false);
-
-    // window.updateLights = (lights: any) => {
-    //   // console.log(lights);
-    //   app.setLights(lights);
-    // };
-
-    return () => {
-      appModel.worker.removeEventListener('message', listener);
-    };
-  }, []);
 
   useEffect(() => {
     if (!appModel) return;
@@ -105,7 +112,7 @@ function Display() {
 
   return (
     <div css={flex1}>
-      <canvas id="mainCanvas"></canvas>
+      <canvas id="mainCanvas" />
     </div>
   );
 }

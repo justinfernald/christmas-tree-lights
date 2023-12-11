@@ -22,6 +22,7 @@ import locations from '../locations.json';
 import flarePng from './flare.png';
 import { Light } from '../utils/Light';
 import { AppModel } from '../models/AppModel';
+import { autorun, reaction } from 'mobx';
 
 const coords = locations.map((location) => {
   return new Vector3(
@@ -63,11 +64,24 @@ export class MainApp {
   fps = 60;
 
   constructor(public appModel: AppModel) {
-    appModel.worker.addEventListener('message', (e) => {
+    const listener = (e: MessageEvent<any>) => {
       if (e.data.type === 'update') {
         this.setLights(e.data.lights.map((light: any) => Light.fromDto(light)));
       }
-    });
+    };
+
+    reaction(
+      () => appModel.worker,
+      (worker, prevWorker) => {
+        if (prevWorker) {
+          prevWorker.removeEventListener('message', listener);
+        }
+        worker.addEventListener('message', listener);
+      },
+      {
+        fireImmediately: true,
+      },
+    );
 
     // this.fpsControl = document.querySelector<HTMLInputElement>('#fpsLabel')!;
 
@@ -144,8 +158,6 @@ export class MainApp {
       color.g = newColor.green / 255;
       color.b = newColor.blue / 255;
     }
-
-    console.log(this.state.colors);
 
     this.updateState();
   }
