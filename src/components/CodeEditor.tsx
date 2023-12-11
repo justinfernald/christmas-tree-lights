@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { BaseViewModel, useViewModelConstructor } from '../utils/ViewModel';
 import { useQuery } from 'react-query';
 import { makeSimpleAutoObservable } from '../utils/mobx';
+import LZString from 'lz-string';
 
 export interface CodeEditorViewModelProps {
   editor: editor.IStandaloneCodeEditor | null;
@@ -68,6 +69,10 @@ export const CodeEditor = observer(
     const monaco = useMonaco();
     const [rerender, setRerender] = useState(0);
 
+    const [hashCode] = useState(() => {
+      return LZString.decompressFromEncodedURIComponent(location.hash.substring(1));
+    });
+
     const viewModel = useViewModelConstructor(CodeEditorViewModel, {
       editor: editorRef.current,
       monaco,
@@ -118,10 +123,15 @@ export const CodeEditor = observer(
               editorRef.current = editor;
               setRerender((r) => r + 1);
             }}
+            onChange={(code) => {
+              if (code) {
+                location.hash = LZString.compressToEncodedURIComponent(code);
+              }
+            }}
             theme="vs-dark"
             options={{ minimap: { enabled: false } }}
             defaultLanguage="typescript"
-            defaultValue={example}
+            defaultValue={hashCode || example}
           />
         )}
       </div>
