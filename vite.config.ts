@@ -1,6 +1,5 @@
 import react from '@vitejs/plugin-react';
 import { PluginOption, defineConfig } from 'vite';
-import plainText from 'vite-plugin-plain-text';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
