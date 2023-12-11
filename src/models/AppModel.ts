@@ -1,25 +1,23 @@
-import { createContext, useContext } from 'react';
+import { MutableRefObject, createContext, useContext } from 'react';
 import { CodeEditorRef } from '../components/CodeEditor';
 import { makeSimpleAutoObservable } from '../utils/mobx';
 import { BaseViewModel } from '../utils/ViewModel';
 import SimWorker from '../visualizer/worker?worker';
 
-export class AppModel extends BaseViewModel<{ codeEditor: CodeEditorRef | null }> {
+export class AppModel extends BaseViewModel<{
+  codeEditorRef: MutableRefObject<CodeEditorRef | null>;
+}> {
   worker = new SimWorker();
 
-  constructor(props: { codeEditor: CodeEditorRef | null }) {
+  constructor(props: { codeEditorRef: MutableRefObject<CodeEditorRef | null> }) {
     super(props);
     makeSimpleAutoObservable(this, {}, { autoBind: true });
   }
 
-  postSetProps(updatedProps: Partial<{ codeEditor: CodeEditorRef | null }>): void {
-    console.log(updatedProps);
-  }
-
   compile() {
-    if (!this.props.codeEditor) throw new Error('codeEditor is null');
+    if (!this.props.codeEditorRef.current) throw new Error('codeEditor is null');
 
-    return this.props.codeEditor.compile();
+    return this.props.codeEditorRef.current.compile();
   }
 
   async newWorker() {

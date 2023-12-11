@@ -26,7 +26,7 @@ const queryClient = new QueryClient();
 const App = observer(() => {
   const codeEditorRef = useRef<CodeEditorRef | null>(null);
   const appModel = useViewModelConstructor(AppModel, {
-    codeEditor: codeEditorRef.current,
+    codeEditorRef,
   });
   return (
     <QueryClientProvider client={queryClient}>
