@@ -150,18 +150,6 @@ export class MainApp {
     this.destroyers = [];
   }
 
-  updateCode(code: string) {
-    try {
-      this.resetState();
-
-      eval(`${code}window.exports = exports;`);
-
-      eval('exports.runner.play()');
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   setLights(lights: Light[]) {
     for (const [i, color] of this.state.colors.entries()) {
       const newColor = lights[i].color;
