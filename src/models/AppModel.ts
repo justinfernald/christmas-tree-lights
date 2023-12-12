@@ -73,9 +73,11 @@ export class AppModel extends BaseViewModel<{
       if (type === 'update') {
         const currentTime = performance.now();
         const deltaTime = currentTime - lastUpdateTime;
-        const expectedDeltaTime = 1.2 * (1000 / 30) + (count < 2 ? 40 : 0);
+        const expectedDeltaTime = 2 * (1000 / 30) + (count < 2 ? 40 : 0);
 
-        if (deltaTime > expectedDeltaTime && this.playing && count !== 0) {
+        if (deltaTime > expectedDeltaTime && this.playing) {
+          console.log({ deltaTime, expectedDeltaTime, count });
+
           this.worker!.terminate();
           this.terminated = true;
           this.playing = false;
