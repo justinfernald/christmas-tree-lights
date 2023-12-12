@@ -12,7 +12,7 @@ export abstract class Runner {
   update?: (time: number, delta: number | null, iteration: number) => void;
 
   lights = locations.map(
-    (location) => new Light(Vector3.fromObject(location), new Color(255, 0, 0)),
+    (location) => new Light(Vector3.fromObject(location), new Color(0, 0, 0)),
   );
 
   time: number | null = null;
@@ -50,6 +50,12 @@ export abstract class Runner {
   reset() {
     this.iteration = 0;
     this.time = null;
+
+    for (const light of this.lights) {
+      light.color = new Color(0, 0, 0);
+    }
+
+    this.draw();
   }
 
   pause() {

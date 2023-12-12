@@ -1,5 +1,5 @@
 import { Editor, useMonaco } from '@monaco-editor/react';
-import { flex1, fullWidth } from '../styles';
+import { flex1, flexColumn, fullHeight, fullWidth } from '../styles';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { editor, Uri } from 'monaco-editor';
 import { observer } from 'mobx-react-lite';
@@ -7,6 +7,8 @@ import { BaseViewModel, useViewModelConstructor } from '../utils/ViewModel';
 import { useQuery } from 'react-query';
 import { makeSimpleAutoObservable } from '../utils/mobx';
 import LZString from 'lz-string';
+import { useAppModel } from '../models/AppModel';
+import { action } from 'mobx';
 
 export interface CodeEditorViewModelProps {
   editor: editor.IStandaloneCodeEditor | null;
@@ -32,7 +34,17 @@ export class CodeEditorViewModel extends BaseViewModel<CodeEditorViewModelProps>
 
     const worker = await this.props.monaco.languages.typescript.getTypeScriptWorker();
     const client = await worker(monacoUri);
-    const result = await client.getEmitOutput(uri.toString());
+
+    const [syntacticDiagnostics, semanticDiagnostics] = await Promise.all([
+      client.getSyntacticDiagnostics(uri),
+      client.getSemanticDiagnostics(uri),
+    ]);
+
+    if (syntacticDiagnostics.length > 0 || semanticDiagnostics.length > 0) return;
+
+    console.log(semanticDiagnostics);
+
+    const result = await client.getEmitOutput(uri);
 
     const code = result.outputFiles[0].text;
     const newCode = code.replace(`require("christmas-tree");`, 'exports;');
@@ -65,6 +77,8 @@ export interface CodeEditorRef {
 
 export const CodeEditor = observer(
   forwardRef<CodeEditorRef>(function CodeEditor(props, ref) {
+    const appModel = useAppModel();
+
     const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
     const monaco = useMonaco();
     const [rerender, setRerender] = useState(0);
@@ -116,24 +130,34 @@ export const CodeEditor = observer(
     }));
 
     return (
-      <div css={[fullWidth, flex1]}>
-        {example && (
-          <Editor
-            onMount={(editor) => {
-              editorRef.current = editor;
-              setRerender((r) => r + 1);
-            }}
-            onChange={(code) => {
-              if (code) {
-                location.hash = LZString.compressToEncodedURIComponent(code);
-              }
-            }}
-            theme="vs-dark"
-            options={{ minimap: { enabled: false } }}
-            defaultLanguage="typescript"
-            defaultValue={hashCode || example}
-          />
-        )}
+      <div css={[flex1, fullHeight, flexColumn]}>
+        <div css={[fullWidth, flex1]}>
+          {example && (
+            <Editor
+              onMount={action(async (editor) => {
+                editorRef.current = editor;
+
+                setRerender((r) => r + 1);
+
+                if (!(await appModel.setupCode())) return;
+
+                appModel.play();
+              })}
+              onChange={action(async (code) => {
+                if (code) {
+                  location.hash = LZString.compressToEncodedURIComponent(code);
+                  if (!(await appModel.setupCode())) return;
+
+                  appModel.play();
+                }
+              })}
+              theme="vs-dark"
+              options={{ minimap: { enabled: false } }}
+              defaultLanguage="typescript"
+              defaultValue={hashCode || example}
+            />
+          )}
+        </div>
       </div>
     );
   }),

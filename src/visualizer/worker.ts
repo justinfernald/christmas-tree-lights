@@ -8,7 +8,7 @@ function main() {
     const { type, data } = e.data;
 
     if (type === 'code') {
-      const code = data;
+      const { code } = data;
 
       const module = eval(code + '\nself.exports = exports;');
       runner = module.runner;
@@ -33,6 +33,10 @@ function main() {
       if (!runner) return;
       runner.step();
     }
+
+    console.log(type, data);
+
+    postMessage({ type: 'confirmation', data: { type, messageId: data.messageId } });
   });
 
   postMessage({ type: 'ready' });
