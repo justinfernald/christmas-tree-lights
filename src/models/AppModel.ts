@@ -62,38 +62,30 @@ export class AppModel extends BaseViewModel<{
   }
 
   workerEnforcer() {
-    if (!this.worker) throw new Error('worker is null');
-
-    let lastUpdateTime = performance.now();
-    let count = 0;
-
-    const listener = action((e: MessageEvent<any>) => {
-      const { type } = e.data;
-
-      if (type === 'update') {
-        const currentTime = performance.now();
-        const deltaTime = currentTime - lastUpdateTime;
-        const expectedDeltaTime = 2 * (1000 / 30) + (count < 2 ? 40 : 0);
-
-        if (deltaTime > expectedDeltaTime && this.playing) {
-          console.log({ deltaTime, expectedDeltaTime, count });
-
-          this.worker!.terminate();
-          this.terminated = true;
-          this.playing = false;
-          alert("Your code is too slow. It's been terminated.");
-        }
-
-        lastUpdateTime = currentTime;
-        count++;
-      }
-    });
-
-    this.worker.addEventListener('message', listener);
-
-    return () => {
-      this.worker!.removeEventListener('message', listener);
-    };
+    // if (!this.worker) throw new Error('worker is null');
+    // let lastUpdateTime = performance.now();
+    // let count = 0;
+    // const listener = action((e: MessageEvent<any>) => {
+    //   const { type } = e.data;
+    //   if (type === 'update') {
+    //     const currentTime = performance.now();
+    //     const deltaTime = currentTime - lastUpdateTime;
+    //     const expectedDeltaTime = 2 * (1000 / 30) + (count < 2 ? 40 : 0);
+    //     if (deltaTime > expectedDeltaTime && this.playing) {
+    //       console.log({ deltaTime, expectedDeltaTime, count });
+    //       this.worker!.terminate();
+    //       this.terminated = true;
+    //       this.playing = false;
+    //       alert("Your code is too slow. It's been terminated.");
+    //     }
+    //     lastUpdateTime = currentTime;
+    //     count++;
+    //   }
+    // });
+    // this.worker.addEventListener('message', listener);
+    // return () => {
+    //   this.worker!.removeEventListener('message', listener);
+    // };
   }
 
   messagePending = false;
