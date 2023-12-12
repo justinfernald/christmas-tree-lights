@@ -61,6 +61,8 @@ export class AppModel extends BaseViewModel<{
     const url = new URL(window.location.href);
 
     navigator.clipboard.writeText(url.toString());
+
+    this.showSnackbar('Copied URL to clipboard', 'info');
   }
 
   compile() {
