@@ -42,8 +42,6 @@ export class CodeEditorViewModel extends BaseViewModel<CodeEditorViewModelProps>
 
     if (syntacticDiagnostics.length > 0 || semanticDiagnostics.length > 0) return;
 
-    console.log(semanticDiagnostics);
-
     const result = await client.getEmitOutput(uri);
 
     const code = result.outputFiles[0].text;
