@@ -21,11 +21,27 @@ declare class Color_2 {
     red: number;
     green: number;
     blue: number;
+    /**
+     * red: 0 to 255
+     * green: 0 to 255
+     * blue: 0 to 255
+     */
     constructor(red: number, green: number, blue: number);
     toString(): string;
     toInt(): number;
     static fromInt(int: number): Color_2;
     static fromHex(hex: string): Color_2;
+    /**
+     * red: 0 to 255
+     * green: 0 to 255
+     * blue: 0 to 255
+     */
+    static fromRGB(r: number, g: number, b: number): Color_2;
+    /**
+     * hue: 0 to 360
+     * saturation: 0 to 100
+     * lightness: 0 to 100
+     */
     static fromHSL(h: number, s: number, l: number): Color_2;
 }
 
@@ -247,6 +263,7 @@ declare class Vector3_2 {
     scale(scaler: number): Vector3_2;
     limitLength(length?: number): Vector3_2;
     asLength(length: number): Vector3_2;
+    distanceTo(v: Vector3_2): number;
     get squaredMagnitude(): number;
     get length(): number;
     get normalized(): Vector3_2;
