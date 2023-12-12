@@ -106,6 +106,10 @@ export class Vector3 {
     return this.normalized.scale(length);
   }
 
+  distanceTo(v: Vector3): number {
+    return Math.hypot(this.x - v.x, this.y - v.y, this.z - v.z);
+  }
+
   get squaredMagnitude(): number {
     return this.x ** 2 + this.y ** 2 + this.z ** 2;
   }
