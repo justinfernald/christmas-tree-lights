@@ -19,6 +19,30 @@ export class AppModel extends BaseViewModel<{
     this.setupListeners();
   }
 
+  snackbar = {
+    showing: false,
+    message: '',
+    timeout: 5000,
+    severity: 'info' as 'info' | 'error' | 'warning' | 'success',
+  };
+
+  showSnackbar(
+    message: string,
+    severity: 'info' | 'error' | 'warning' | 'success',
+    timeout = 5000,
+  ) {
+    this.snackbar = {
+      showing: true,
+      message,
+      severity,
+      timeout,
+    };
+  }
+
+  closeSnackbar() {
+    this.snackbar.showing = false;
+  }
+
   setupListeners() {
     // add listener for control + s - then copy url to clipboard
 
@@ -61,31 +85,52 @@ export class AppModel extends BaseViewModel<{
     });
   }
 
-  workerEnforcer() {
-    // if (!this.worker) throw new Error('worker is null');
-    // let lastUpdateTime = performance.now();
-    // let count = 0;
-    // const listener = action((e: MessageEvent<any>) => {
-    //   const { type } = e.data;
-    //   if (type === 'update') {
-    //     const currentTime = performance.now();
-    //     const deltaTime = currentTime - lastUpdateTime;
-    //     const expectedDeltaTime = 2 * (1000 / 30) + (count < 2 ? 40 : 0);
-    //     if (deltaTime > expectedDeltaTime && this.playing) {
-    //       console.log({ deltaTime, expectedDeltaTime, count });
-    //       this.worker!.terminate();
-    //       this.terminated = true;
-    //       this.playing = false;
-    //       alert("Your code is too slow. It's been terminated.");
-    //     }
-    //     lastUpdateTime = currentTime;
-    //     count++;
-    //   }
-    // });
-    // this.worker.addEventListener('message', listener);
-    // return () => {
-    //   this.worker!.removeEventListener('message', listener);
-    // };
+  *workerEnforcer() {
+    if (!this.worker) throw new Error('worker is null');
+
+    const fps = 30;
+    const frameTime = 1000 / fps;
+
+    const allowedTime = 2 * frameTime;
+
+    while (true) {
+      const startTime = performance.now();
+      const isFast = yield* result(
+        new Promise<boolean>((resolve) => {
+          const listener = action((e: MessageEvent<any>) => {
+            const { type } = e.data;
+            if (type === 'update') {
+              resolve(true);
+              this.worker?.removeEventListener('message', listener);
+            }
+          });
+
+          if (!this.worker) throw new Error('worker is null');
+
+          this.worker.addEventListener('message', listener);
+
+          setTimeout(() => {
+            this.worker?.removeEventListener('message', listener);
+            resolve(false);
+          }, allowedTime);
+        }),
+      );
+      const endTime = performance.now();
+
+      const time = endTime - startTime;
+
+      if (!isFast) {
+        console.log('slow', time);
+
+        this.showSnackbar('Program was poorly performing and was stopped', 'warning');
+
+        this.worker.terminate();
+        this.terminated = true;
+        this.playing = false;
+
+        break;
+      }
+    }
   }
 
   messagePending = false;
@@ -118,9 +163,7 @@ export class AppModel extends BaseViewModel<{
 
   code = '';
 
-  async setupCode() {
-    console.log('setup worker');
-
+  async setupCode(forceRun = false) {
     await sleep(100);
 
     const result = await this.compile();
@@ -129,10 +172,11 @@ export class AppModel extends BaseViewModel<{
 
     const { codeStub } = result;
 
-    if (this.code === codeStub) return false;
+    if (this.code === codeStub && !forceRun) return false;
 
     this.code = codeStub;
 
+    console.log('setup worker');
     await this.newWorker();
     return await this.sendWorkerMessage('code', { code: codeStub });
   }
@@ -143,13 +187,20 @@ export class AppModel extends BaseViewModel<{
 
   *play() {
     if (this.terminated) {
-      if (!(yield* result(this.setupCode()))) return;
+      if (!(yield* result(this.setupCode(true)))) return;
     }
 
     if (!(yield* result(this.sendWorkerMessage('play', {})))) return;
     this.playing = true;
 
-    this.enforcerDestroyer = this.workerEnforcer();
+    const enforcerRunner = async () => {
+      try {
+        const enforcer = this.workerEnforcer();
+        this.enforcerDestroyer = (enforcer as any).cancel;
+        await enforcer;
+      } catch {}
+    };
+    enforcerRunner();
   }
 
   *pause() {
