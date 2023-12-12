@@ -5,12 +5,15 @@ import { BaseViewModel } from '../utils/ViewModel';
 import SimWorker from '../visualizer/worker?worker';
 import { action } from 'mobx';
 import { sleep } from '../utils/Time';
+import { MainApp } from '../visualizer/display';
 
 export class AppModel extends BaseViewModel<{
   codeEditorRef: MutableRefObject<CodeEditorRef | null>;
 }> {
   worker?: Worker;
   terminated: boolean = false;
+
+  displayApp: MainApp | null = null;
 
   constructor(props: { codeEditorRef: MutableRefObject<CodeEditorRef | null> }) {
     super(props);

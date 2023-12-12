@@ -2,13 +2,18 @@ import { ButtonHTMLAttributes } from 'react';
 import { flexCenter } from '../styles';
 import { css } from '@emotion/react';
 
-export const Button = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  icon?: boolean;
+}
+
+export const Button = (props: ButtonProps) => {
   const buttonStyles = css({
     background: '#007BFF',
     color: '#fff',
     cursor: 'pointer',
     borderRadius: 5,
     height: 40,
+    width: props.icon ? 40 : undefined,
     padding: 10,
     border: '1px solid #00000055',
     fontSize: 16,

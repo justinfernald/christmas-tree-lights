@@ -121,11 +121,11 @@ export class MainApp {
     window.onresize = updateSize;
   }
 
-  resetCamera() {
+  resetCamera = () => {
     this.camera.position.x = 5;
     this.camera.position.z = averageCoord.z;
     this.camera.up.set(0, 0, 1);
-  }
+  };
 
   destructor() {
     for (const destroyer of this.destroyers) {
