@@ -97,7 +97,7 @@ export declare const colors: {
     darkCyan: Color;
 };
 
-export declare class Cone extends Shape {
+declare class Cone extends Shape {
     private radius;
     private height;
     private center;
@@ -109,7 +109,7 @@ export declare class Cone extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class ConeFrustum extends Shape {
+declare class ConeFrustum extends Shape {
     private nearRadius;
     private farRadius;
     private height;
@@ -122,7 +122,7 @@ export declare class ConeFrustum extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class Cube extends Shape {
+declare class Cube extends Shape {
     private sideLength;
     private center;
     constructor(sideLength: number, center: {
@@ -133,7 +133,7 @@ export declare class Cube extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class Cuboid extends Shape {
+declare class Cuboid extends Shape {
     private lengthX;
     private lengthY;
     private lengthZ;
@@ -146,7 +146,7 @@ export declare class Cuboid extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class Cylinder extends Shape {
+declare class Cylinder extends Shape {
     private radius;
     private height;
     private center;
@@ -158,7 +158,7 @@ export declare class Cylinder extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class CylinderWithEllipticalBase extends Shape {
+declare class CylinderWithEllipticalBase extends Shape {
     private majorRadius;
     private minorRadius;
     private height;
@@ -173,7 +173,7 @@ export declare class CylinderWithEllipticalBase extends Shape {
 
 declare const DEG_TO_RAD: number;
 
-export declare class Ellipsoid extends Shape {
+declare class Ellipsoid extends Shape {
     private semiAxisX;
     private semiAxisY;
     private semiAxisZ;
@@ -186,7 +186,7 @@ export declare class Ellipsoid extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class Frustum extends Shape {
+declare class Frustum extends Shape {
     private near;
     private far;
     private left;
@@ -202,7 +202,7 @@ export declare class Frustum extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class HexagonalPrism extends Shape {
+declare class HexagonalPrism extends Shape {
     private sideLength;
     private height;
     private center;
@@ -321,7 +321,7 @@ declare class LocalRunner extends Runner {
  */
 declare function mod(a: number, b: number): number;
 
-export declare class Octahedron extends Shape {
+declare class Octahedron extends Shape {
     private edgeLength;
     private center;
     constructor(edgeLength: number, center: {
@@ -340,7 +340,7 @@ export declare class Octahedron extends Shape {
  */
 declare function perlinNoise(x: number, y: number): number;
 
-export declare class Pyramid extends Shape {
+declare class Pyramid extends Shape {
     private baseLength;
     private height;
     private center;
@@ -391,7 +391,7 @@ declare function randomInt(min: number, max: number): number;
  */
 declare function randomSign(): number;
 
-export declare class RectangularPrism extends Shape {
+declare class RectangularPrism extends Shape {
     private lengthX;
     private lengthY;
     private lengthZ;
@@ -435,10 +435,32 @@ declare abstract class Runner {
 
 export declare const runner: LocalRunner;
 
-export declare class Shape {
+declare class Shape {
     constructor();
     isPointInside(x: number, y: number, z: number): boolean;
 }
+
+declare namespace Shapes {
+    export {
+        Cone,
+        ConeFrustum,
+        Cube,
+        Cuboid,
+        Cylinder,
+        CylinderWithEllipticalBase,
+        Ellipsoid,
+        Frustum,
+        HexagonalPrism,
+        Octahedron,
+        Pyramid,
+        RectangularPrism,
+        Shape,
+        Sphere,
+        Torus,
+        TriangularPyramid
+    }
+}
+export { Shapes }
 
 /**
  * Shuffles the elements of an array in place.
@@ -464,7 +486,7 @@ declare function shuffleInPlace<T>(array: T[]): T[];
  */
 declare function sleep(ms: number): Promise<unknown>;
 
-export declare class Sphere extends Shape {
+declare class Sphere extends Shape {
     private radius;
     private center;
     constructor(radius: number, center: {
@@ -475,7 +497,7 @@ export declare class Sphere extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class Torus extends Shape {
+declare class Torus extends Shape {
     private majorRadius;
     private minorRadius;
     private center;
@@ -487,7 +509,7 @@ export declare class Torus extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
-export declare class TriangularPyramid extends Shape {
+declare class TriangularPyramid extends Shape {
     private baseLength;
     private height;
     private center;
