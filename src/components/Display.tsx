@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { useAppModel } from '../models/AppModel';
 import { useEffect } from 'react';
-import { flex1, relative, absolute } from '../styles';
+import { relative, absolute, fullSize } from '../styles';
 import { MainApp } from '../visualizer/display';
 import { Button } from './Button';
 import { ViewInArRounded } from '@mui/icons-material';
@@ -21,7 +21,7 @@ export const Display = observer(() => {
   }, [appModel, flare]);
 
   return (
-    <div css={[flex1, relative()]}>
+    <div css={[fullSize, relative(), { background: 'black' }]}>
       <div css={[absolute(0, 0, 0, 0), { overflow: 'hidden' }]}>
         <canvas id="mainCanvas" />
       </div>

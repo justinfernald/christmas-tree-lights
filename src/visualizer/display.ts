@@ -3,7 +3,6 @@ import {
   Color as ThreeColor,
   Vector3,
   PointsMaterial,
-  NormalBlending,
   AdditiveBlending,
   BufferGeometry,
   DynamicDrawUsage,
@@ -27,6 +26,7 @@ import { Light } from '../utils/Light';
 import { AppModel } from '../models/AppModel';
 import { reaction } from 'mobx';
 import { WorkerMessage, WorkerToAppMessageTypes } from './messages';
+import { debounce } from '../utils';
 
 const coords = locations.map((location) => {
   return new Vector3(
@@ -116,8 +116,12 @@ export class MainApp {
       this.camera.updateProjectionMatrix();
     };
 
+    const debouncedUpdateSize = debounce(updateSize, 50);
+
     updateSize();
-    window.onresize = updateSize;
+
+    const observer = new ResizeObserver(debouncedUpdateSize);
+    observer.observe(canvas.parentElement!);
   }
 
   resetCamera = () => {

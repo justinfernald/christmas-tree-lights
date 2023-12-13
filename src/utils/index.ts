@@ -179,3 +179,18 @@ export function shuffleInPlace<T>(array: T[]): T[] {
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export function debounce<F extends (...args: any[]) => any>(func: F, waitFor: number): F {
+  let timeout: NodeJS.Timeout | null = null;
+
+  const debounced = (...args: any[]) => {
+    if (timeout !== null) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => func(...args), waitFor);
+  };
+
+  return debounced as any;
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */

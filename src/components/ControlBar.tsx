@@ -85,12 +85,14 @@ const InfoDialog = observer((props: InfoDialogProps) => {
             },
           }}
         >
-          <p>Justin made this very quickly so give him some slack. It's not perfect.</p>
+          <p>
+            Justin made this very quickly so give him some slack. It&apos;s not perfect.
+          </p>
           <p>
             These points on this tree reflect the points on my actual Christmas tree at
             home. So all the code created in this editor can be sent to me, then I can run
-            it on my tree If you sent me a program for the tree, I'll try to send you a
-            video of me running it on the tree.
+            it on my tree If you sent me a program for the tree, I&apos;ll try to send you
+            a video of me running it on the tree.
           </p>
           <p>
             The code editor uses the TypeScript compiler to compile your code. You can use
@@ -98,7 +100,8 @@ const InfoDialog = observer((props: InfoDialogProps) => {
             <i>Color, Light, Utils, Vector3, Shapes, colors, runner</i>
           </p>
           <p>
-            Note that Light have different properties for it's location to fit your need.
+            Note that Light have different properties for it&apos;s location to fit your
+            need.
           </p>
           <p>
             The runner runs at a constant 30 fps. And it will stop running if it detects
@@ -109,18 +112,18 @@ const InfoDialog = observer((props: InfoDialogProps) => {
             every frame. light.update will also run every frame
           </p>
           <p>
-            If you return a value in light.update, it will also set that value to it's
-            color.
+            If you return a value in light.update, it will also set that value to
+            it&apos;s color.
           </p>
-          <p>You can also set a light's color by doing light.color = [some color]</p>
-          <p>I'm sorry 10x'ers, I will not add a VI mode.</p>
+          <p>You can also set a light&apos;s color by doing light.color = [some color]</p>
+          <p>I&apos;m sorry 10x&apos;ers, I will not add a VI mode.</p>
           <p>
-            The code in the editor is saved in the URL. I'm sorry that it gets really
+            The code in the editor is saved in the URL. I&apos;m sorry that it gets really
             really long. If you do Ctrl + S, it will copy the URL to your clipboard.
           </p>
           <p>
-            I'm also sorry that this is a word dump and doesn't have a specific order to
-            what I mention about the editor. Regardless, enjoy!
+            I&apos;m also sorry that this is a word dump and doesn&apos;t have a specific
+            order to what I mention about the editor. Regardless, enjoy!
           </p>
           <p>
             Credit to <a href="https://github.com/sirxemic/xmastree-app">sirxemic</a> on
