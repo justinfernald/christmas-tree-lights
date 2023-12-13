@@ -9,12 +9,7 @@ import {
   RestartAltRounded,
   SkipNextRounded,
 } from '@mui/icons-material';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-} from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@mui/material';
 import { BaseViewModel, useViewModelConstructor } from '../utils/ViewModel';
 import { makeSimpleAutoObservable } from '../utils/mobx';
 
@@ -103,9 +98,7 @@ const InfoDialog = observer((props: InfoDialogProps) => {
             <i>Vector3, Color, colors, Light, MathUtils, Time, runner</i>
           </p>
           <p>
-            Note all x, y, z values range from 0 to 1. To scale z proportionally with
-            tree, multiple value by 1.74. Also z=0 the top of the tree and z=1 is the
-            bottom of the tree.
+            Note that Light have different properties for it's location to fit your need.
           </p>
           <p>
             The runner runs at a constant 30 fps. And it will stop running if it detects
@@ -131,12 +124,18 @@ const InfoDialog = observer((props: InfoDialogProps) => {
           </p>
           <p>
             Credit to <a href="https://github.com/sirxemic/xmastree-app">sirxemic</a> on
-            GitHub for inspiration of the editor
+            GitHub for inspiration of the editor. Some code for the 3D view is taken from
+            his version.
           </p>
           <p>
             Credit to{' '}
             <a href="https://www.youtube.com/watch?v=TvlpIojusBE">Matt Parker</a> for
             inspiration of the Christmas Tree
+          </p>
+          <p>
+            <a href="https://github.com/justinfernald/christmas-tree-lights">
+              Source Code
+            </a>
           </p>
         </DialogContentText>
       </DialogContent>
