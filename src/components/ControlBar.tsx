@@ -95,7 +95,7 @@ const InfoDialog = observer((props: InfoDialogProps) => {
           <p>
             The code editor uses the TypeScript compiler to compile your code. You can use
             any TypeScript code you want, but you can only use the following imports:
-            <i>Vector3, Color, colors, Light, MathUtils, Time, runner</i>
+            <i>Color, Light, Utils, Vector3, Shapes, colors, runner</i>
           </p>
           <p>
             Note that Light have different properties for it's location to fit your need.
