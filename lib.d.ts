@@ -171,6 +171,8 @@ declare class CylinderWithEllipticalBase extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
+declare function debounce<F extends (...args: any[]) => any>(func: F, waitFor: number): F;
+
 declare const DEG_TO_RAD: number;
 
 declare class Ellipsoid extends Shape {
@@ -539,6 +541,7 @@ declare namespace Utils {
         shuffle,
         shuffleInPlace,
         sleep,
+        debounce,
         RAD_TO_DEG,
         DEG_TO_RAD
     }
