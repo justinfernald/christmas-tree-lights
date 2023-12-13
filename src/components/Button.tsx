@@ -7,13 +7,15 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = (props: ButtonProps) => {
+  const { icon, ...rest } = props;
+
   const buttonStyles = css({
     background: '#007BFF',
     color: '#fff',
     cursor: 'pointer',
     borderRadius: 5,
     height: 40,
-    width: props.icon ? 40 : undefined,
+    width: icon ? 40 : undefined,
     padding: 10,
     border: '1px solid #00000055',
     fontSize: 16,
@@ -34,5 +36,5 @@ export const Button = (props: ButtonProps) => {
     },
   });
 
-  return <button {...props} css={[buttonStyles, flexCenter]} />;
+  return <button {...rest} css={[buttonStyles, flexCenter]} />;
 };

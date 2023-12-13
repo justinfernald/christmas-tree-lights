@@ -14,7 +14,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions,
 } from '@mui/material';
 import { BaseViewModel, useViewModelConstructor } from '../utils/ViewModel';
 import { makeSimpleAutoObservable } from '../utils/mobx';

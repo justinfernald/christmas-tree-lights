@@ -22,7 +22,8 @@ import locations from '../locations.json';
 import flarePng from './flare.png';
 import { Light } from '../utils/Light';
 import { AppModel } from '../models/AppModel';
-import { autorun, reaction } from 'mobx';
+import { reaction } from 'mobx';
+import { WorkerMessage, WorkerToAppMessageTypes } from './messages';
 
 const coords = locations.map((location) => {
   return new Vector3(
@@ -56,9 +57,13 @@ export class MainApp {
   destroyers: (() => void)[] = [];
 
   constructor(public appModel: AppModel) {
-    const listener = (e: MessageEvent<any>) => {
-      if (e.data.type === 'update') {
-        this.setLights(e.data.lights.map((light: any) => Light.fromDto(light)));
+    const listener = (
+      e: MessageEvent<WorkerMessage & { type: WorkerToAppMessageTypes }>,
+    ) => {
+      const payload = e.data;
+
+      if (payload.type === 'update') {
+        this.setLights(payload.data.lights.map(Light.fromDto));
       }
     };
 
@@ -125,6 +130,7 @@ export class MainApp {
     this.camera.position.x = 5;
     this.camera.position.z = averageCoord.z;
     this.camera.up.set(0, 0, 1);
+    this.controls.target.copy(averageCoord);
   };
 
   destructor() {

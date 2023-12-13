@@ -11,12 +11,15 @@
     "resolveJsonModule": true,
     // "noEmit": true,
     "declaration": true,
-    "rootDirs": ["src", "animations"],
+    "rootDirs": ["src"],
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "sourceMap": true,
-    "types": ["vite/client", "@emotion/react/types/css-prop"]
+    "types": ["vite/client", "@emotion/react/types/css-prop"],
+    "paths": {
+      "christmas-tree": ["./editor-dist/lib"]
+    }
   },
-  "include": ["src", "animations"],
+  "include": ["src/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -3,14 +3,27 @@ import { Light } from '../utils/Light';
 import { Vector3 } from '../utils/Vector3';
 
 import locations from '../locations.json';
-import { sleep } from '../utils/Time';
+import { sleep } from '../utils';
 
 export abstract class Runner {
   abstract fps: number;
   abstract draw(): void;
+
+  /**
+   * Optional setup function that can be called before running the animation.
+   */
   setup?: () => void;
+  /**
+   * A function that updates the state of the runner.
+   * @param time - The current time in milliseconds.
+   * @param delta - The time difference between the current and previous frame in milliseconds.
+   * @param iteration - The current iteration of the update loop.
+   */
   update?: (time: number, delta: number | null, iteration: number) => void;
 
+  /**
+   * The lights that will be updated and drawn.
+   */
   lights = locations.map(
     (location) => new Light(Vector3.fromObject(location), new Color(0, 0, 0)),
   );
@@ -28,6 +41,7 @@ export abstract class Runner {
       this.setup?.();
     }
 
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (!this.running) {
         break;

@@ -4,8 +4,14 @@ import { makeSimpleAutoObservable, result } from '../utils/mobx';
 import { BaseViewModel } from '../utils/ViewModel';
 import SimWorker from '../visualizer/worker?worker';
 import { action } from 'mobx';
-import { sleep } from '../utils/Time';
+import { sleep } from '../utils';
 import { MainApp } from '../visualizer/display';
+import {
+  AppToWorkerMessageTypes,
+  WorkerMessage,
+  WorkerMessageTypes,
+  WorkerToAppMessageTypes,
+} from '../visualizer/messages';
 
 export class AppModel extends BaseViewModel<{
   codeEditorRef: MutableRefObject<CodeEditorRef | null>;
@@ -72,12 +78,15 @@ export class AppModel extends BaseViewModel<{
   }
 
   async newWorker() {
+    this.enforcerDestroyer?.();
     this.worker?.terminate();
     this.terminated = false;
     this.worker = new SimWorker();
 
     await new Promise<void>((resolve) => {
-      const listener = (e: MessageEvent<any>) => {
+      const listener = (
+        e: MessageEvent<WorkerMessage & { type: WorkerToAppMessageTypes }>,
+      ) => {
         const { type } = e.data;
 
         if (type === 'ready') {
@@ -98,34 +107,51 @@ export class AppModel extends BaseViewModel<{
 
     const allowedTime = 2 * frameTime;
 
+    let count = 0;
+
+    const animationStartTime = performance.now();
+
     while (true) {
       const startTime = performance.now();
       const isFast = yield* result(
         new Promise<boolean>((resolve) => {
-          const listener = action((e: MessageEvent<any>) => {
-            const { type } = e.data;
-            if (type === 'update') {
-              resolve(true);
-              this.worker?.removeEventListener('message', listener);
-            }
-          });
+          const listener = action(
+            (e: MessageEvent<WorkerMessage & { type: WorkerToAppMessageTypes }>) => {
+              const { type } = e.data;
+              if (type === 'update') {
+                resolve(true);
+                this.worker?.removeEventListener('message', listener);
+              }
+            },
+          );
 
           if (!this.worker) throw new Error('worker is null');
 
           this.worker.addEventListener('message', listener);
 
-          setTimeout(() => {
-            this.worker?.removeEventListener('message', listener);
-            resolve(false);
-          }, allowedTime);
+          setTimeout(
+            () => {
+              this.worker?.removeEventListener('message', listener);
+              resolve(false);
+            },
+            allowedTime + (count < fps * 3 ? frameTime * 5 : 0),
+          );
         }),
       );
-      const endTime = performance.now();
 
-      const time = endTime - startTime;
+      if (!isFast && this.playing) {
+        const endTime = performance.now();
 
-      if (!isFast) {
-        console.log('slow', time);
+        const time = endTime - startTime;
+        const fullTime = endTime - animationStartTime;
+
+        console.log('slow', {
+          frameTime: time,
+          frameCount: count,
+          allowedTime,
+          fps,
+          fullTime,
+        });
 
         this.showSnackbar('Program was poorly performing and was stopped', 'warning');
 
@@ -135,21 +161,31 @@ export class AppModel extends BaseViewModel<{
 
         break;
       }
+
+      count++;
     }
   }
 
   messagePending = false;
 
-  async sendWorkerMessage(type: string, data: Record<string, any>) {
+  async sendWorkerMessage<T extends AppToWorkerMessageTypes>(
+    type: T,
+    data: (WorkerMessage & { type: T })['data'],
+  ) {
     if (!this.worker) throw new Error('worker is null');
 
     const messageId = Math.random().toString(36).slice(2);
 
     return await new Promise<boolean>((resolve) => {
-      const listener = (e: MessageEvent<any>) => {
-        const { type: messageType, data: messageData } = e.data;
+      const listener = (
+        e: MessageEvent<WorkerMessage & { type: WorkerToAppMessageTypes }>,
+      ) => {
+        const workerMessageData = e.data;
 
-        if (messageType === 'confirmation' && messageId === messageData.messageId) {
+        if (
+          workerMessageData.type === 'confirmation' &&
+          messageId === workerMessageData.data.messageId
+        ) {
           resolve(true);
           this.messagePending = false;
           this.worker!.removeEventListener('message', listener);
@@ -162,7 +198,11 @@ export class AppModel extends BaseViewModel<{
         resolve(false);
       }
       this.messagePending = true;
-      this.worker!.postMessage({ type, data: { ...data, messageId } });
+      if (data) {
+        this.worker!.postMessage({ type, data: { ...data, messageId } });
+      } else {
+        this.worker!.postMessage({ type, data: { messageId } });
+      }
     });
   }
 
@@ -183,7 +223,7 @@ export class AppModel extends BaseViewModel<{
 
     console.log('setup worker');
     await this.newWorker();
-    return await this.sendWorkerMessage('code', { code: codeStub });
+    return await this.sendWorkerMessage(WorkerMessageTypes.Code, { code: codeStub });
   }
 
   playing = false;
@@ -195,27 +235,30 @@ export class AppModel extends BaseViewModel<{
       if (!(yield* result(this.setupCode(true)))) return;
     }
 
-    if (!(yield* result(this.sendWorkerMessage('play', {})))) return;
+    if (!(yield* result(this.sendWorkerMessage(WorkerMessageTypes.Play, {})))) return;
     this.playing = true;
 
     const enforcerRunner = async () => {
       try {
         const enforcer = this.workerEnforcer();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.enforcerDestroyer = (enforcer as any).cancel;
         await enforcer;
-      } catch {}
+      } catch {
+        // Ignore errors
+      }
     };
     enforcerRunner();
   }
 
   *pause() {
     this.enforcerDestroyer?.();
-    if (!(yield* result(this.sendWorkerMessage('pause', {})))) return;
+    if (!(yield* result(this.sendWorkerMessage(WorkerMessageTypes.Pause, {})))) return;
     this.playing = false;
   }
 
   *reset() {
-    yield this.sendWorkerMessage('reset', {});
+    yield this.sendWorkerMessage(WorkerMessageTypes.Reset, {});
   }
 
   *step() {
@@ -223,7 +266,7 @@ export class AppModel extends BaseViewModel<{
       if (!(yield* result(this.setupCode()))) return;
     }
 
-    yield this.sendWorkerMessage('step', {});
+    yield this.sendWorkerMessage(WorkerMessageTypes.Step, {});
   }
 }
 

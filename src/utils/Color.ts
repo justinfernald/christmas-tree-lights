@@ -1,10 +1,14 @@
 import { clamp } from 'three/src/math/MathUtils';
 
+/**
+ * Represents a color in RGB format.
+ */
 export class Color {
   /**
-   * red: 0 to 255
-   * green: 0 to 255
-   * blue: 0 to 255
+   * Creates a new Color instance.
+   * @param red The red component of the color (0 to 255).
+   * @param green The green component of the color (0 to 255).
+   * @param blue The blue component of the color (0 to 255).
    */
   constructor(
     public red: number,
@@ -12,20 +16,39 @@ export class Color {
     public blue: number,
   ) {}
 
+  /**
+   * Returns the color as a string in the format "rgb(red, green, blue)".
+   * @returns The color as a string.
+   */
   toString(): string {
     return `rgb(${this.red}, ${this.green}, ${this.blue})`;
   }
 
+  /**
+   * Returns the color as a 32-bit integer.
+   * @returns The color as an integer.
+   */
   toInt(): number {
     return ((this.red & 0xff) << 16) | ((this.green & 0xff) << 8) | (this.blue & 0xff);
   }
 
+  /**
+   * Creates a new Color instance from a 32-bit integer.
+   * @param int The integer representing the color.
+   * @returns A new Color instance.
+   */
   static fromInt(int: number): Color {
     int = clamp(int, 0, 0xffffff);
 
     return new Color((int >> 16) & 0xff, (int >> 8) & 0xff, int & 0xff);
   }
 
+  /**
+   * Creates a new Color instance from a hexadecimal color string.
+   * @param hex The hexadecimal color string (e.g., "#ff0000").
+   * @returns A new Color instance.
+   * @throws Error if the hex color string is invalid.
+   */
   static fromHex(hex: string): Color {
     const match = hex.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
 
@@ -41,9 +64,11 @@ export class Color {
   }
 
   /**
-   * red: 0 to 255
-   * green: 0 to 255
-   * blue: 0 to 255
+   * Creates a new Color instance from RGB components.
+   * @param r The red component of the color (0 to 255).
+   * @param g The green component of the color (0 to 255).
+   * @param b The blue component of the color (0 to 255).
+   * @returns A new Color instance.
    */
   static fromRGB(r: number, g: number, b: number): Color {
     r = clamp(r, 0, 255);
@@ -54,9 +79,11 @@ export class Color {
   }
 
   /**
-   * hue: 0 to 360
-   * saturation: 0 to 100
-   * lightness: 0 to 100
+   * Creates a new Color instance from HSL components.
+   * @param h The hue component of the color (0 to 360).
+   * @param s The saturation component of the color (0 to 100).
+   * @param l The lightness component of the color (0 to 100).
+   * @returns A new Color instance.
    */
   static fromHSL(h: number, s: number, l: number): Color {
     h = clamp(h, 0, 360);
@@ -108,6 +135,9 @@ export class Color {
   }
 }
 
+/**
+ * Predefined colors
+ */
 export const colors = {
   red: new Color(255, 0, 0),
   green: new Color(0, 255, 0),

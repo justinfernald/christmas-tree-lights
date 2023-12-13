@@ -85,6 +85,16 @@ export function angleDifference(a: number, b: number): number {
 }
 
 /**
+ * Returns the mod.
+ * @param a
+ * @param b
+ * @returns
+ */
+export function mod(a: number, b: number): number {
+  return ((a % b) + b) % b;
+}
+
+/**
  * get a random number
  * @param min min
  * @param max max
@@ -104,18 +114,39 @@ export function randomInt(min: number, max: number): number {
   return Math.floor(random(min, max));
 }
 
+/**
+ * Returns a random element from the given array.
+ * @param array - The array to choose from.
+ * @returns The randomly chosen element.
+ * @template T - The type of elements in the array.
+ */
 export function randomChoice<T>(array: T[]): T {
   return array[randomInt(0, array.length)];
 }
 
+/**
+ * Generates a random boolean value.
+ * @returns {boolean} The randomly generated boolean value.
+ */
 export function randomBool(): boolean {
   return Math.random() < 0.5;
 }
 
+/**
+ * Generates a random sign, either 1 or -1.
+ *
+ * @returns The randomly generated sign.
+ */
 export function randomSign(): number {
   return randomBool() ? 1 : -1;
 }
 
+/**
+ * Shuffles the elements of an array in place.
+ * @param array - The array to be shuffled.
+ * @returns The shuffled array.
+ * @template T - The type of elements in the array.
+ */
 export function shuffle<T>(array: T[]): T[] {
   const result = array.slice();
   for (let i = result.length - 1; i > 0; i--) {
@@ -125,10 +156,26 @@ export function shuffle<T>(array: T[]): T[] {
   return result;
 }
 
+/**
+ * Shuffles an array in place.
+ *
+ * @template T - The type of elements in the array.
+ * @param {T[]} array - The array to be shuffled.
+ * @returns {T[]} - The shuffled array.
+ */
 export function shuffleInPlace<T>(array: T[]): T[] {
   for (let i = array.length - 1; i > 0; i--) {
     const j = randomInt(0, i + 1);
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+}
+
+/**
+ * Pauses the execution for a specified number of milliseconds.
+ * @param ms - The number of milliseconds to sleep.
+ * @returns A promise that resolves after the specified time has elapsed.
+ */
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
