@@ -309,7 +309,9 @@ export declare interface LightDTO {
 }
 
 declare class LocalRunner extends Runner {
-    fps: number;
+    _fps: number;
+    set fps(fps: number);
+    get fps(): number;
     draw(): void;
 }
 
