@@ -2,6 +2,8 @@ import {
   Box3,
   Color as ThreeColor,
   Vector3,
+  PointsMaterial,
+  NormalBlending,
   AdditiveBlending,
   BufferGeometry,
   DynamicDrawUsage,
@@ -19,6 +21,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { fragmentShader, vertexShader } from './shaders';
 
 import locations from '../locations.json';
+import dotPng from './dot.png';
 import flarePng from './flare.png';
 import { Light } from '../utils/Light';
 import { AppModel } from '../models/AppModel';
@@ -56,7 +59,10 @@ export class MainApp {
 
   destroyers: (() => void)[] = [];
 
-  constructor(public appModel: AppModel) {
+  constructor(
+    public appModel: AppModel,
+    public flare: boolean,
+  ) {
     const listener = (
       e: MessageEvent<WorkerMessage & { type: WorkerToAppMessageTypes }>,
     ) => {
@@ -81,18 +87,6 @@ export class MainApp {
     );
 
     this.destroyers.push(reactionDisposer);
-
-    // this.fpsControl = document.querySelector<HTMLInputElement>('#fpsLabel')!;
-
-    // console.log(this.fpsControl);
-
-    // this.fpsControl.oninput = () => {
-    //   const value = Number(this.fpsControl.value);
-    //   if (!this.fpsControl.validity.valid) {
-    //     return;
-    //   }
-    //   this.fps = value;
-    // };
 
     const canvas = document.querySelector<HTMLCanvasElement>('#mainCanvas')!;
     this.scene = new Scene();
@@ -186,21 +180,35 @@ export class MainApp {
       'color',
       new Float32BufferAttribute(colors, 3).setUsage(DynamicDrawUsage),
     );
-    const lightsObject = new Points(
-      geometry,
-      new ShaderMaterial({
-        uniforms: {
-          pointTexture: { value: new TextureLoader().load(flarePng) },
-        },
-        vertexShader,
-        fragmentShader,
-        blending: AdditiveBlending,
-        depthTest: false,
-        transparent: true,
-        vertexColors: true,
-      }),
-    );
 
-    this.scene.add(lightsObject);
+    if (this.flare) {
+      const lightsObject = new Points(
+        geometry,
+        new ShaderMaterial({
+          uniforms: {
+            pointTexture: { value: new TextureLoader().load(flarePng) },
+          },
+          vertexShader,
+          fragmentShader,
+          blending: AdditiveBlending,
+          depthTest: false,
+          transparent: true,
+          vertexColors: true,
+        }),
+      );
+      this.scene.add(lightsObject);
+    } else {
+      const material = new PointsMaterial({
+        size: 0.1,
+        sizeAttenuation: true,
+        vertexColors: true,
+        map: new TextureLoader().load(dotPng),
+        transparent: true,
+        alphaTest: 0.5,
+      });
+
+      const lightsObject = new Points(geometry, material);
+      this.scene.add(lightsObject);
+    }
   }
 }

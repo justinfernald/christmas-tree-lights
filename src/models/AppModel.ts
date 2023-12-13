@@ -28,6 +28,10 @@ export class AppModel extends BaseViewModel<{
     this.setupListeners();
   }
 
+  fps = 30;
+
+  flare = true;
+
   snackbar = {
     showing: false,
     message: '',
@@ -81,6 +85,8 @@ export class AppModel extends BaseViewModel<{
     this.enforcerDestroyer?.();
     this.worker?.terminate();
     this.terminated = false;
+
+    this.fps = 30;
     this.worker = new SimWorker();
 
     await new Promise<void>((resolve) => {
@@ -97,28 +103,37 @@ export class AppModel extends BaseViewModel<{
 
       this.worker!.addEventListener('message', listener);
     });
+
+    const fpsListener = (
+      e: MessageEvent<WorkerMessage & { type: WorkerToAppMessageTypes }>,
+    ) => {
+      const { type, data } = e.data;
+
+      if (type === WorkerMessageTypes.Fps) {
+        this.fps = data.fps;
+      }
+    };
+    this.worker!.addEventListener('message', fpsListener);
   }
 
   *workerEnforcer() {
     if (!this.worker) throw new Error('worker is null');
-
-    const fps = 30;
-    const frameTime = 1000 / fps;
-
-    const allowedTime = 2 * frameTime;
 
     let count = 0;
 
     const animationStartTime = performance.now();
 
     while (true) {
+      const frameTime = 1000 / this.fps;
+      const allowedTime = 2 * frameTime;
+
       const startTime = performance.now();
       const isFast = yield* result(
         new Promise<boolean>((resolve) => {
           const listener = action(
             (e: MessageEvent<WorkerMessage & { type: WorkerToAppMessageTypes }>) => {
               const { type } = e.data;
-              if (type === 'update') {
+              if (type === 'update' || type === 'fps') {
                 resolve(true);
                 this.worker?.removeEventListener('message', listener);
               }
@@ -134,7 +149,7 @@ export class AppModel extends BaseViewModel<{
               this.worker?.removeEventListener('message', listener);
               resolve(false);
             },
-            allowedTime + (count < fps * 3 ? frameTime * 5 : 0),
+            allowedTime + (count < this.fps * 3 ? frameTime * 5 : 0),
           );
         }),
       );
@@ -149,7 +164,7 @@ export class AppModel extends BaseViewModel<{
           frameTime: time,
           frameCount: count,
           allowedTime,
-          fps,
+          fps: this.fps,
           fullTime,
         });
 

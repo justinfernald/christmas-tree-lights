@@ -2,7 +2,7 @@ import { Runner } from './Runner';
 import ws281x from 'rpi-ws281x-native';
 
 export class LightRunner extends Runner {
-  fps = 60;
+  fps = 30;
   channel: ReturnType<typeof ws281x>;
 
   /** brightness is 0 to 1 */

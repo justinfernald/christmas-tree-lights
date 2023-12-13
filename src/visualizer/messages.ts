@@ -9,6 +9,7 @@ export enum WorkerMessageTypes {
   Ready = 'ready',
   Confirmation = 'confirmation',
   Code = 'code',
+  Fps = 'fps',
 }
 
 export interface WorkerMessageStructure {
@@ -51,6 +52,11 @@ export interface CodeMessage extends WorkerMessageStructure {
   data: { code: string };
 }
 
+export interface FpsMessage extends WorkerMessageStructure {
+  type: WorkerMessageTypes.Fps;
+  data: { fps: number };
+}
+
 export type WorkerMessage =
   | StartMessage
   | PauseMessage
@@ -59,7 +65,8 @@ export type WorkerMessage =
   | CodeMessage
   | UpdateMessage
   | ReadyMessage
-  | ConfirmationMessage;
+  | ConfirmationMessage
+  | FpsMessage;
 
 export type AppToWorkerMessageTypes =
   | WorkerMessageTypes.Play
@@ -71,4 +78,5 @@ export type AppToWorkerMessageTypes =
 export type WorkerToAppMessageTypes =
   | WorkerMessageTypes.Update
   | WorkerMessageTypes.Ready
-  | WorkerMessageTypes.Confirmation;
+  | WorkerMessageTypes.Confirmation
+  | WorkerMessageTypes.Fps;

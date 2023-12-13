@@ -1,7 +1,16 @@
 import { Runner } from './Runner';
 
 export class LocalRunner extends Runner {
-  fps = 30;
+  _fps = 30;
+
+  set fps(fps: number) {
+    this._fps = fps;
+    postMessage({ type: 'fps', data: { fps } });
+  }
+
+  get fps() {
+    return this._fps;
+  }
 
   draw() {
     postMessage({

@@ -8,17 +8,17 @@ import { ViewInArRounded } from '@mui/icons-material';
 
 export const Display = observer(() => {
   const appModel = useAppModel();
+  const flare = appModel.flare;
 
   useEffect(() => {
     if (!appModel) return;
 
-    appModel.displayApp = new MainApp(appModel);
+    appModel.displayApp = new MainApp(appModel, flare);
 
     () => {
       appModel.displayApp?.destructor();
     };
-  }, [appModel]);
-  // add iframe lister for messages from the parent
+  }, [appModel, flare]);
 
   return (
     <div css={[flex1, relative()]}>
@@ -26,11 +26,12 @@ export const Display = observer(() => {
         <canvas id="mainCanvas" />
       </div>
 
-      <div css={[absolute(undefined, 3, 3)]}>
+      <div css={[absolute(undefined, 5, 5)]}>
         <Button
+          icon
           title="Reset Camera"
           onClick={() => appModel.displayApp?.resetCamera()}
-          css={{ width: 40, height: 40, borderRadius: 20 }}
+          css={{ borderRadius: 20 }}
         >
           <ViewInArRounded />
         </Button>

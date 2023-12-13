@@ -1,5 +1,5 @@
 import { Editor, useMonaco } from '@monaco-editor/react';
-import { flex1, flexColumn, fullHeight, fullWidth } from '../styles';
+import { absolute, flex1, flexColumn, fullHeight, fullWidth, relative } from '../styles';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { editor, Uri } from 'monaco-editor';
 import { observer } from 'mobx-react-lite';
@@ -9,6 +9,8 @@ import { makeSimpleAutoObservable } from '../utils/mobx';
 import LZString from 'lz-string';
 import { useAppModel } from '../models/AppModel';
 import { action } from 'mobx';
+import { Button } from './Button';
+import { AutoFixHighRounded } from '@mui/icons-material';
 
 export interface CodeEditorViewModelProps {
   editor: editor.IStandaloneCodeEditor | null;
@@ -58,6 +60,18 @@ export class CodeEditorViewModel extends BaseViewModel<CodeEditorViewModelProps>
     `;
 
     return { code, newCode, codeStub };
+  }
+
+  formatCode() {
+    const editor = this.props.editor;
+
+    if (!editor) return;
+
+    const action = editor.getAction('editor.action.formatDocument');
+
+    if (!action) return;
+
+    action.run();
   }
 }
 
@@ -128,7 +142,7 @@ export const CodeEditor = observer(
     }));
 
     return (
-      <div css={[flex1, fullHeight, flexColumn]}>
+      <div css={[flex1, fullHeight, flexColumn, relative()]}>
         <div css={[fullWidth, flex1]}>
           {example && (
             <Editor
@@ -155,6 +169,16 @@ export const CodeEditor = observer(
               defaultValue={hashCode || example}
             />
           )}
+        </div>
+        <div css={[absolute(5, 20)]}>
+          <Button
+            title="Format Code"
+            onClick={viewModel.formatCode}
+            icon
+            css={{ borderRadius: 20 }}
+          >
+            <AutoFixHighRounded />
+          </Button>
         </div>
       </div>
     );
