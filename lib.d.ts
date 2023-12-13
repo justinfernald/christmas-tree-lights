@@ -15,92 +15,204 @@ declare function angleDifference(a: number, b: number): number;
  */
 declare function clamp(value: number, min: number, max: number): number;
 
-export declare const Color: typeof ColorLib.Color;
-
-declare class Color_2 {
+/**
+ * Represents a color in RGB format.
+ */
+export declare class Color {
     red: number;
     green: number;
     blue: number;
     /**
-     * red: 0 to 255
-     * green: 0 to 255
-     * blue: 0 to 255
+     * Creates a new Color instance.
+     * @param red The red component of the color (0 to 255).
+     * @param green The green component of the color (0 to 255).
+     * @param blue The blue component of the color (0 to 255).
      */
     constructor(red: number, green: number, blue: number);
+    /**
+     * Returns the color as a string in the format "rgb(red, green, blue)".
+     * @returns The color as a string.
+     */
     toString(): string;
+    /**
+     * Returns the color as a 32-bit integer.
+     * @returns The color as an integer.
+     */
     toInt(): number;
-    static fromInt(int: number): Color_2;
-    static fromHex(hex: string): Color_2;
     /**
-     * red: 0 to 255
-     * green: 0 to 255
-     * blue: 0 to 255
+     * Creates a new Color instance from a 32-bit integer.
+     * @param int The integer representing the color.
+     * @returns A new Color instance.
      */
-    static fromRGB(r: number, g: number, b: number): Color_2;
+    static fromInt(int: number): Color;
     /**
-     * hue: 0 to 360
-     * saturation: 0 to 100
-     * lightness: 0 to 100
+     * Creates a new Color instance from a hexadecimal color string.
+     * @param hex The hexadecimal color string (e.g., "#ff0000").
+     * @returns A new Color instance.
+     * @throws Error if the hex color string is invalid.
      */
-    static fromHSL(h: number, s: number, l: number): Color_2;
+    static fromHex(hex: string): Color;
+    /**
+     * Creates a new Color instance from RGB components.
+     * @param r The red component of the color (0 to 255).
+     * @param g The green component of the color (0 to 255).
+     * @param b The blue component of the color (0 to 255).
+     * @returns A new Color instance.
+     */
+    static fromRGB(r: number, g: number, b: number): Color;
+    /**
+     * Creates a new Color instance from HSL components.
+     * @param h The hue component of the color (0 to 360).
+     * @param s The saturation component of the color (0 to 100).
+     * @param l The lightness component of the color (0 to 100).
+     * @returns A new Color instance.
+     */
+    static fromHSL(h: number, s: number, l: number): Color;
 }
 
-declare namespace ColorLib {
-    export {
-        Color_2 as Color,
-        colors_2 as colors
-    }
-}
-
+/**
+ * Predefined colors
+ */
 export declare const colors: {
-    red: ColorLib.Color;
-    green: ColorLib.Color;
-    blue: ColorLib.Color;
-    orange: ColorLib.Color;
-    yellow: ColorLib.Color;
-    purple: ColorLib.Color;
-    pink: ColorLib.Color;
-    white: ColorLib.Color;
-    black: ColorLib.Color;
-    gray: ColorLib.Color;
-    brown: ColorLib.Color;
-    cyan: ColorLib.Color;
-    darkGreen: ColorLib.Color;
-    darkBlue: ColorLib.Color;
-    darkOrange: ColorLib.Color;
-    darkYellow: ColorLib.Color;
-    darkPurple: ColorLib.Color;
-    darkPink: ColorLib.Color;
-    darkGray: ColorLib.Color;
-    darkBrown: ColorLib.Color;
-    darkCyan: ColorLib.Color;
+    red: Color;
+    green: Color;
+    blue: Color;
+    orange: Color;
+    yellow: Color;
+    purple: Color;
+    pink: Color;
+    white: Color;
+    black: Color;
+    gray: Color;
+    brown: Color;
+    cyan: Color;
+    darkGreen: Color;
+    darkBlue: Color;
+    darkOrange: Color;
+    darkYellow: Color;
+    darkPurple: Color;
+    darkPink: Color;
+    darkGray: Color;
+    darkBrown: Color;
+    darkCyan: Color;
 };
 
-declare const colors_2: {
-    red: Color_2;
-    green: Color_2;
-    blue: Color_2;
-    orange: Color_2;
-    yellow: Color_2;
-    purple: Color_2;
-    pink: Color_2;
-    white: Color_2;
-    black: Color_2;
-    gray: Color_2;
-    brown: Color_2;
-    cyan: Color_2;
-    darkGreen: Color_2;
-    darkBlue: Color_2;
-    darkOrange: Color_2;
-    darkYellow: Color_2;
-    darkPurple: Color_2;
-    darkPink: Color_2;
-    darkGray: Color_2;
-    darkBrown: Color_2;
-    darkCyan: Color_2;
-};
+export declare class Cone extends Shape {
+    private radius;
+    private height;
+    private center;
+    constructor(radius: number, height: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class ConeFrustum extends Shape {
+    private nearRadius;
+    private farRadius;
+    private height;
+    private center;
+    constructor(nearRadius: number, farRadius: number, height: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class Cube extends Shape {
+    private sideLength;
+    private center;
+    constructor(sideLength: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class Cuboid extends Shape {
+    private lengthX;
+    private lengthY;
+    private lengthZ;
+    private center;
+    constructor(lengthX: number, lengthY: number, lengthZ: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class Cylinder extends Shape {
+    private radius;
+    private height;
+    private center;
+    constructor(radius: number, height: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class CylinderWithEllipticalBase extends Shape {
+    private majorRadius;
+    private minorRadius;
+    private height;
+    private center;
+    constructor(majorRadius: number, minorRadius: number, height: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
 
 declare const DEG_TO_RAD: number;
+
+export declare class Ellipsoid extends Shape {
+    private semiAxisX;
+    private semiAxisY;
+    private semiAxisZ;
+    private center;
+    constructor(semiAxisX: number, semiAxisY: number, semiAxisZ: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class Frustum extends Shape {
+    private near;
+    private far;
+    private left;
+    private right;
+    private top;
+    private bottom;
+    private center;
+    constructor(near: number, far: number, left: number, right: number, top: number, bottom: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class HexagonalPrism extends Shape {
+    private sideLength;
+    private height;
+    private center;
+    constructor(sideLength: number, height: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
 
 /**
  * Linearly interpolates between two numbers.
@@ -120,27 +232,80 @@ declare function lerp(a: number, b: number, t: number): number;
  */
 declare function lerpAngle(a: number, b: number, t: number): number;
 
-export declare const Light: typeof LightLib.Light;
-
-declare class Light_2 {
-    location: Vector3_2;
-    color: Color_2;
-    update?: (timeMs: number, deltaMs: number | null, iteration: number) => Color_2 | void;
-    constructor(location: Vector3_2, color: Color_2);
-    toDto(): {
-        location: [x: number, y: number, z: number];
-        color: number;
-    };
-    static fromDto(dto: {
-        location: [number, number, number];
-        color: number;
-    }): Light_2;
+/**
+ * Represents a light source.
+ */
+export declare class Light {
+    _location: Vector3;
+    color: Color;
+    /**
+     * Location of the light.
+     * x: 0 to 1
+     * y: 0 to 1
+     * z: 0 to 1 (0 is bottom of tree, 1 is top of tree)
+     */
+    get location(): Vector3;
+    /**
+     * Location of the light with z scaled by 1.74.
+     * x: 0 to 1
+     * y: 0 to 1
+     * z: 0 to 1.74 (0 is bottom of tree, 1.74 is top of tree)
+     */
+    get locationScaled(): Vector3;
+    /**
+     * Location of the light with origin at the center of the tree.
+     * x: -0.5 to 0.5
+     * y: -0.5 to 0.5
+     * z: -0.5 to 0.5 (-0.5 is bottom of tree, 0.5 is top of tree)
+     */
+    get locationOriginCenter(): Vector3;
+    /**
+     * Location of the light with origin at the center of the tree and z scaled by 1.74.
+     * x: -0.5 to 0.5
+     * y: -0.5 to 0.5
+     * z: -0.87 to 0.87 (-0.87 is bottom of tree, 0.87 is top of tree)
+     */
+    get locationOriginCenterScaled(): Vector3;
+    /**
+     * Location of the light with origin at the center of the tree for x and y, and bottom of the tree.
+     * x: -0.5 to 0.5
+     * y: -0.5 to 0.5
+     * z: 0 to 1 (0 is bottom of tree, 1 is top of tree)
+     */
+    get locationOriginCenterBottom(): Vector3;
+    /**
+     * Location of the light with origin at the center of the tree for x and y, and bottom of the tree.
+     * x: -0.5 to 0.5
+     * y: -0.5 to 0.5
+     * z: 0 to 1.74 (0 is bottom of tree, 1.74 is top of tree)
+     */
+    get locationOriginCenterBottomScaled(): Vector3;
+    /**
+     * Updates the light's color based on the specified parameters.
+     *
+     * @param timeMs - The current time in milliseconds.
+     * @param deltaMs - The time difference in milliseconds since the last update.
+     * @param iteration - The current iteration count.
+     * @returns The updated color of the light, or void if no color update is needed.
+     */
+    update?: (timeMs: number, deltaMs: number | null, iteration: number) => Color | void;
+    constructor(location: Vector3, color: Color);
+    /**
+     * Converts the Light object to a Data Transfer Object (DTO).
+     * @returns The DTO representation of the Light object.
+     */
+    toDto(): LightDTO;
+    /**
+     * Creates a Light instance from a data transfer object (DTO).
+     * @param dto - The DTO containing the location and color information.
+     * @returns A new Light instance.
+     */
+    static fromDto(dto: LightDTO): Light;
 }
 
-declare namespace LightLib {
-    export {
-        Light_2 as Light
-    }
+export declare interface LightDTO {
+    location: [number, number, number];
+    color: number;
 }
 
 declare class LocalRunner extends Runner {
@@ -148,25 +313,24 @@ declare class LocalRunner extends Runner {
     draw(): void;
 }
 
-declare namespace MathUtils {
-    export {
-        perlinNoise,
-        clamp,
-        lerp,
-        lerpAngle,
-        angleDifference,
-        random,
-        randomInt,
-        randomChoice,
-        randomBool,
-        randomSign,
-        shuffle,
-        shuffleInPlace,
-        RAD_TO_DEG,
-        DEG_TO_RAD
-    }
+/**
+ * Returns the mod.
+ * @param a
+ * @param b
+ * @returns
+ */
+declare function mod(a: number, b: number): number;
+
+export declare class Octahedron extends Shape {
+    private edgeLength;
+    private center;
+    constructor(edgeLength: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
 }
-export { MathUtils }
 
 /**
  * Generates perlin noise at a given point ranging from -1 to 1.
@@ -175,6 +339,18 @@ export { MathUtils }
  * @returns
  */
 declare function perlinNoise(x: number, y: number): number;
+
+export declare class Pyramid extends Shape {
+    private baseLength;
+    private height;
+    private center;
+    constructor(baseLength: number, height: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
 
 declare const RAD_TO_DEG: number;
 
@@ -186,8 +362,18 @@ declare const RAD_TO_DEG: number;
  */
 declare function random(min: number, max: number): number;
 
+/**
+ * Generates a random boolean value.
+ * @returns {boolean} The randomly generated boolean value.
+ */
 declare function randomBool(): boolean;
 
+/**
+ * Returns a random element from the given array.
+ * @param array - The array to choose from.
+ * @returns The randomly chosen element.
+ * @template T - The type of elements in the array.
+ */
 declare function randomChoice<T>(array: T[]): T;
 
 /**
@@ -198,14 +384,44 @@ declare function randomChoice<T>(array: T[]): T;
  */
 declare function randomInt(min: number, max: number): number;
 
+/**
+ * Generates a random sign, either 1 or -1.
+ *
+ * @returns The randomly generated sign.
+ */
 declare function randomSign(): number;
+
+export declare class RectangularPrism extends Shape {
+    private lengthX;
+    private lengthY;
+    private lengthZ;
+    private center;
+    constructor(lengthX: number, lengthY: number, lengthZ: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
 
 declare abstract class Runner {
     abstract fps: number;
     abstract draw(): void;
+    /**
+     * Optional setup function that can be called before running the animation.
+     */
     setup?: () => void;
+    /**
+     * A function that updates the state of the runner.
+     * @param time - The current time in milliseconds.
+     * @param delta - The time difference between the current and previous frame in milliseconds.
+     * @param iteration - The current iteration of the update loop.
+     */
     update?: (time: number, delta: number | null, iteration: number) => void;
-    lights: Light_2[];
+    /**
+     * The lights that will be updated and drawn.
+     */
+    lights: Light[];
     time: number | null;
     iteration: number;
     running: boolean;
@@ -219,84 +435,318 @@ declare abstract class Runner {
 
 export declare const runner: LocalRunner;
 
+export declare class Shape {
+    constructor();
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+/**
+ * Shuffles the elements of an array in place.
+ * @param array - The array to be shuffled.
+ * @returns The shuffled array.
+ * @template T - The type of elements in the array.
+ */
 declare function shuffle<T>(array: T[]): T[];
 
+/**
+ * Shuffles an array in place.
+ *
+ * @template T - The type of elements in the array.
+ * @param {T[]} array - The array to be shuffled.
+ * @returns {T[]} - The shuffled array.
+ */
 declare function shuffleInPlace<T>(array: T[]): T[];
 
+/**
+ * Pauses the execution for a specified number of milliseconds.
+ * @param ms - The number of milliseconds to sleep.
+ * @returns A promise that resolves after the specified time has elapsed.
+ */
 declare function sleep(ms: number): Promise<unknown>;
 
-declare namespace Time {
+export declare class Sphere extends Shape {
+    private radius;
+    private center;
+    constructor(radius: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class Torus extends Shape {
+    private majorRadius;
+    private minorRadius;
+    private center;
+    constructor(majorRadius: number, minorRadius: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+export declare class TriangularPyramid extends Shape {
+    private baseLength;
+    private height;
+    private center;
+    constructor(baseLength: number, height: number, center: {
+        x: number;
+        y: number;
+        z: number;
+    });
+    isPointInside(x: number, y: number, z: number): boolean;
+}
+
+declare namespace Utils {
     export {
-        sleep
+        perlinNoise,
+        clamp,
+        lerp,
+        lerpAngle,
+        angleDifference,
+        mod,
+        random,
+        randomInt,
+        randomChoice,
+        randomBool,
+        randomSign,
+        shuffle,
+        shuffleInPlace,
+        sleep,
+        RAD_TO_DEG,
+        DEG_TO_RAD
     }
 }
-export { Time }
+export { Utils }
 
-export declare const Vector3: typeof Vector3Lib.Vector3;
-
-declare class Vector3_2 {
+/**
+ * Represents a 3-dimensional vector in Euclidean space.
+ */
+export declare class Vector3 {
     x: number;
     y: number;
     z: number;
+    /**
+     * Creates a Vector3 from an object with `x`, `y`, and `z` properties.
+     * @param obj - The object containing the `x`, `y`, and `z` properties.
+     * @returns A new Vector3 instance.
+     */
     static fromObject(obj: {
         x: number;
         y: number;
         z: number;
-    }): Vector3_2;
-    static fromTuple(tuple: [x: number, y: number, z: number]): Vector3_2;
-    static zero(): Vector3_2;
-    static forward(): Vector3_2;
-    static backward(): Vector3_2;
-    static up(): Vector3_2;
-    static down(): Vector3_2;
-    static left(): Vector3_2;
-    static right(): Vector3_2;
-    static randomOnSphere(radius: number): Vector3_2;
-    static randomInSphere(radius: number): Vector3_2;
+    }): Vector3;
+    /**
+     * Creates a Vector3 from a tuple of numbers representing the `x`, `y`, and `z` values.
+     * @param tuple - The tuple containing the `x`, `y`, and `z` values.
+     * @returns A new Vector3 instance.
+     */
+    static fromTuple(tuple: [x: number, y: number, z: number]): Vector3;
+    /**
+     * Creates a Vector3 with all components set to zero.
+     * @returns A new Vector3 instance with all components set to zero.
+     */
+    static zero(): Vector3;
+    /**
+     * Creates a Vector3 representing the forward direction.
+     * @returns A new Vector3 instance representing the forward direction.
+     */
+    static forward(): Vector3;
+    /**
+     * Creates a Vector3 representing the backward direction.
+     * @returns A new Vector3 instance representing the backward direction.
+     */
+    static backward(): Vector3;
+    /**
+     * Creates a Vector3 representing the up direction.
+     * @returns A new Vector3 instance representing the up direction.
+     */
+    static up(): Vector3;
+    /**
+     * Creates a Vector3 representing the down direction.
+     * @returns A new Vector3 instance representing the down direction.
+     */
+    static down(): Vector3;
+    /**
+     * Creates a Vector3 representing the left direction.
+     * @returns A new Vector3 instance representing the left direction.
+     */
+    static left(): Vector3;
+    /**
+     * Creates a Vector3 representing the right direction.
+     * @returns A new Vector3 instance representing the right direction.
+     */
+    static right(): Vector3;
+    /**
+     * Creates a random Vector3 on the surface of a sphere with the given radius.
+     * @param radius - The radius of the sphere.
+     * @returns A new Vector3 instance representing a random point on the sphere's surface.
+     */
+    static randomOnSphere(radius: number): Vector3;
+    /**
+     * Creates a random Vector3 inside a sphere with the given radius.
+     * @param radius - The radius of the sphere.
+     * @returns A new Vector3 instance representing a random point inside the sphere.
+     */
+    static randomInSphere(radius: number): Vector3;
+    /**
+     * Creates a new Vector3 instance with the specified `x`, `y`, and `z` values.
+     * @param x - The x component of the vector.
+     * @param y - The y component of the vector.
+     * @param z - The z component of the vector.
+     */
     constructor(x: number, y: number, z: number);
-    clone(): Vector3_2;
-    add(v: Vector3_2): Vector3_2;
-    sub(v: Vector3_2): Vector3_2;
-    mult(v: Vector3_2): Vector3_2;
-    dot(v: Vector3_2): number;
-    cross(v: Vector3_2): Vector3_2;
-    scale(scaler: number): Vector3_2;
-    limitLength(length?: number): Vector3_2;
-    asLength(length: number): Vector3_2;
-    distanceTo(v: Vector3_2): number;
+    /**
+     * Creates a copy of this Vector3 instance.
+     * @returns A new Vector3 instance with the same `x`, `y`, and `z` values as this vector.
+     */
+    clone(): Vector3;
+    /**
+     * Adds another vector to this vector and returns the result.
+     * @param v - The vector to add.
+     * @returns A new Vector3 instance representing the sum of this vector and the given vector.
+     */
+    add(v: Vector3): Vector3;
+    /**
+     * Subtracts another vector from this vector and returns the result.
+     * @param v - The vector to subtract.
+     * @returns A new Vector3 instance representing the difference between this vector and the given vector.
+     */
+    sub(v: Vector3): Vector3;
+    /**
+     * Multiplies this vector by another vector component-wise and returns the result.
+     * @param v - The vector to multiply by.
+     * @returns A new Vector3 instance representing the component-wise product of this vector and the given vector.
+     */
+    mult(v: Vector3): Vector3;
+    /**
+     * Calculates the dot product of this vector and another vector.
+     * @param v - The vector to calculate the dot product with.
+     * @returns The dot product of this vector and the given vector.
+     */
+    dot(v: Vector3): number;
+    /**
+     * Calculates the cross product of this vector and another vector.
+     * @param v - The vector to calculate the cross product with.
+     * @returns A new Vector3 instance representing the cross product of this vector and the given vector.
+     */
+    cross(v: Vector3): Vector3;
+    /**
+     * Scales this vector by a scalar value and returns the result.
+     * @param scaler - The scalar value to scale by.
+     * @returns A new Vector3 instance representing the scaled vector.
+     */
+    scale(scaler: number): Vector3;
+    /**
+     * Limits the length of this vector to the specified value.
+     * If the length of the vector is less than or equal to the specified length, the vector is returned unchanged.
+     * If the length of the vector is greater than the specified length, a new vector with the same direction but the specified length is returned.
+     * @param length - The maximum length of the vector.
+     * @returns A new Vector3 instance with the same direction as this vector but with a length no greater than the specified length.
+     */
+    limitLength(length?: number): Vector3;
+    /**
+     * Returns a new vector with the same direction as this vector but with the specified length.
+     * @param length - The desired length of the vector.
+     * @returns A new Vector3 instance with the same direction as this vector but with the specified length.
+     */
+    asLength(length: number): Vector3;
+    /**
+     * Calculates the distance between this vector and another vector.
+     * @param v - The vector to calculate the distance to.
+     * @returns The distance between this vector and the given vector.
+     */
+    distanceTo(v: Vector3): number;
+    /**
+     * Returns the squared magnitude of this vector.
+     * @returns The squared magnitude of this vector.
+     */
     get squaredMagnitude(): number;
+    /**
+     * Returns the length (magnitude) of this vector.
+     * @returns The length of this vector.
+     */
     get length(): number;
-    get normalized(): Vector3_2;
+    /**
+     * Returns a new vector with the same direction as this vector but with a length of 1.
+     * @returns A new Vector3 instance representing the normalized vector.
+     */
+    get normalized(): Vector3;
+    /**
+     * Returns the components of this vector as a tuple of numbers.
+     * @returns A tuple containing the `x`, `y`, and `z` values of this vector.
+     */
     get asTuple(): [x: number, y: number, z: number];
+    /**
+     * Returns the components of this vector as an object with `x`, `y`, and `z` properties.
+     * @returns An object containing the `x`, `y`, and `z` values of this vector.
+     */
     get asObject(): {
         x: number;
         y: number;
         z: number;
     };
-    negate(): Vector3_2;
-    /** In radians */
+    /**
+     * Returns the negation of this vector.
+     * @returns A new Vector3 instance representing the negation of this vector.
+     */
+    negate(): Vector3;
+    /**
+     * Rotates this vector around the x, y, and z axes by the specified angles.
+     * @param angles - An object containing the rotation angles in radians for the x, y, and z axes.
+     * @returns A new Vector3 instance representing the rotated vector.
+     */
     rotateXYZ(angles: {
         x: number;
         y: number;
         z: number;
-    }): Vector3_2;
-    /** In radians */
-    rotateXY(angle: number): Vector3_2;
-    /** In radians */
-    rotateYZ(angle: number): Vector3_2;
-    /** In radians */
-    rotateZX(angle: number): Vector3_2;
-    /** In radians */
-    rotateAroundAxis(axis: Vector3_2, angle: number): Vector3_2;
-    angleBetween(v: Vector3_2): number;
-    projectOnto(v: Vector3_2): Vector3_2;
-    midpoint(v: Vector3_2): Vector3_2;
-}
-
-declare namespace Vector3Lib {
-    export {
-        Vector3_2 as Vector3
-    }
+    }): Vector3;
+    /**
+     * Rotates this vector around the x and y axes by the specified angle.
+     * @param angle - The rotation angle in radians.
+     * @returns A new Vector3 instance representing the rotated vector.
+     */
+    rotateXY(angle: number): Vector3;
+    /**
+     * Rotates this vector around the y and z axes by the specified angle.
+     * @param angle - The rotation angle in radians.
+     * @returns A new Vector3 instance representing the rotated vector.
+     */
+    rotateYZ(angle: number): Vector3;
+    /**
+     * Rotates this vector around the z and x axes by the specified angle.
+     * @param angle - The rotation angle in radians.
+     * @returns A new Vector3 instance representing the rotated vector.
+     */
+    rotateZX(angle: number): Vector3;
+    /**
+     * Rotates this vector around the specified axis by the specified angle.
+     * @param axis - The axis to rotate around.
+     * @param angle - The rotation angle in radians.
+     * @returns A new Vector3 instance representing the rotated vector.
+     */
+    rotateAroundAxis(axis: Vector3, angle: number): Vector3;
+    /**
+     * Calculates the angle between this vector and another vector.
+     * @param v - The vector to calculate the angle to.
+     * @returns The angle between this vector and the given vector in radians.
+     */
+    angleBetween(v: Vector3): number;
+    /**
+     * Projects this vector onto another vector.
+     * @param v - The vector to project onto.
+     * @returns A new Vector3 instance representing the projection of this vector onto the given vector.
+     * @throws An error if the given vector has zero length.
+     */
+    projectOnto(v: Vector3): Vector3;
+    /**
+     * Calculates the midpoint between this vector and another vector.
+     * @param v - The vector to calculate the midpoint with.
+     * @returns A new Vector3 instance representing the midpoint between this vector and the given vector.
+     */
+    midpoint(v: Vector3): Vector3;
 }
 
 export { }
