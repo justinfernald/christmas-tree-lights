@@ -76,7 +76,16 @@ interface InfoDialogProps {
 const InfoDialog = observer((props: InfoDialogProps) => {
   return (
     <Dialog open={props.open} onClose={props.onClose} maxWidth={'lg'}>
-      <DialogTitle>✨Info✨</DialogTitle>
+      <DialogTitle>
+        <div css={[flexBetween]}>
+          <div>✨Info✨</div>
+          <div>
+            <a href="https://github.com/justinfernald/christmas-tree-lights/blob/main/docs/modules.md">
+              Library Documentation
+            </a>
+          </div>
+        </div>
+      </DialogTitle>
       <DialogContent>
         <DialogContentText
           css={{
