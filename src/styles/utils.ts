@@ -1,4 +1,4 @@
-import { CSSObject } from '@emotion/react';
+import { CSSObject, css } from '@emotion/react';
 import { CSSProperties } from '@emotion/serialize/types';
 import { Property } from 'csstype';
 
@@ -86,9 +86,9 @@ export const flexValue = (value = 1): CSSObject => ({
 });
 
 export const font = (
-  family?: CSSObject['fontFamily'],
-  size?: CSSObject['fontSize'],
-  weight?: CSSObject['fontWeight'],
+  family?: Property.FontFamily,
+  size?: Property.FontSize,
+  weight?: Property.FontWeight,
 ): CSSObject => ({
   fontFamily: family,
   fontSize: size,
@@ -150,12 +150,15 @@ export const fullHeight: CSSObject = {
 export const imageCover: CSSObject = {
   objectFit: 'cover',
   ...fullSize,
-};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any;
 
-export const imageContain: CSSObject = {
-  objectFit: 'contain',
-  ...fullSize,
-};
+export const imageContain = css([
+  {
+    objectFit: 'contain',
+  },
+  fullSize,
+]);
 
 export const dropShadow = (
   size: keyof typeof standardShadows,
@@ -200,6 +203,8 @@ export const clearTextStyle: CSSObject = {
 
 export const property =
   <T extends keyof CSSProperties>(prop: T) =>
-  (value: CSSProperties[T]): CSSObject => ({
-    [prop]: value,
-  });
+  (value: CSSProperties[T]): CSSObject =>
+    ({
+      [prop]: value,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }) as any;
