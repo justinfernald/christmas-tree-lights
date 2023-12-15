@@ -46,17 +46,11 @@ function createPulse(time: number, lights: Light[]): Pulse {
 let currentPulse: null | Pulse = null;
 
 runner.setup = () => {
-  console.log('SETUP');
-  currentPulse = null; // this doesn't fix the reset issue, but will with update to lib
+  currentPulse = null;
 };
 
 runner.update = (time, delta, iteration) => {
-  // added time <= 1000 / runner.fps to fix reset issue, but can be removed with update to lib
-  if (
-    !currentPulse ||
-    currentPulse.time + PULSE_DELAY < time ||
-    time <= 1000 / runner.fps
-  ) {
+  if (!currentPulse || currentPulse.time + PULSE_DELAY < time) {
     currentPulse = createPulse(time, runner.lights);
   }
 
