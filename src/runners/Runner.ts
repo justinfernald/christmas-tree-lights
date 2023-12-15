@@ -47,15 +47,20 @@ export abstract class Runner {
         break;
       }
 
-      const delta = 1000 / this.fps;
+      if (this.time === null) {
+        this.time = 0;
+        this.setup?.();
+      }
 
-      this.iteration++;
-      this.time += delta;
+      const delta = 1000 / this.fps;
 
       this.update?.(this.time, delta, this.iteration);
       this.lightUpdate(this.time, delta, this.iteration);
 
       this.draw();
+
+      this.iteration++;
+      this.time += delta;
 
       await sleep(delta);
     }
