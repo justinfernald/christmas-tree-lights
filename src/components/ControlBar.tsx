@@ -114,6 +114,7 @@ const InfoDialog = observer((props: InfoDialogProps) => {
               rel="noreferrer"
               href="https://github.com/justinfernald/christmas-tree-lights/tree/main/src/animations"
             >
+              {' '}
               animations folder
             </a>
             and add your animation then make a pull request. Try give your filename a name
