@@ -80,7 +80,11 @@ const InfoDialog = observer((props: InfoDialogProps) => {
         <div css={[flexBetween]}>
           <div>✨Info✨</div>
           <div>
-            <a href="https://github.com/justinfernald/christmas-tree-lights/blob/main/docs/modules.md">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/justinfernald/christmas-tree-lights/blob/main/docs/modules.md"
+            >
               Library Documentation
             </a>
           </div>
@@ -102,6 +106,18 @@ const InfoDialog = observer((props: InfoDialogProps) => {
             home. So all the code created in this editor can be sent to me, then I can run
             it on my tree If you sent me a program for the tree, I&apos;ll try to send you
             a video of me running it on the tree.
+          </p>
+          <p>
+            Alternatively, you can go the{' '}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/justinfernald/christmas-tree-lights/tree/main/src/animations"
+            >
+              animations folder
+            </a>
+            and add your animation then make a pull request. Try give your filename a name
+            that makes sense.
           </p>
           <p>
             The code editor uses the TypeScript compiler to compile your code. You can use
@@ -135,14 +151,27 @@ const InfoDialog = observer((props: InfoDialogProps) => {
             order to what I mention about the editor. Regardless, enjoy!
           </p>
           <p>
-            Credit to <a href="https://github.com/sirxemic/xmastree-app">sirxemic</a> on
-            GitHub for inspiration of the editor. Some code for the 3D view is taken from
-            his version.
+            Credit to{' '}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/sirxemic/xmastree-app"
+            >
+              sirxemic
+            </a>{' '}
+            on GitHub for inspiration of the editor. Some code for the 3D view is taken
+            from his version.
           </p>
           <p>
             Credit to{' '}
-            <a href="https://www.youtube.com/watch?v=TvlpIojusBE">Matt Parker</a> for
-            inspiration of the Christmas Tree
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.youtube.com/watch?v=TvlpIojusBE"
+            >
+              Matt Parker
+            </a>{' '}
+            for inspiration of the Christmas Tree
           </p>
           <p>
             <a href="https://github.com/justinfernald/christmas-tree-lights">
