@@ -1,9 +1,51 @@
-import { clamp } from 'three/src/math/MathUtils';
+import { clamp } from '.';
+
+/**
+ * Enum representing different blend modes for colors.
+ */
+export enum BlendMode {
+  Normal,
+  Multiply,
+  Screen,
+  Overlay,
+  Darken,
+  Lighten,
+  ColorDodge,
+  ColorBurn,
+  HardLight,
+  SoftLight,
+  Difference,
+  Exclusion,
+  Gamma,
+}
 
 /**
  * Represents a color in RGB format.
  */
 export class Color {
+  private static blendFuncs = {
+    [BlendMode.Normal]: (a: number, b: number) => b,
+    [BlendMode.Multiply]: (a: number, b: number) => a * b,
+    [BlendMode.Screen]: (a: number, b: number) => a + b - a * b,
+    [BlendMode.Overlay]: (a: number, b: number) =>
+      a < 0.5 ? 2 * a * b : 1 - 2 * (1 - a) * (1 - b),
+    [BlendMode.Darken]: (a: number, b: number) => Math.min(a, b),
+    [BlendMode.Lighten]: (a: number, b: number) => Math.max(a, b),
+    [BlendMode.ColorDodge]: (a: number, b: number) =>
+      b === 1 ? 1 : Math.min(1, a / (1 - b)),
+    [BlendMode.ColorBurn]: (a: number, b: number) =>
+      b === 0 ? 0 : 1 - Math.min(1, (1 - a) / b),
+    [BlendMode.HardLight]: (a: number, b: number) =>
+      b < 0.5 ? 2 * a * b : 1 - 2 * (1 - a) * (1 - b),
+    [BlendMode.SoftLight]: (a: number, b: number) =>
+      b < 0.5
+        ? 2 * a * b + a * a * (1 - 2 * b)
+        : Math.sqrt(a) * (2 * b - 1) + 2 * a * (1 - b),
+    [BlendMode.Difference]: (a: number, b: number) => Math.abs(a - b),
+    [BlendMode.Exclusion]: (a: number, b: number) => a + b - 2 * a * b,
+    [BlendMode.Gamma]: (a: number, b: number) => ((a ** 2.2 + b ** 2.2) / 2) ** (1 / 2.2),
+  };
+
   /**
    * Creates a new Color instance.
    * @param red The red component of the color (0 to 255).
@@ -15,6 +57,99 @@ export class Color {
     public green: number,
     public blue: number,
   ) {}
+
+  private blendChannel(
+    c1: number,
+    c2: number,
+    blendFunc: (a: number, b: number) => number,
+  ): number {
+    return clamp(Math.round(blendFunc(c1 / 255, c2 / 255) * 255), 0, 255);
+  }
+
+  /**
+   * Blends the color with another color.
+   * @param color The color to blend with.
+   * @param mode The blend mode to use.
+   * @returns A new Color instance.
+   */
+  blend(color: Color, mode: BlendMode = BlendMode.Lighten): Color {
+    const blendFunc = Color.blendFuncs[mode];
+
+    return new Color(
+      this.blendChannel(this.red, color.red, blendFunc),
+      this.blendChannel(this.green, color.green, blendFunc),
+      this.blendChannel(this.blue, color.blue, blendFunc),
+    );
+  }
+
+  /**
+   * Converts the RGB color values to HSL (Hue, Saturation, Lightness) format.
+   * @returns An array containing the HSL values [Hue, Saturation, Lightness].
+   */
+  toHSL(): [h: number, s: number, l: number] {
+    const r = this.red / 255;
+    const g = this.green / 255;
+    const b = this.blue / 255;
+
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+
+    let h = (max + min) / 2;
+    let s = h;
+    const l = h;
+
+    if (max === min) {
+      h = s = 0;
+    } else {
+      const d = max - min;
+
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+
+        case g:
+          h = (b - r) / d + 2;
+          break;
+
+        case b:
+          h = (r - g) / d + 4;
+          break;
+
+        default:
+          break;
+      }
+
+      h /= 6;
+    }
+
+    return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+  }
+
+  /**
+   * Returns the complementary color of the current color.
+   * The complementary color is obtained by adding 180 degrees to the hue value of the current color.
+   * @returns {Color} The complementary color.
+   */
+  complementary(): Color {
+    const [h, s, l] = this.toHSL();
+    return Color.fromHSL((h + 180) % 360, s, l);
+  }
+
+  /**
+   * Returns a new color with the specified intensity.
+   * @param amount The intensity of the new color (0 to 1).
+   * @returns A new Color instance.
+   */
+  intensity(amount: number): Color {
+    return new Color(
+      clamp(Math.round(this.red * amount), 0, 255),
+      clamp(Math.round(this.green * amount), 0, 255),
+      clamp(Math.round(this.blue * amount), 0, 255),
+    );
+  }
 
   /**
    * Returns the color as a string in the format "rgb(red, green, blue)".

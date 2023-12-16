@@ -1,3 +1,5 @@
+import { Color } from './Color';
+
 export const RAD_TO_DEG = 180 / Math.PI;
 export const DEG_TO_RAD = Math.PI / 180;
 
@@ -49,6 +51,31 @@ export function perlinNoise(x: number, y: number): number {
  */
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
+}
+
+/**
+ * Normalizes a value within a range.
+ * If it is outside the range, null is returned.
+ * If it is inside the range, a value between 0 and 1 is returned.
+ * 0 is returned if the value is equal to the minimum value.
+ * 1 is returned if the value is equal to the maximum value.
+ * Linearly maps the value to the 0-1 range if it is within the range.
+ *
+ * @param value
+ * @param min minimum value
+ * @param max maximum value
+ * @returns
+ */
+export function normalizeWithinRange(
+  value: number,
+  min: number,
+  max: number,
+): number | null {
+  if (value < min || value > max) {
+    return null; // Value is not in range
+  }
+
+  return (value - min) / (max - min); // Linearly map to 0-1 range
 }
 
 /**
@@ -139,6 +166,50 @@ export function randomBool(): boolean {
  */
 export function randomSign(): number {
   return randomBool() ? 1 : -1;
+}
+
+/**
+ * Generates a random point within a circle of the specified radius.
+ * @param radius The radius of the circle.
+ * @returns An tuple containing the x and y coordinates.
+ */
+export function randomInCircle(
+  radius: number,
+  origin: [x: number, y: number] = [0, 0],
+): [x: number, y: number] {
+  const angle = random(0, Math.PI * 2);
+  const r = radius * Math.sqrt(Math.random()); // used to make it uniform
+
+  const [offsetX, offsetY] = origin;
+  return [offsetX + Math.cos(angle) * r, offsetY + Math.sin(angle) * r];
+}
+
+/**
+ * Generates random coordinates on a circle with the specified radius.
+ * @param radius The radius of the circle.
+ * @returns An tuple containing the x and y coordinates.
+ */
+export function randomOnCircle(
+  radius: number,
+  origin: [x: number, y: number] = [0, 0],
+): [x: number, y: number] {
+  const angle = random(0, Math.PI * 2);
+
+  const [offsetX, offsetY] = origin;
+  return [offsetX + Math.cos(angle) * radius, offsetY + Math.sin(angle) * radius];
+}
+
+/**
+ * Generates a random color based on the specified hue range.
+ * @param hMin The minimum hue value (default: 0) [0 - hMax].
+ * @param hMax The maximum hue value (default: 360) [0 - 360].
+ * @param s The saturation value (default: 100) [0 - 100].
+ * @param l The lightness value (default: 50) [0 - 100].
+ * @returns A Color object representing the generated color.
+ */
+export function randomColorByHue(hMin = 0, hMax = 360, s = 100, l = 50) {
+  const h = random(hMin, hMax);
+  return Color.fromHSL(h, s, l);
 }
 
 /**
