@@ -7,6 +7,25 @@
 declare function angleDifference(a: number, b: number): number;
 
 /**
+ * Enum representing different blend modes for colors.
+ */
+export declare enum BlendMode {
+    Normal = 0,
+    Multiply = 1,
+    Screen = 2,
+    Overlay = 3,
+    Darken = 4,
+    Lighten = 5,
+    ColorDodge = 6,
+    ColorBurn = 7,
+    HardLight = 8,
+    SoftLight = 9,
+    Difference = 10,
+    Exclusion = 11,
+    Gamma = 12
+}
+
+/**
  * Clamps a number between a minimum and maximum value.
  * @param value
  * @param min minimum value
@@ -22,6 +41,7 @@ export declare class Color {
     red: number;
     green: number;
     blue: number;
+    private static blendFuncs;
     /**
      * Creates a new Color instance.
      * @param red The red component of the color (0 to 255).
@@ -29,6 +49,31 @@ export declare class Color {
      * @param blue The blue component of the color (0 to 255).
      */
     constructor(red: number, green: number, blue: number);
+    private blendChannel;
+    /**
+     * Blends the color with another color.
+     * @param color The color to blend with.
+     * @param mode The blend mode to use.
+     * @returns A new Color instance.
+     */
+    blend(color: Color, mode?: BlendMode): Color;
+    /**
+     * Converts the RGB color values to HSL (Hue, Saturation, Lightness) format.
+     * @returns An array containing the HSL values [Hue, Saturation, Lightness].
+     */
+    toHSL(): [h: number, s: number, l: number];
+    /**
+     * Returns the complementary color of the current color.
+     * The complementary color is obtained by adding 180 degrees to the hue value of the current color.
+     * @returns {Color} The complementary color.
+     */
+    complementary(): Color;
+    /**
+     * Returns a new color with the specified intensity.
+     * @param amount The intensity of the new color (0 to 1).
+     * @returns A new Color instance.
+     */
+    intensity(amount: number): Color;
     /**
      * Returns the color as a string in the format "rgb(red, green, blue)".
      * @returns The color as a string.
@@ -325,6 +370,21 @@ declare class LocalRunner extends Runner {
  */
 declare function mod(a: number, b: number): number;
 
+/**
+ * Normalizes a value within a range.
+ * If it is outside the range, null is returned.
+ * If it is inside the range, a value between 0 and 1 is returned.
+ * 0 is returned if the value is equal to the minimum value.
+ * 1 is returned if the value is equal to the maximum value.
+ * Linearly maps the value to the 0-1 range if it is within the range.
+ *
+ * @param value
+ * @param min minimum value
+ * @param max maximum value
+ * @returns
+ */
+declare function normalizeWithinRange(value: number, min: number, max: number): number | null;
+
 declare class Octahedron extends Shape {
     private edgeLength;
     private center;
@@ -381,12 +441,36 @@ declare function randomBool(): boolean;
 declare function randomChoice<T>(array: T[]): T;
 
 /**
+ * Generates a random color based on the specified hue range.
+ * @param hMin The minimum hue value (default: 0) [0 - hMax].
+ * @param hMax The maximum hue value (default: 360) [0 - 360].
+ * @param s The saturation value (default: 100) [0 - 100].
+ * @param l The lightness value (default: 50) [0 - 100].
+ * @returns A Color object representing the generated color.
+ */
+declare function randomColorByHue(hMin?: number, hMax?: number, s?: number, l?: number): Color;
+
+/**
+ * Generates a random point within a circle of the specified radius.
+ * @param radius The radius of the circle.
+ * @returns An tuple containing the x and y coordinates.
+ */
+declare function randomInCircle(radius: number, origin?: [x: number, y: number]): [x: number, y: number];
+
+/**
  * get a random int
  * @param min min inclusive
  * @param max max exclusive
  * @returns random value between min and max
  */
 declare function randomInt(min: number, max: number): number;
+
+/**
+ * Generates random coordinates on a circle with the specified radius.
+ * @param radius The radius of the circle.
+ * @returns An tuple containing the x and y coordinates.
+ */
+declare function randomOnCircle(radius: number, origin?: [x: number, y: number]): [x: number, y: number];
 
 /**
  * Generates a random sign, either 1 or -1.
@@ -529,6 +613,7 @@ declare namespace Utils {
     export {
         perlinNoise,
         clamp,
+        normalizeWithinRange,
         lerp,
         lerpAngle,
         angleDifference,
@@ -538,6 +623,9 @@ declare namespace Utils {
         randomChoice,
         randomBool,
         randomSign,
+        randomInCircle,
+        randomOnCircle,
+        randomColorByHue,
         shuffle,
         shuffleInPlace,
         sleep,
