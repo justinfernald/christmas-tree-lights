@@ -12,6 +12,7 @@ import {
   WorkerMessageTypes,
   WorkerToAppMessageTypes,
 } from '../visualizer/messages';
+import { AudioModel } from './AudioModel';
 
 export class AppModel extends BaseViewModel<{
   codeEditorRef: MutableRefObject<CodeEditorRef | null>;
@@ -20,6 +21,8 @@ export class AppModel extends BaseViewModel<{
   terminated: boolean = false;
 
   displayApp: MainApp | null = null;
+
+  audioModel = new AudioModel(this);
 
   constructor(props: { codeEditorRef: MutableRefObject<CodeEditorRef | null> }) {
     super(props);

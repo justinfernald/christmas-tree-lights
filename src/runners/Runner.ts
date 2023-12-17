@@ -4,10 +4,13 @@ import { Vector3 } from '../utils/Vector3';
 
 import locations from '../locations.json';
 import { sleep } from '../utils';
+import { AudioRunner } from './AudioRunner';
 
 export abstract class Runner {
   abstract fps: number;
   abstract draw(): void;
+
+  audioRunner: AudioRunner | null = null;
 
   /**
    * Optional setup function that can be called before running the animation.
@@ -75,21 +78,29 @@ export abstract class Runner {
     }
 
     this.draw();
+    this.audioRunner?.audioReset();
   }
 
   pause() {
     this.running = false;
+    this.audioRunner?.audioPause();
   }
 
   play() {
     this.running = true;
     this.run();
+    this.audioRunner?.audioPlay();
   }
 
-  step() {
+  async step() {
     this.running = true;
     this.run();
     this.running = false;
+
+    this.audioRunner?.audioPlay();
+    const delta = 1000 / this.fps;
+    await sleep(delta);
+    this.audioRunner?.audioPause();
   }
 
   lightUpdate(time: number, delta: number | null, iteration: number) {
