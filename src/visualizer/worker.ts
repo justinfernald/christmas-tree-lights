@@ -36,7 +36,7 @@ function main() {
         runner.step();
       }
 
-      console.log(type, data);
+      // console.log(type, data);
 
       postMessage({
         type: 'confirmation',

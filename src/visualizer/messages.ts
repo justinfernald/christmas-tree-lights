@@ -10,6 +10,13 @@ export enum WorkerMessageTypes {
   Confirmation = 'confirmation',
   Code = 'code',
   Fps = 'fps',
+  AudioTime = 'audioTime',
+  AudioEnded = 'audioEnded',
+  AudioPause = 'audioPause',
+  AudioPlay = 'audioPlay',
+  AudioReset = 'audioReset',
+  AudioUrl = 'audioUrl',
+  AudioLoaded = 'audioLoaded',
 }
 
 export interface WorkerMessageStructure {
@@ -57,6 +64,36 @@ export interface FpsMessage extends WorkerMessageStructure {
   data: { fps: number };
 }
 
+export interface AudioTimeMessage extends WorkerMessageStructure {
+  type: WorkerMessageTypes.AudioTime;
+  data: { time: number };
+}
+
+export interface AudioEndedMessage extends WorkerMessageStructure {
+  type: WorkerMessageTypes.AudioEnded;
+}
+
+export interface AudioPauseMessage extends WorkerMessageStructure {
+  type: WorkerMessageTypes.AudioPause;
+}
+
+export interface AudioPlayMessage extends WorkerMessageStructure {
+  type: WorkerMessageTypes.AudioPlay;
+}
+
+export interface AudioResetMessage extends WorkerMessageStructure {
+  type: WorkerMessageTypes.AudioReset;
+}
+
+export interface AudioUrlMessage extends WorkerMessageStructure {
+  type: WorkerMessageTypes.AudioUrl;
+  data: { url: string; loop: boolean };
+}
+
+export interface AudioLoadedMessage extends WorkerMessageStructure {
+  type: WorkerMessageTypes.AudioLoaded;
+}
+
 export type WorkerMessage =
   | StartMessage
   | PauseMessage
@@ -66,17 +103,31 @@ export type WorkerMessage =
   | UpdateMessage
   | ReadyMessage
   | ConfirmationMessage
-  | FpsMessage;
+  | FpsMessage
+  | AudioTimeMessage
+  | AudioEndedMessage
+  | AudioPauseMessage
+  | AudioPlayMessage
+  | AudioResetMessage
+  | AudioUrlMessage
+  | AudioLoadedMessage;
 
 export type AppToWorkerMessageTypes =
   | WorkerMessageTypes.Play
   | WorkerMessageTypes.Pause
   | WorkerMessageTypes.Reset
   | WorkerMessageTypes.Step
-  | WorkerMessageTypes.Code;
+  | WorkerMessageTypes.Code
+  | WorkerMessageTypes.AudioLoaded
+  | WorkerMessageTypes.AudioTime
+  | WorkerMessageTypes.AudioEnded;
 
 export type WorkerToAppMessageTypes =
   | WorkerMessageTypes.Update
   | WorkerMessageTypes.Ready
   | WorkerMessageTypes.Confirmation
-  | WorkerMessageTypes.Fps;
+  | WorkerMessageTypes.Fps
+  | WorkerMessageTypes.AudioPause
+  | WorkerMessageTypes.AudioPlay
+  | WorkerMessageTypes.AudioReset
+  | WorkerMessageTypes.AudioUrl;
