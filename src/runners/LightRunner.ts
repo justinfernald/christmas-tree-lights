@@ -22,6 +22,8 @@ export class LightRunner extends Runner {
         process.exit(0);
       });
     });
+
+    this.play();
   }
 
   draw() {
