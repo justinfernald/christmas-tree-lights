@@ -51,7 +51,7 @@
 
 #### Defined in
 
-[utils/Shapes/Cube.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Cube.ts#L4)
+[utils/Shapes/Cube.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Cube.ts#L4)
 
 ## Properties
 
@@ -69,7 +69,7 @@
 
 #### Defined in
 
-[utils/Shapes/Cube.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Cube.ts#L6)
+[utils/Shapes/Cube.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Cube.ts#L6)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Cube.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Cube.ts#L5)
+[utils/Shapes/Cube.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Cube.ts#L5)
 
 ## Methods
 
@@ -105,4 +105,4 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Cube.ts:11](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Cube.ts#L11)
+[utils/Shapes/Cube.ts:11](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Cube.ts#L11)

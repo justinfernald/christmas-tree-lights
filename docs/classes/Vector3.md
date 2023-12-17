@@ -79,7 +79,7 @@ Creates a new Vector3 instance with the specified `x`, `y`, and `z` values.
 
 #### Defined in
 
-[utils/Vector3.ts:120](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L120)
+[utils/Vector3.ts:120](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L120)
 
 ## Properties
 
@@ -91,7 +91,7 @@ The x component of the vector.
 
 #### Defined in
 
-[utils/Vector3.ts:121](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L121)
+[utils/Vector3.ts:121](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L121)
 
 ___
 
@@ -103,7 +103,7 @@ The y component of the vector.
 
 #### Defined in
 
-[utils/Vector3.ts:122](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L122)
+[utils/Vector3.ts:122](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L122)
 
 ___
 
@@ -115,7 +115,7 @@ The z component of the vector.
 
 #### Defined in
 
-[utils/Vector3.ts:123](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L123)
+[utils/Vector3.ts:123](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L123)
 
 ## Accessors
 
@@ -139,7 +139,7 @@ An object containing the `x`, `y`, and `z` values of this vector.
 
 #### Defined in
 
-[utils/Vector3.ts:258](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L258)
+[utils/Vector3.ts:258](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L258)
 
 ___
 
@@ -157,7 +157,7 @@ A tuple containing the `x`, `y`, and `z` values of this vector.
 
 #### Defined in
 
-[utils/Vector3.ts:250](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L250)
+[utils/Vector3.ts:250](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L250)
 
 ___
 
@@ -175,7 +175,7 @@ The length of this vector.
 
 #### Defined in
 
-[utils/Vector3.ts:233](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L233)
+[utils/Vector3.ts:233](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L233)
 
 ___
 
@@ -193,7 +193,7 @@ A new Vector3 instance representing the normalized vector.
 
 #### Defined in
 
-[utils/Vector3.ts:241](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L241)
+[utils/Vector3.ts:241](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L241)
 
 ___
 
@@ -211,7 +211,7 @@ The squared magnitude of this vector.
 
 #### Defined in
 
-[utils/Vector3.ts:225](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L225)
+[utils/Vector3.ts:225](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L225)
 
 ## Methods
 
@@ -235,7 +235,7 @@ A new Vector3 instance representing the sum of this vector and the given vector.
 
 #### Defined in
 
-[utils/Vector3.ts:139](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L139)
+[utils/Vector3.ts:139](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L139)
 
 ___
 
@@ -259,7 +259,7 @@ The angle between this vector and the given vector in radians.
 
 #### Defined in
 
-[utils/Vector3.ts:370](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L370)
+[utils/Vector3.ts:370](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L370)
 
 ___
 
@@ -283,7 +283,7 @@ A new Vector3 instance with the same direction as this vector but with the speci
 
 #### Defined in
 
-[utils/Vector3.ts:208](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L208)
+[utils/Vector3.ts:208](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L208)
 
 ___
 
@@ -301,7 +301,7 @@ A new Vector3 instance with the same `x`, `y`, and `z` values as this vector.
 
 #### Defined in
 
-[utils/Vector3.ts:130](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L130)
+[utils/Vector3.ts:130](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L130)
 
 ___
 
@@ -325,7 +325,7 @@ A new Vector3 instance representing the cross product of this vector and the giv
 
 #### Defined in
 
-[utils/Vector3.ts:175](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L175)
+[utils/Vector3.ts:175](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L175)
 
 ___
 
@@ -349,7 +349,7 @@ The distance between this vector and the given vector.
 
 #### Defined in
 
-[utils/Vector3.ts:217](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L217)
+[utils/Vector3.ts:217](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L217)
 
 ___
 
@@ -373,7 +373,7 @@ The dot product of this vector and the given vector.
 
 #### Defined in
 
-[utils/Vector3.ts:166](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L166)
+[utils/Vector3.ts:166](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L166)
 
 ___
 
@@ -399,7 +399,7 @@ A new Vector3 instance with the same direction as this vector but with a length 
 
 #### Defined in
 
-[utils/Vector3.ts:199](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L199)
+[utils/Vector3.ts:199](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L199)
 
 ___
 
@@ -423,7 +423,7 @@ A new Vector3 instance representing the midpoint between this vector and the giv
 
 #### Defined in
 
-[utils/Vector3.ts:399](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L399)
+[utils/Vector3.ts:399](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L399)
 
 ___
 
@@ -447,7 +447,7 @@ A new Vector3 instance representing the component-wise product of this vector an
 
 #### Defined in
 
-[utils/Vector3.ts:157](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L157)
+[utils/Vector3.ts:157](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L157)
 
 ___
 
@@ -465,7 +465,7 @@ A new Vector3 instance representing the negation of this vector.
 
 #### Defined in
 
-[utils/Vector3.ts:266](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L266)
+[utils/Vector3.ts:266](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L266)
 
 ___
 
@@ -493,7 +493,7 @@ An error if the given vector has zero length.
 
 #### Defined in
 
-[utils/Vector3.ts:382](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L382)
+[utils/Vector3.ts:382](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L382)
 
 ___
 
@@ -518,7 +518,7 @@ A new Vector3 instance representing the rotated vector.
 
 #### Defined in
 
-[utils/Vector3.ts:346](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L346)
+[utils/Vector3.ts:346](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L346)
 
 ___
 
@@ -542,7 +542,7 @@ A new Vector3 instance representing the rotated vector.
 
 #### Defined in
 
-[utils/Vector3.ts:303](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L303)
+[utils/Vector3.ts:303](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L303)
 
 ___
 
@@ -569,7 +569,7 @@ A new Vector3 instance representing the rotated vector.
 
 #### Defined in
 
-[utils/Vector3.ts:275](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L275)
+[utils/Vector3.ts:275](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L275)
 
 ___
 
@@ -593,7 +593,7 @@ A new Vector3 instance representing the rotated vector.
 
 #### Defined in
 
-[utils/Vector3.ts:317](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L317)
+[utils/Vector3.ts:317](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L317)
 
 ___
 
@@ -617,7 +617,7 @@ A new Vector3 instance representing the rotated vector.
 
 #### Defined in
 
-[utils/Vector3.ts:331](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L331)
+[utils/Vector3.ts:331](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L331)
 
 ___
 
@@ -641,7 +641,7 @@ A new Vector3 instance representing the scaled vector.
 
 #### Defined in
 
-[utils/Vector3.ts:188](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L188)
+[utils/Vector3.ts:188](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L188)
 
 ___
 
@@ -665,7 +665,7 @@ A new Vector3 instance representing the difference between this vector and the g
 
 #### Defined in
 
-[utils/Vector3.ts:148](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L148)
+[utils/Vector3.ts:148](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L148)
 
 ___
 
@@ -683,7 +683,7 @@ A new Vector3 instance representing the backward direction.
 
 #### Defined in
 
-[utils/Vector3.ts:43](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L43)
+[utils/Vector3.ts:43](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L43)
 
 ___
 
@@ -701,7 +701,7 @@ A new Vector3 instance representing the down direction.
 
 #### Defined in
 
-[utils/Vector3.ts:59](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L59)
+[utils/Vector3.ts:59](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L59)
 
 ___
 
@@ -719,7 +719,7 @@ A new Vector3 instance representing the forward direction.
 
 #### Defined in
 
-[utils/Vector3.ts:35](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L35)
+[utils/Vector3.ts:35](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L35)
 
 ___
 
@@ -746,7 +746,7 @@ A new Vector3 instance.
 
 #### Defined in
 
-[utils/Vector3.ts:10](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L10)
+[utils/Vector3.ts:10](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L10)
 
 ___
 
@@ -770,7 +770,7 @@ A new Vector3 instance.
 
 #### Defined in
 
-[utils/Vector3.ts:19](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L19)
+[utils/Vector3.ts:19](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L19)
 
 ___
 
@@ -788,7 +788,7 @@ A new Vector3 instance representing the left direction.
 
 #### Defined in
 
-[utils/Vector3.ts:67](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L67)
+[utils/Vector3.ts:67](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L67)
 
 ___
 
@@ -812,7 +812,7 @@ A new Vector3 instance representing a random point inside the sphere.
 
 #### Defined in
 
-[utils/Vector3.ts:101](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L101)
+[utils/Vector3.ts:101](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L101)
 
 ___
 
@@ -836,7 +836,7 @@ A new Vector3 instance representing a random point on the sphere's surface.
 
 #### Defined in
 
-[utils/Vector3.ts:84](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L84)
+[utils/Vector3.ts:84](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L84)
 
 ___
 
@@ -854,7 +854,7 @@ A new Vector3 instance representing the right direction.
 
 #### Defined in
 
-[utils/Vector3.ts:75](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L75)
+[utils/Vector3.ts:75](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L75)
 
 ___
 
@@ -872,7 +872,7 @@ A new Vector3 instance representing the up direction.
 
 #### Defined in
 
-[utils/Vector3.ts:51](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L51)
+[utils/Vector3.ts:51](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L51)
 
 ___
 
@@ -890,4 +890,4 @@ A new Vector3 instance with all components set to zero.
 
 #### Defined in
 
-[utils/Vector3.ts:27](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Vector3.ts#L27)
+[utils/Vector3.ts:27](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Vector3.ts#L27)

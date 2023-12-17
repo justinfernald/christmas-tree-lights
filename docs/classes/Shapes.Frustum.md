@@ -61,7 +61,7 @@
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L4)
+[utils/Shapes/Frustum.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L4)
 
 ## Properties
 
@@ -71,7 +71,7 @@
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:10](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L10)
+[utils/Shapes/Frustum.ts:10](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L10)
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:11](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L11)
+[utils/Shapes/Frustum.ts:11](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L11)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L6)
+[utils/Shapes/Frustum.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L6)
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L7)
+[utils/Shapes/Frustum.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L7)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L5)
+[utils/Shapes/Frustum.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L5)
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:8](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L8)
+[utils/Shapes/Frustum.ts:8](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L8)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:9](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L9)
+[utils/Shapes/Frustum.ts:9](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L9)
 
 ## Methods
 
@@ -165,4 +165,4 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Frustum.ts:16](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Frustum.ts#L16)
+[utils/Shapes/Frustum.ts:16](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Frustum.ts#L16)

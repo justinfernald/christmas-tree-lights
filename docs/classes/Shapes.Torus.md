@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[utils/Shapes/Torus.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Torus.ts#L4)
+[utils/Shapes/Torus.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Torus.ts#L4)
 
 ## Properties
 
@@ -71,7 +71,7 @@
 
 #### Defined in
 
-[utils/Shapes/Torus.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Torus.ts#L7)
+[utils/Shapes/Torus.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Torus.ts#L7)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Torus.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Torus.ts#L5)
+[utils/Shapes/Torus.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Torus.ts#L5)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Torus.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Torus.ts#L6)
+[utils/Shapes/Torus.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Torus.ts#L6)
 
 ## Methods
 
@@ -117,4 +117,4 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Torus.ts:12](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Torus.ts#L12)
+[utils/Shapes/Torus.ts:12](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Torus.ts#L12)

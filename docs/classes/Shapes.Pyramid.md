@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[utils/Shapes/Pyramid.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Pyramid.ts#L4)
+[utils/Shapes/Pyramid.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Pyramid.ts#L4)
 
 ## Properties
 
@@ -63,7 +63,7 @@
 
 #### Defined in
 
-[utils/Shapes/Pyramid.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Pyramid.ts#L5)
+[utils/Shapes/Pyramid.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Pyramid.ts#L5)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Pyramid.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Pyramid.ts#L7)
+[utils/Shapes/Pyramid.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Pyramid.ts#L7)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Pyramid.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Pyramid.ts#L6)
+[utils/Shapes/Pyramid.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Pyramid.ts#L6)
 
 ## Methods
 
@@ -117,4 +117,4 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Pyramid.ts:12](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Pyramid.ts#L12)
+[utils/Shapes/Pyramid.ts:12](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Pyramid.ts#L12)

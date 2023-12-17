@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[utils/Shapes/RectangularPrism.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/RectangularPrism.ts#L4)
+[utils/Shapes/RectangularPrism.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/RectangularPrism.ts#L4)
 
 ## Properties
 
@@ -73,7 +73,7 @@
 
 #### Defined in
 
-[utils/Shapes/RectangularPrism.ts:8](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/RectangularPrism.ts#L8)
+[utils/Shapes/RectangularPrism.ts:8](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/RectangularPrism.ts#L8)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/RectangularPrism.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/RectangularPrism.ts#L5)
+[utils/Shapes/RectangularPrism.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/RectangularPrism.ts#L5)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/RectangularPrism.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/RectangularPrism.ts#L6)
+[utils/Shapes/RectangularPrism.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/RectangularPrism.ts#L6)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/RectangularPrism.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/RectangularPrism.ts#L7)
+[utils/Shapes/RectangularPrism.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/RectangularPrism.ts#L7)
 
 ## Methods
 
@@ -129,4 +129,4 @@ ___
 
 #### Defined in
 
-[utils/Shapes/RectangularPrism.ts:13](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/RectangularPrism.ts#L13)
+[utils/Shapes/RectangularPrism.ts:13](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/RectangularPrism.ts#L13)

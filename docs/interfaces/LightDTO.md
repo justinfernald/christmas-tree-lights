@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[utils/Light.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L6)
+[utils/Light.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L6)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[utils/Light.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L5)
+[utils/Light.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L5)

@@ -15,9 +15,15 @@ Represents a color in RGB format.
 - [blue](Color.md#blue)
 - [green](Color.md#green)
 - [red](Color.md#red)
+- [blendFuncs](Color.md#blendfuncs)
 
 ### Methods
 
+- [blend](Color.md#blend)
+- [blendChannel](Color.md#blendchannel)
+- [complementary](Color.md#complementary)
+- [intensity](Color.md#intensity)
+- [toHSL](Color.md#tohsl)
 - [toInt](Color.md#toint)
 - [toString](Color.md#tostring)
 - [fromHSL](Color.md#fromhsl)
@@ -47,7 +53,7 @@ Creates a new Color instance.
 
 #### Defined in
 
-[utils/Color.ts:13](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L13)
+[utils/Color.ts:55](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L55)
 
 ## Properties
 
@@ -59,7 +65,7 @@ The blue component of the color (0 to 255).
 
 #### Defined in
 
-[utils/Color.ts:16](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L16)
+[utils/Color.ts:58](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L58)
 
 ___
 
@@ -71,7 +77,7 @@ The green component of the color (0 to 255).
 
 #### Defined in
 
-[utils/Color.ts:15](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L15)
+[utils/Color.ts:57](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L57)
 
 ___
 
@@ -83,9 +89,145 @@ The red component of the color (0 to 255).
 
 #### Defined in
 
-[utils/Color.ts:14](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L14)
+[utils/Color.ts:56](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L56)
+
+___
+
+### blendFuncs
+
+▪ `Static` `Private` **blendFuncs**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `0` | (`a`: `number`, `b`: `number`) => `number` |
+| `1` | (`a`: `number`, `b`: `number`) => `number` |
+| `10` | (`a`: `number`, `b`: `number`) => `number` |
+| `11` | (`a`: `number`, `b`: `number`) => `number` |
+| `12` | (`a`: `number`, `b`: `number`) => `number` |
+| `2` | (`a`: `number`, `b`: `number`) => `number` |
+| `3` | (`a`: `number`, `b`: `number`) => `number` |
+| `4` | (`a`: `number`, `b`: `number`) => `number` |
+| `5` | (`a`: `number`, `b`: `number`) => `number` |
+| `6` | (`a`: `number`, `b`: `number`) => `number` |
+| `7` | (`a`: `number`, `b`: `number`) => `number` |
+| `8` | (`a`: `number`, `b`: `number`) => `number` |
+| `9` | (`a`: `number`, `b`: `number`) => `number` |
+
+#### Defined in
+
+[utils/Color.ts:26](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L26)
 
 ## Methods
+
+### blend
+
+▸ **blend**(`color`, `mode?`): [`Color`](Color.md)
+
+Blends the color with another color.
+
+#### Parameters
+
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `color` | [`Color`](Color.md) | `undefined` | The color to blend with. |
+| `mode` | [`BlendMode`](../enums/BlendMode.md) | `BlendMode.Lighten` | The blend mode to use. |
+
+#### Returns
+
+[`Color`](Color.md)
+
+A new Color instance.
+
+#### Defined in
+
+[utils/Color.ts:75](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L75)
+
+___
+
+### blendChannel
+
+▸ **blendChannel**(`c1`, `c2`, `blendFunc`): `number`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `c1` | `number` |
+| `c2` | `number` |
+| `blendFunc` | (`a`: `number`, `b`: `number`) => `number` |
+
+#### Returns
+
+`number`
+
+#### Defined in
+
+[utils/Color.ts:61](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L61)
+
+___
+
+### complementary
+
+▸ **complementary**(): [`Color`](Color.md)
+
+Returns the complementary color of the current color.
+The complementary color is obtained by adding 180 degrees to the hue value of the current color.
+
+#### Returns
+
+[`Color`](Color.md)
+
+The complementary color.
+
+#### Defined in
+
+[utils/Color.ts:136](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L136)
+
+___
+
+### intensity
+
+▸ **intensity**(`amount`): [`Color`](Color.md)
+
+Returns a new color with the specified intensity.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `amount` | `number` | The intensity of the new color (0 to 1). |
+
+#### Returns
+
+[`Color`](Color.md)
+
+A new Color instance.
+
+#### Defined in
+
+[utils/Color.ts:146](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L146)
+
+___
+
+### toHSL
+
+▸ **toHSL**(): [h: number, s: number, l: number]
+
+Converts the RGB color values to HSL (Hue, Saturation, Lightness) format.
+
+#### Returns
+
+[h: number, s: number, l: number]
+
+An array containing the HSL values [Hue, Saturation, Lightness].
+
+#### Defined in
+
+[utils/Color.ts:89](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L89)
+
+___
 
 ### toInt
 
@@ -101,7 +243,7 @@ The color as an integer.
 
 #### Defined in
 
-[utils/Color.ts:31](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L31)
+[utils/Color.ts:166](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L166)
 
 ___
 
@@ -119,7 +261,7 @@ The color as a string.
 
 #### Defined in
 
-[utils/Color.ts:23](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L23)
+[utils/Color.ts:158](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L158)
 
 ___
 
@@ -145,7 +287,7 @@ A new Color instance.
 
 #### Defined in
 
-[utils/Color.ts:88](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L88)
+[utils/Color.ts:223](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L223)
 
 ___
 
@@ -173,7 +315,7 @@ Error if the hex color string is invalid.
 
 #### Defined in
 
-[utils/Color.ts:52](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L52)
+[utils/Color.ts:187](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L187)
 
 ___
 
@@ -197,7 +339,7 @@ A new Color instance.
 
 #### Defined in
 
-[utils/Color.ts:40](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L40)
+[utils/Color.ts:175](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L175)
 
 ___
 
@@ -223,4 +365,4 @@ A new Color instance.
 
 #### Defined in
 
-[utils/Color.ts:73](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L73)
+[utils/Color.ts:208](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L208)

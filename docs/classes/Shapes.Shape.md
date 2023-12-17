@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[utils/Shapes/Shape.ts:2](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Shape.ts#L2)
+[utils/Shapes/Shape.ts:2](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Shape.ts#L2)
 
 ## Methods
 
@@ -82,4 +82,4 @@
 
 #### Defined in
 
-[utils/Shapes/Shape.ts:8](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Shape.ts#L8)
+[utils/Shapes/Shape.ts:8](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Shape.ts#L8)

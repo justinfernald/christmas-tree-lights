@@ -49,7 +49,7 @@ Represents a light source.
 
 #### Defined in
 
-[utils/Light.ts:86](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L86)
+[utils/Light.ts:86](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L86)
 
 ## Properties
 
@@ -59,7 +59,7 @@ Represents a light source.
 
 #### Defined in
 
-[utils/Light.ts:13](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L13)
+[utils/Light.ts:13](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L13)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[utils/Light.ts:14](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L14)
+[utils/Light.ts:14](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L14)
 
 ___
 
@@ -99,7 +99,7 @@ The updated color of the light, or void if no color update is needed.
 
 #### Defined in
 
-[utils/Light.ts:84](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L84)
+[utils/Light.ts:84](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L84)
 
 ## Accessors
 
@@ -118,7 +118,7 @@ z: 0 to 1 (0 is bottom of tree, 1 is top of tree)
 
 #### Defined in
 
-[utils/Light.ts:22](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L22)
+[utils/Light.ts:22](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L22)
 
 ___
 
@@ -137,7 +137,7 @@ z: -0.5 to 0.5 (-0.5 is bottom of tree, 0.5 is top of tree)
 
 #### Defined in
 
-[utils/Light.ts:42](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L42)
+[utils/Light.ts:42](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L42)
 
 ___
 
@@ -156,7 +156,7 @@ z: 0 to 1 (0 is bottom of tree, 1 is top of tree)
 
 #### Defined in
 
-[utils/Light.ts:62](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L62)
+[utils/Light.ts:62](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L62)
 
 ___
 
@@ -175,7 +175,7 @@ z: 0 to 1.74 (0 is bottom of tree, 1.74 is top of tree)
 
 #### Defined in
 
-[utils/Light.ts:72](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L72)
+[utils/Light.ts:72](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L72)
 
 ___
 
@@ -194,7 +194,7 @@ z: -0.87 to 0.87 (-0.87 is bottom of tree, 0.87 is top of tree)
 
 #### Defined in
 
-[utils/Light.ts:52](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L52)
+[utils/Light.ts:52](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L52)
 
 ___
 
@@ -213,7 +213,7 @@ z: 0 to 1.74 (0 is bottom of tree, 1.74 is top of tree)
 
 #### Defined in
 
-[utils/Light.ts:32](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L32)
+[utils/Light.ts:32](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L32)
 
 ## Methods
 
@@ -231,7 +231,7 @@ The DTO representation of the Light object.
 
 #### Defined in
 
-[utils/Light.ts:95](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L95)
+[utils/Light.ts:95](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L95)
 
 ___
 
@@ -255,4 +255,4 @@ A new Light instance.
 
 #### Defined in
 
-[utils/Light.ts:107](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Light.ts#L107)
+[utils/Light.ts:107](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Light.ts#L107)

@@ -51,7 +51,7 @@
 
 #### Defined in
 
-[utils/Shapes/Octohedron.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Octohedron.ts#L4)
+[utils/Shapes/Octohedron.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Octohedron.ts#L4)
 
 ## Properties
 
@@ -69,7 +69,7 @@
 
 #### Defined in
 
-[utils/Shapes/Octohedron.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Octohedron.ts#L6)
+[utils/Shapes/Octohedron.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Octohedron.ts#L6)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Octohedron.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Octohedron.ts#L5)
+[utils/Shapes/Octohedron.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Octohedron.ts#L5)
 
 ## Methods
 
@@ -105,4 +105,4 @@ ___
 
 #### Defined in
 
-[utils/Shapes/Octohedron.ts:11](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/Octohedron.ts#L11)
+[utils/Shapes/Octohedron.ts:11](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/Octohedron.ts#L11)

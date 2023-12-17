@@ -9,6 +9,10 @@
 - [Shapes](modules/Shapes.md)
 - [Utils](modules/Utils.md)
 
+### Enumerations
+
+- [BlendMode](enums/BlendMode.md)
+
 ### Classes
 
 - [Color](classes/Color.md)
@@ -60,7 +64,7 @@ Predefined colors
 
 #### Defined in
 
-[utils/Color.ts:141](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Color.ts#L141)
+[utils/Color.ts:276](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Color.ts#L276)
 
 ___
 
@@ -70,4 +74,4 @@ ___
 
 #### Defined in
 
-[editor/library.ts:10](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/editor/library.ts#L10)
+[editor/library.ts:10](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/editor/library.ts#L10)

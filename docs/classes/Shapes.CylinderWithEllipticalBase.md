@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[utils/Shapes/CylinderWithEllipticalBase.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/CylinderWithEllipticalBase.ts#L4)
+[utils/Shapes/CylinderWithEllipticalBase.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/CylinderWithEllipticalBase.ts#L4)
 
 ## Properties
 
@@ -73,7 +73,7 @@
 
 #### Defined in
 
-[utils/Shapes/CylinderWithEllipticalBase.ts:8](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/CylinderWithEllipticalBase.ts#L8)
+[utils/Shapes/CylinderWithEllipticalBase.ts:8](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/CylinderWithEllipticalBase.ts#L8)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/CylinderWithEllipticalBase.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/CylinderWithEllipticalBase.ts#L7)
+[utils/Shapes/CylinderWithEllipticalBase.ts:7](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/CylinderWithEllipticalBase.ts#L7)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/CylinderWithEllipticalBase.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/CylinderWithEllipticalBase.ts#L5)
+[utils/Shapes/CylinderWithEllipticalBase.ts:5](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/CylinderWithEllipticalBase.ts#L5)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[utils/Shapes/CylinderWithEllipticalBase.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/CylinderWithEllipticalBase.ts#L6)
+[utils/Shapes/CylinderWithEllipticalBase.ts:6](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/CylinderWithEllipticalBase.ts#L6)
 
 ## Methods
 
@@ -129,4 +129,4 @@ ___
 
 #### Defined in
 
-[utils/Shapes/CylinderWithEllipticalBase.ts:13](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/Shapes/CylinderWithEllipticalBase.ts#L13)
+[utils/Shapes/CylinderWithEllipticalBase.ts:13](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/Shapes/CylinderWithEllipticalBase.ts#L13)

@@ -17,11 +17,15 @@
 - [lerp](Utils.md#lerp)
 - [lerpAngle](Utils.md#lerpangle)
 - [mod](Utils.md#mod)
+- [normalizeWithinRange](Utils.md#normalizewithinrange)
 - [perlinNoise](Utils.md#perlinnoise)
 - [random](Utils.md#random)
 - [randomBool](Utils.md#randombool)
 - [randomChoice](Utils.md#randomchoice)
+- [randomColorByHue](Utils.md#randomcolorbyhue)
+- [randomInCircle](Utils.md#randomincircle)
 - [randomInt](Utils.md#randomint)
+- [randomOnCircle](Utils.md#randomoncircle)
 - [randomSign](Utils.md#randomsign)
 - [shuffle](Utils.md#shuffle)
 - [shuffleInPlace](Utils.md#shuffleinplace)
@@ -35,7 +39,7 @@
 
 #### Defined in
 
-[utils/index.ts:2](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L2)
+[utils/index.ts:4](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L4)
 
 ___
 
@@ -45,7 +49,7 @@ ___
 
 #### Defined in
 
-[utils/index.ts:1](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L1)
+[utils/index.ts:3](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L3)
 
 ## Functions
 
@@ -70,7 +74,7 @@ degrees
 
 #### Defined in
 
-[utils/index.ts:82](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L82)
+[utils/index.ts:109](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L109)
 
 ___
 
@@ -94,7 +98,7 @@ Clamps a number between a minimum and maximum value.
 
 #### Defined in
 
-[utils/index.ts:50](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L50)
+[utils/index.ts:52](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L52)
 
 ___
 
@@ -121,7 +125,7 @@ ___
 
 #### Defined in
 
-[utils/index.ts:184](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L184)
+[utils/index.ts:255](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L255)
 
 ___
 
@@ -145,7 +149,7 @@ Linearly interpolates between two numbers.
 
 #### Defined in
 
-[utils/index.ts:61](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L61)
+[utils/index.ts:88](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L88)
 
 ___
 
@@ -171,7 +175,7 @@ degrees
 
 #### Defined in
 
-[utils/index.ts:72](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L72)
+[utils/index.ts:99](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L99)
 
 ___
 
@@ -194,7 +198,36 @@ Returns the mod.
 
 #### Defined in
 
-[utils/index.ts:93](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L93)
+[utils/index.ts:120](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L120)
+
+___
+
+### normalizeWithinRange
+
+▸ **normalizeWithinRange**(`value`, `min`, `max`): `number` \| ``null``
+
+Normalizes a value within a range.
+If it is outside the range, null is returned.
+If it is inside the range, a value between 0 and 1 is returned.
+0 is returned if the value is equal to the minimum value.
+1 is returned if the value is equal to the maximum value.
+Linearly maps the value to the 0-1 range if it is within the range.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `number` |  |
+| `min` | `number` | minimum value |
+| `max` | `number` | maximum value |
+
+#### Returns
+
+`number` \| ``null``
+
+#### Defined in
+
+[utils/index.ts:69](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L69)
 
 ___
 
@@ -217,7 +250,7 @@ Generates perlin noise at a given point ranging from -1 to 1.
 
 #### Defined in
 
-[utils/index.ts:23](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L23)
+[utils/index.ts:25](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L25)
 
 ___
 
@@ -242,7 +275,7 @@ random value between min and max
 
 #### Defined in
 
-[utils/index.ts:103](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L103)
+[utils/index.ts:130](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L130)
 
 ___
 
@@ -260,7 +293,7 @@ The randomly generated boolean value.
 
 #### Defined in
 
-[utils/index.ts:131](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L131)
+[utils/index.ts:158](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L158)
 
 ___
 
@@ -290,7 +323,59 @@ The randomly chosen element.
 
 #### Defined in
 
-[utils/index.ts:123](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L123)
+[utils/index.ts:150](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L150)
+
+___
+
+### randomColorByHue
+
+▸ **randomColorByHue**(`hMin?`, `hMax?`, `s?`, `l?`): [`Color`](../classes/Color.md)
+
+Generates a random color based on the specified hue range.
+
+#### Parameters
+
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `hMin` | `number` | `0` | The minimum hue value (default: 0) [0 - hMax]. |
+| `hMax` | `number` | `360` | The maximum hue value (default: 360) [0 - 360]. |
+| `s` | `number` | `100` | The saturation value (default: 100) [0 - 100]. |
+| `l` | `number` | `50` | The lightness value (default: 50) [0 - 100]. |
+
+#### Returns
+
+[`Color`](../classes/Color.md)
+
+A Color object representing the generated color.
+
+#### Defined in
+
+[utils/index.ts:210](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L210)
+
+___
+
+### randomInCircle
+
+▸ **randomInCircle**(`radius`, `origin?`): [x: number, y: number]
+
+Generates a random point within a circle of the specified radius.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `radius` | `number` | The radius of the circle. |
+| `origin` | [x: number, y: number] | - |
+
+#### Returns
+
+[x: number, y: number]
+
+An tuple containing the x and y coordinates.
+
+#### Defined in
+
+[utils/index.ts:176](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L176)
 
 ___
 
@@ -315,7 +400,32 @@ random value between min and max
 
 #### Defined in
 
-[utils/index.ts:113](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L113)
+[utils/index.ts:140](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L140)
+
+___
+
+### randomOnCircle
+
+▸ **randomOnCircle**(`radius`, `origin?`): [x: number, y: number]
+
+Generates random coordinates on a circle with the specified radius.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `radius` | `number` | The radius of the circle. |
+| `origin` | [x: number, y: number] | - |
+
+#### Returns
+
+[x: number, y: number]
+
+An tuple containing the x and y coordinates.
+
+#### Defined in
+
+[utils/index.ts:192](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L192)
 
 ___
 
@@ -333,7 +443,7 @@ The randomly generated sign.
 
 #### Defined in
 
-[utils/index.ts:140](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L140)
+[utils/index.ts:167](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L167)
 
 ___
 
@@ -363,7 +473,7 @@ The shuffled array.
 
 #### Defined in
 
-[utils/index.ts:150](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L150)
+[utils/index.ts:221](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L221)
 
 ___
 
@@ -393,7 +503,7 @@ Shuffles an array in place.
 
 #### Defined in
 
-[utils/index.ts:166](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L166)
+[utils/index.ts:237](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L237)
 
 ___
 
@@ -417,4 +527,4 @@ A promise that resolves after the specified time has elapsed.
 
 #### Defined in
 
-[utils/index.ts:179](https://github.com/justinfernald/christmas-tree-lights/blob/49c38ff/src/utils/index.ts#L179)
+[utils/index.ts:250](https://github.com/justinfernald/christmas-tree-lights/blob/6ac5881/src/utils/index.ts#L250)
