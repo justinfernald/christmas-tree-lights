@@ -4,7 +4,7 @@ import { makeSimpleAutoObservable, result } from '../utils/mobx';
 import { BaseViewModel } from '../utils/ViewModel';
 import SimWorker from '../visualizer/worker?worker';
 import { action } from 'mobx';
-import { sleep } from '../utils';
+import { sleep } from '@christmas-tree/core/src/utils';
 import { MainApp } from '../visualizer/display';
 import {
   AppToWorkerMessageTypes,

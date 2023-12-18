@@ -19,14 +19,14 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 import { fragmentShader, vertexShader } from './shaders';
 
-import locations from '../locations.json';
+import locations from '@christmas-tree/core/src/locations.json';
 import dotPng from './dot.png';
 import flarePng from './flare.png';
-import { Light } from '../utils/Light';
+import { Light } from '@christmas-tree/core/src/utils/Light';
 import { AppModel } from '../models/AppModel';
 import { reaction } from 'mobx';
 import { WorkerMessage, WorkerToAppMessageTypes } from './messages';
-import { debounce } from '../utils';
+import { debounce } from '@christmas-tree/core/src/utils';
 
 const coords = locations.map((location) => {
   return new Vector3(

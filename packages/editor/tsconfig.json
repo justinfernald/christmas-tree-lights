@@ -17,7 +17,7 @@
     "sourceMap": true,
     "types": ["vite/client", "@emotion/react/types/css-prop"],
     "paths": {
-      "christmas-tree": ["./src/editor/lights-library.ts"]
+      "christmas-tree": ["./src/library.ts"]
     }
   },
   "include": ["src/**/*"],

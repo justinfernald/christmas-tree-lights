@@ -5,3 +5,4 @@ dist-ssr
 editor-dist
 *.local
 node_modules/*
+packages/animations/src

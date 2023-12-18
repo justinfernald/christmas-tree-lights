@@ -1,4 +1,4 @@
-import { Runner } from './Runner';
+import { Runner } from '@christmas-tree/core/src/runners/Runner';
 
 export class LocalRunner extends Runner {
   _fps = 30;

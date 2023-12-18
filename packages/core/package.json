@@ -1,0 +1,8 @@
+{
+  "name": "@christmas-tree/core",
+  "version": "1.0.0",
+  "description": "Core library",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  }
+}

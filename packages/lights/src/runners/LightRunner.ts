@@ -1,4 +1,4 @@
-import { Runner } from './Runner';
+import { Runner } from '@christmas-tree/core/src/runners/Runner';
 import ws281x from 'rpi-ws281x-native';
 
 export class LightRunner extends Runner {

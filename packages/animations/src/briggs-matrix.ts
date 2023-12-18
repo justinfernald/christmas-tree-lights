@@ -30,7 +30,7 @@ function getLevelNum(light: Light): number {
   if (light._location.z === 1) {
     return BOTTOM_LEVEL_NUMBER;
   }
-  return Math.floor((light._location.z * 10));
+  return Math.floor(light._location.z * 10);
 }
 
 // Gets the closest light in the next level with respect to the x-y plane.
@@ -45,13 +45,13 @@ function getClosestLightInNextLevel(light: Light): Light | null {
   for (const lightAtNextLevel of levels[levelNum + 1]) {
     const dist = Math.sqrt(
       Math.pow(light._location.x - lightAtNextLevel._location.x, 2) +
-      Math.pow(light._location.y - lightAtNextLevel._location.y, 2)
+        Math.pow(light._location.y - lightAtNextLevel._location.y, 2),
     );
     if (dist < shortestDistance) {
       shortestDistance = dist;
       closest = lightAtNextLevel;
     }
-  } 
+  }
   return closest;
 }
 
@@ -60,7 +60,7 @@ function isRandomlyGlitched(): boolean {
 }
 
 // Organize lights into their respective levels.
-const levels = [...Array(10)].map(_ => []);
+const levels: any[][] = [...Array(10)].map((_) => []);
 for (const light of runner.lights) {
   levels[getLevelNum(light)].push(light);
 }
@@ -68,9 +68,9 @@ for (const light of runner.lights) {
 // Pre-compute the the drop path from each starting light in the zeroth (top) level.
 //   The path is terminated with a null value.
 const dropPaths = levels[0].map((topLight: Light) => {
-  const path = [topLight];
+  const path: (Light | null)[] = [topLight];
   while (path[path.length - 1] != null) {
-    path.push(getClosestLightInNextLevel(path[path.length - 1]));
+    path.push(getClosestLightInNextLevel(path[path.length - 1]!));
   }
   return path;
 });
@@ -79,8 +79,8 @@ const drops = dropPaths.map((path) => {
   return {
     path,
     index: path.length - 1,
-    glitched: isRandomlyGlitched()
-  }
+    glitched: isRandomlyGlitched(),
+  };
 });
 
 // ---------------------------------- Animation ------------------------------

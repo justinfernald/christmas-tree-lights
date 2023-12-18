@@ -2,65 +2,22 @@
   "name": "christmas-tree",
   "version": "1.0.0",
   "description": "a christmas tree",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "lights": "ts-node -T -P tsconfig.lights.json -r tsconfig-paths/register",
-    "docs": "typedoc --plugin typedoc-plugin-markdown src/editor/library.ts",
-    "build-editor": "vite -c vite.editor.config.ts build",
-    "build-app": "vite build",
-    "build": "npm run build-editor && npm run build-app",
-    "upload": "gh-pages -d dist",
-    "serve": "vite preview",
+    "dev": "npm run dev -w packages/editor",
+    "lights": "npm run lights -w packages/animations",
+    "docs": "npm run docs -w packages/editor",
+    "build-editor": "npm run build-editor -w packages/editor",
+    "build-app": "npm run build-app -w packages/editor",
+    "build": "npm run build -w packages/editor",
+    "serve": "npm run serve -w packages/editor",
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:format": "prettier . --list-different --write",
-    "type-check": "tsc",
-    "lint": "yarn lint:format && yarn lint:fix",
-    "start": "ts-node --transpile-only src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "type-check": "npm run type-check --workspaces --if-present",
+    "lint": "yarn lint:format && yarn lint:fix"
   },
-  "author": "Justin Fernald",
-  "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@monaco-editor/react": "^4.6.0",
-    "@mui/base": "^5.0.0-beta.27",
-    "@mui/icons-material": "^5.14.19",
-    "@mui/material": "^5.14.20",
-    "lz-string": "^1.5.0",
-    "mobx": "^6.12.0",
-    "mobx-react-lite": "^4.0.5",
-    "monaco-editor": "^0.44.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-query": "^3.39.3",
-    "react-resizable-panels": "^1.0.0",
-    "three": "^0.159.0"
-  },
-  "devDependencies": {
-    "@emotion/babel-plugin": "^11.11.0",
-    "@types/node": "^20.10.2",
-    "@types/react": "^18.2.42",
-    "@types/react-dom": "^18.2.17",
-    "@types/rpi-ws281x-native": "^1.0.3",
-    "@types/three": "^0.159.0",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react": "^7.33.2",
-    "gh-pages": "^6.1.0",
-    "prettier": "^3.1.1",
-    "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
-    "typedoc": "^0.25.4",
-    "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.7",
-    "vite-plugin-dts": "^3.6.4",
-    "vite-plugin-plain-text": "^1.4.2"
-  },
-  "optionalDependencies": {
-    "rpi-ws281x-native": "^1.0.4",
-    "audic": "^3.0.2"
-  }
+  "author": "Justin Fernald"
 }

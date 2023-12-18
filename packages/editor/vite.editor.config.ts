@@ -8,7 +8,7 @@ export default defineConfig({
     outDir: 'editor-dist',
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/editor/library.ts'),
+      entry: resolve(__dirname, 'src/library.ts'),
       name: 'christmas-tree',
 
       // the proper extensions will be added

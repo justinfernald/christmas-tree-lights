@@ -1,4 +1,4 @@
-import { LightDTO } from '../utils/Light';
+import { LightDTO } from '@christmas-tree/core/src/utils/Light';
 
 export enum WorkerMessageTypes {
   Update = 'update',

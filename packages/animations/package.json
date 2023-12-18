@@ -1,0 +1,12 @@
+{
+  "name": "@christmas-tree/animations",
+  "version": "1.0.0",
+  "description": "Core library",
+  "scripts": {
+    "lights": "ts-node -T -P tsconfig.lights.json -r tsconfig-paths/register",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@christmas-tree/lights": "file:../lights"
+  }
+}

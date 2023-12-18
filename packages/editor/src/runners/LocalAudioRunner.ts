@@ -3,7 +3,7 @@ import {
   WorkerMessageTypes,
   WorkerToAppMessageTypes,
 } from '../visualizer/messages';
-import { AudioRunner } from './AudioRunner';
+import { AudioRunner } from '@christmas-tree/core/src/runners/AudioRunner';
 
 export class LocalAudioRunner extends AudioRunner {
   constructor(url: string, loop: boolean) {
