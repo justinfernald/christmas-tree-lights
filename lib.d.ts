@@ -6,6 +6,52 @@
  */
 declare function angleDifference(a: number, b: number): number;
 
+declare interface AudioEndedMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.AudioEnded;
+}
+
+declare interface AudioLoadedMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.AudioLoaded;
+}
+
+declare interface AudioPauseMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.AudioPause;
+}
+
+declare interface AudioPlayMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.AudioPlay;
+}
+
+declare interface AudioResetMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.AudioReset;
+}
+
+declare abstract class AudioRunner {
+    loader: Promise<void> | null;
+    constructor(url: string, loop?: boolean);
+    abstract audioLoader(url: string, loop: boolean): Promise<void>;
+    audioTime?: (time: number) => void;
+    audioEnded?: () => void;
+    abstract audioPause(): void;
+    abstract audioPlay(): void;
+    abstract audioReset(): void;
+}
+
+declare interface AudioTimeMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.AudioTime;
+    data: {
+        time: number;
+    };
+}
+
+declare interface AudioUrlMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.AudioUrl;
+    data: {
+        url: string;
+        loop: boolean;
+    };
+}
+
 /**
  * Enum representing different blend modes for colors.
  */
@@ -33,6 +79,13 @@ export declare enum BlendMode {
  * @returns
  */
 declare function clamp(value: number, min: number, max: number): number;
+
+declare interface CodeMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Code;
+    data: {
+        code: string;
+    };
+}
 
 /**
  * Represents a color in RGB format.
@@ -167,6 +220,13 @@ declare class ConeFrustum extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
+declare interface ConfirmationMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Confirmation;
+    data: {
+        messageId: string;
+    };
+}
+
 declare class Cube extends Shape {
     private sideLength;
     private center;
@@ -231,6 +291,13 @@ declare class Ellipsoid extends Shape {
         z: number;
     });
     isPointInside(x: number, y: number, z: number): boolean;
+}
+
+declare interface FpsMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Fps;
+    data: {
+        fps: number;
+    };
 }
 
 declare class Frustum extends Shape {
@@ -355,6 +422,15 @@ export declare interface LightDTO {
     color: number;
 }
 
+export declare class LocalAudioRunner extends AudioRunner {
+    constructor(url: string, loop: boolean);
+    audioMessageListener: (message: MessageEvent<WorkerMessage>) => void;
+    audioLoader(url: string, loop?: boolean): Promise<void>;
+    audioPause(): void;
+    audioPlay(): void;
+    audioReset(): void;
+}
+
 declare class LocalRunner extends Runner {
     _fps: number;
     set fps(fps: number);
@@ -394,6 +470,10 @@ declare class Octahedron extends Shape {
         z: number;
     });
     isPointInside(x: number, y: number, z: number): boolean;
+}
+
+declare interface PauseMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Pause;
 }
 
 /**
@@ -479,6 +559,10 @@ declare function randomOnCircle(radius: number, origin?: [x: number, y: number])
  */
 declare function randomSign(): number;
 
+declare interface ReadyMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Ready;
+}
+
 declare class RectangularPrism extends Shape {
     private lengthX;
     private lengthY;
@@ -492,9 +576,14 @@ declare class RectangularPrism extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
+declare interface ResetMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Reset;
+}
+
 declare abstract class Runner {
     abstract fps: number;
     abstract draw(): void;
+    audioRunner: AudioRunner | null;
     /**
      * Optional setup function that can be called before running the animation.
      */
@@ -517,7 +606,7 @@ declare abstract class Runner {
     reset(): void;
     pause(): void;
     play(): void;
-    step(): void;
+    step(): Promise<void>;
     lightUpdate(time: number, delta: number | null, iteration: number): void;
 }
 
@@ -585,6 +674,14 @@ declare class Sphere extends Shape {
     isPointInside(x: number, y: number, z: number): boolean;
 }
 
+declare interface StartMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Play;
+}
+
+declare interface StepMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Step;
+}
+
 declare class Torus extends Shape {
     private majorRadius;
     private minorRadius;
@@ -607,6 +704,13 @@ declare class TriangularPyramid extends Shape {
         z: number;
     });
     isPointInside(x: number, y: number, z: number): boolean;
+}
+
+declare interface UpdateMessage extends WorkerMessageStructure {
+    type: WorkerMessageTypes.Update;
+    data: {
+        lights: LightDTO[];
+    };
 }
 
 declare namespace Utils {
@@ -862,6 +966,32 @@ export declare class Vector3 {
      * @returns A new Vector3 instance representing the midpoint between this vector and the given vector.
      */
     midpoint(v: Vector3): Vector3;
+}
+
+declare type WorkerMessage = StartMessage | PauseMessage | ResetMessage | StepMessage | CodeMessage | UpdateMessage | ReadyMessage | ConfirmationMessage | FpsMessage | AudioTimeMessage | AudioEndedMessage | AudioPauseMessage | AudioPlayMessage | AudioResetMessage | AudioUrlMessage | AudioLoadedMessage;
+
+declare interface WorkerMessageStructure {
+    type: string;
+    data?: unknown;
+}
+
+declare enum WorkerMessageTypes {
+    Update = "update",
+    Play = "play",
+    Pause = "pause",
+    Reset = "reset",
+    Step = "step",
+    Ready = "ready",
+    Confirmation = "confirmation",
+    Code = "code",
+    Fps = "fps",
+    AudioTime = "audioTime",
+    AudioEnded = "audioEnded",
+    AudioPause = "audioPause",
+    AudioPlay = "audioPlay",
+    AudioReset = "audioReset",
+    AudioUrl = "audioUrl",
+    AudioLoaded = "audioLoaded"
 }
 
 export { }
