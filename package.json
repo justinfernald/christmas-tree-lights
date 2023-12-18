@@ -35,6 +35,7 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-resizable-panels": "^1.0.0",
+    "rpi-ws281x-native": "^1.0.4",
     "three": "^0.159.0"
   },
   "devDependencies": {
@@ -58,9 +59,5 @@
     "vite": "^5.0.7",
     "vite-plugin-dts": "^3.6.4",
     "vite-plugin-plain-text": "^1.4.2"
-  },
-  "optionalDependencies": {
-    "rpi-ws281x-native": "^1.0.4",
-    "audic": "^3.0.2"
   }
 }
