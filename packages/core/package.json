@@ -2,7 +2,16 @@
   "name": "@christmas-tree/core",
   "version": "1.0.0",
   "description": "Core library",
+  "types": "dist/lib.d.ts",
   "scripts": {
+    "build": "vite build",
     "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.7",
+    "vite-plugin-dts": "^3.6.4",
+    "vite-plugin-plain-text": "^1.4.2"
   }
 }
