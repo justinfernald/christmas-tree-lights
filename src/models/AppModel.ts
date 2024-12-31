@@ -14,7 +14,7 @@ import {
 } from '../visualizer/messages';
 import { AudioModel } from './AudioModel';
 
-export class AppModel extends BaseViewModel<{
+export class EditorModel extends BaseViewModel<{
   codeEditorRef: MutableRefObject<CodeEditorRef | null>;
 }> {
   worker?: Worker;
@@ -288,7 +288,7 @@ export class AppModel extends BaseViewModel<{
   }
 }
 
-export const AppContext = createContext<AppModel | undefined>(undefined);
+export const AppContext = createContext<EditorModel | undefined>(undefined);
 
 // use react context
 export const useAppModel = () => {

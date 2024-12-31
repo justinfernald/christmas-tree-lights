@@ -1,115 +1,59 @@
-import { useRef } from 'react';
 import './App.css';
 
-import {
-  absolute,
-  flex,
-  flex1,
-  flexCenter,
-  flexColumn,
-  fullSize,
-  fullWidth,
-} from './styles';
-import { AppContext, AppModel, useAppModel } from './models/AppModel';
-import { CodeEditor, CodeEditorRef } from './components/CodeEditor';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import { BrowserRouter, Route, Routes } from 'react-router';
+import { MainLayout } from './routes/main-layout';
+import { Editor } from './routes/editor';
+import { ControlPanel } from './routes/control-panel';
+import { getAuth } from 'firebase/auth';
+import { AuthStore } from './models/AuthStore';
 import { observer } from 'mobx-react-lite';
+import { getFirestore } from 'firebase/firestore';
+import { ControlPanelModel } from './models/ControlPanelModel';
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: 'AIzaSyDffaZ_TxNWdnQa84DWjzX0bQPhlOrdVsE',
+  authDomain: 'christmas-tree-light.firebaseapp.com',
+  projectId: 'christmas-tree-light',
+  storageBucket: 'christmas-tree-light.firebasestorage.app',
+  messagingSenderId: '474137480656',
+  appId: '1:474137480656:web:4e043b32ac0c1333a4bdd5',
+  measurementId: 'G-53W96H3LLB',
+};
 
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { useViewModelConstructor } from './utils/ViewModel';
-import { ControlBar } from './components/ControlBar';
-import { Display } from './components/Display';
-import { Alert, Snackbar } from '@mui/material';
-import { DragHandleRounded } from '@mui/icons-material';
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
 
-const queryClient = new QueryClient();
+export const auth = getAuth(app);
+export const authStore = new AuthStore(auth);
 
-const App = observer(() => {
-  const codeEditorRef = useRef<CodeEditorRef | null>(null);
-  const appModel = useViewModelConstructor(AppModel, {
-    codeEditorRef,
-  });
+export const db = getFirestore(app);
+
+export const analytics = getAnalytics(app);
+
+export const controlPanelModel = new ControlPanelModel();
+
+export const App = observer(() => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppContext.Provider value={appModel}>
-        <div css={[absolute(0, 0, 0, 0), { height: '100vh' }, flexColumn]}>
-          <ControlBar />
-          <div css={[flex(), fullWidth, flex1, { background: 'black' }]}>
-            <PanelGroup direction="horizontal">
-              <Panel collapsible defaultSize={50} minSize={20}>
-                <CodeEditor ref={codeEditorRef} />
-              </Panel>
-              <ResizeHandle />
-              <Panel collapsible defaultSize={50} minSize={20}>
-                <Display />
-              </Panel>
-            </PanelGroup>
-          </div>
-        </div>
-        <div>
-          <SnackbarHandler />
-        </div>
-      </AppContext.Provider>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route index element={<ControlPanel />} />
+          <Route path="editor" element={<Editor />} />
+          <Route path="*" element={<div>404</div>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 });
-
-const SnackbarHandler = observer(() => {
-  const appModel = useAppModel();
-
-  return (
-    <Snackbar
-      open={appModel.snackbar.showing}
-      autoHideDuration={appModel.snackbar.timeout}
-      onClose={appModel.closeSnackbar}
-    >
-      <Alert onClose={appModel.closeSnackbar} severity={appModel.snackbar.severity}>
-        {appModel.snackbar.message}
-      </Alert>
-    </Snackbar>
-  );
-});
-
-export function ResizeHandle({
-  className = '',
-  collapsed = false,
-  id,
-}: {
-  className?: string;
-  collapsed?: boolean;
-  id?: string;
-}) {
-  return (
-    <PanelResizeHandle
-      className={className}
-      css={{
-        margin: 4,
-        borderRadius: 4,
-        width: 8,
-        backgroundColor: '#111',
-        transition: '0.3s ease-in-out',
-        '&:hover': {
-          backgroundColor: '#222',
-        },
-        '&:active': {
-          backgroundColor: '#333',
-        },
-      }}
-      id={id}
-    >
-      <div
-        css={[
-          flexCenter,
-          fullSize,
-          { transform: 'perspective(1px) scale(0.8) rotate(90deg)' },
-        ]}
-        data-collapsed={collapsed || undefined}
-      >
-        <DragHandleRounded css={{ color: '#444' }} />
-      </div>
-    </PanelResizeHandle>
-  );
-}
-
-export default App;
