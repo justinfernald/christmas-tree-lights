@@ -8,7 +8,7 @@
     "docs": "typedoc --plugin typedoc-plugin-markdown src/editor/library.ts",
     "build-editor": "vite -c vite.editor.config.ts build",
     "build-app": "vite build",
-    "build": "npm run build-editor && npm run build-app",
+    "build": "yarn run build-editor && yarn run build-app",
     "upload": "gh-pages -d dist",
     "serve": "vite preview",
     "lint:check": "eslint .",
