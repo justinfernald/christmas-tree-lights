@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import '../App.css';
 
 import { flex, flex1, flexCenter, flexColumn, fullSize, fullWidth } from '../styles';
-import { AppContext, EditorModel, useAppModel } from '../models/AppModel';
+import { AppContext, EditorModel, useAppModel } from '../models/EditorModel';
 import { CodeEditor, CodeEditorRef } from '../components/CodeEditor';
 import { observer } from 'mobx-react-lite';
 

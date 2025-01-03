@@ -4,11 +4,15 @@ import { AnimationCard } from './AnimationCard';
 
 export const AnimationsList = ({
   animations,
+  currentAnimationId,
   onSelectAnimation,
+  onViewInEditor,
   allowDelete,
 }: {
   animations: Animation[];
+  currentAnimationId: string | null;
   onSelectAnimation: (id: string) => void;
+  onViewInEditor: (id: string) => void;
   allowDelete?: boolean;
 }) => (
   <div css={[flex1, fullWidth, relative()]}>
@@ -27,9 +31,11 @@ export const AnimationsList = ({
       >
         {animations.map((animation) => (
           <AnimationCard
+            selected={currentAnimationId === animation.id}
             key={animation.id}
             animation={animation}
-            onSelect={() => onSelectAnimation(animation.id)}
+            onPlayOnTree={() => onSelectAnimation(animation.id)}
+            onViewInEditor={() => onViewInEditor(animation.id)}
             allowDelete={allowDelete}
           />
         ))}

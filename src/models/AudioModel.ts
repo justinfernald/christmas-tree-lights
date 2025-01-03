@@ -4,7 +4,7 @@ import {
   WorkerMessageTypes,
   WorkerToAppMessageTypes,
 } from '../visualizer/messages';
-import { EditorModel } from './AppModel';
+import { EditorModel } from './EditorModel';
 
 export class AudioModel {
   audio: HTMLAudioElement | null = null;

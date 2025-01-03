@@ -1,7 +1,8 @@
+import LZString from 'lz-string';
+
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
 import { FlexColumn, FlexRow } from '../components/Flex';
-import { authStore, controlPanelModel } from '../App';
+import { controlPanelModel } from '../App';
 import { fullWidth, flex1 } from '../styles';
 
 import { AppBarWithAuth } from '../components/AppBarWithAuth';
@@ -18,8 +19,17 @@ export const Profile = observer(() => {
     navigate('/');
   };
 
-  const navigateToEditor = () => {
-    navigate('/editor');
+  const navigateToEditor = (code?: string) => {
+    console.log(controlPanelModel.animationsMap);
+
+    if (!code) {
+      navigate('/editor');
+      return;
+    }
+
+    const urlEncoded = LZString.compressToEncodedURIComponent(code);
+
+    navigate(`/editor#${urlEncoded}`);
   };
 
   return (
@@ -28,13 +38,22 @@ export const Profile = observer(() => {
       <FlexColumn css={[flex1, fullWidth]}>
         <BrightnessControl />
         <FlexRow center css={{ padding: 10 }}>
-          <Button variant="contained" startIcon={<Create />} onClick={navigateToEditor}>
+          <Button
+            variant="contained"
+            startIcon={<Create />}
+            onClick={() => navigateToEditor()}
+          >
             Create New Animation
           </Button>
         </FlexRow>
         <AnimationsList
           allowDelete
           onSelectAnimation={controlPanelModel.playAnimation}
+          onViewInEditor={(animationId) => {
+            console.log({ animationId });
+            navigateToEditor(controlPanelModel.animationsMap.get(animationId)?.code);
+          }}
+          currentAnimationId={controlPanelModel.playerData?.animationId ?? null}
           animations={controlPanelModel.animations}
         />
       </FlexColumn>

@@ -23,7 +23,7 @@ import locations from '../locations.json';
 import dotPng from './dot.png';
 import flarePng from './flare.png';
 import { Light } from '../utils/Light';
-import { EditorModel } from '../models/AppModel';
+import { EditorModel } from '../models/EditorModel';
 import { reaction } from 'mobx';
 import { WorkerMessage, WorkerToAppMessageTypes } from './messages';
 import { debounce } from '../utils';

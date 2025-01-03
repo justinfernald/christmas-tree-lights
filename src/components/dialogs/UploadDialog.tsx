@@ -1,3 +1,5 @@
+import LZString from 'lz-string';
+
 import {
   Dialog,
   DialogTitle,
@@ -31,7 +33,7 @@ class UploadDialogViewModel extends BaseViewModel<UploadDialogProps> {
     }
 
     this.animationData = {
-      code: props.code,
+      code: '',
       ownerId: user.uid,
       title: '',
       description: '',
@@ -43,12 +45,16 @@ class UploadDialogViewModel extends BaseViewModel<UploadDialogProps> {
   }
 
   upload() {
+    // This is a dumb way of doing this, but I'm too lazy to do it correctly rn.
+    this.animationData.code = LZString.decompressFromEncodedURIComponent(
+      location.hash.substring(1),
+    );
+
     createAnimation(this.animationData);
   }
 }
 
 export interface UploadDialogProps {
-  code: string;
   open: boolean;
   onClose: () => void;
 }

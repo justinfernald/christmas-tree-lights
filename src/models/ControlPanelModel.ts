@@ -7,22 +7,46 @@ import {
   deleteAnimation,
   updateAnimation,
   subscribeToAnimations,
+  PlayerData,
+  subscribeToMainPlayer,
+  setMainPlayerBrightness,
+  setMainPlayerAnimation,
 } from '../firebase';
 
 export class ControlPanelModel {
   animations: Animation[] = [];
+  playerData: PlayerData | null = null;
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
 
     // Set up subscription to Firestore updates
     this.subscribeToAnimations();
+    this.subscribeToPlayerData();
   }
 
   subscribeToAnimations() {
     subscribeToAnimations((updatedAnimations) => {
       this.animations = updatedAnimations;
     });
+  }
+
+  subscribeToPlayerData() {
+    subscribeToMainPlayer((playerData) => {
+      this.playerData = playerData;
+    });
+  }
+
+  updateBrightness(brightness: number) {
+    setMainPlayerBrightness(brightness);
+  }
+
+  updatePlayedAnimation(animationId: string) {
+    setMainPlayerAnimation(animationId);
+  }
+
+  get animationsMap(): Map<string, Animation> {
+    return new Map(this.animations.map((animation) => [animation.id, animation]));
   }
 
   get userAnimations() {
@@ -36,7 +60,7 @@ export class ControlPanelModel {
   }
 
   async playAnimation(animationId: string) {
-    throw new Error('Not implemented');
+    this.updatePlayedAnimation(animationId);
   }
 
   async createAnimation(animation: Animation) {

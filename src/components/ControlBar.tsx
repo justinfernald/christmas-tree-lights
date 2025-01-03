@@ -1,4 +1,4 @@
-import { useAppModel } from '../models/AppModel';
+import { useAppModel } from '../models/EditorModel';
 import { flex, flexBetween, flexCenterVertical } from '../styles';
 import { Button } from './Button';
 import { observer } from 'mobx-react-lite';
@@ -124,11 +124,7 @@ export const ControlBar = observer(() => {
       <InfoDialog open={viewModel.showingInfo} onClose={viewModel.hideInfo} />
       <LoginDialog show={viewModel.showingLogin} onClose={viewModel.hideLogin} />
       {isLoggedIn && (
-        <UploadDialog
-          code={appModel.code}
-          open={viewModel.showingUpload}
-          onClose={viewModel.hideUpload}
-        />
+        <UploadDialog open={viewModel.showingUpload} onClose={viewModel.hideUpload} />
       )}
     </div>
   );

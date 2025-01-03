@@ -7,6 +7,7 @@ import {
   CardActions,
   IconButton,
   Popover,
+  LinearProgress,
 } from '@mui/material';
 import { authStore, controlPanelModel } from '../App';
 import {
@@ -23,15 +24,24 @@ import { DeleteButton } from './DeleteButton';
 
 export const AnimationCard = ({
   animation,
-  onSelect,
+  onPlayOnTree,
+  onViewInEditor,
   allowDelete,
+  selected,
 }: {
   animation: Animation;
-  onSelect: () => void;
+  onPlayOnTree: () => void;
+  onViewInEditor: () => void;
   allowDelete?: boolean;
+  selected: boolean;
 }) => (
   <Card variant="outlined" sx={[fullWidth, { height: 167, maxWidth: 400 }]}>
-    <FlexColumn css={[fullSize]}>
+    <FlexColumn css={[fullSize, relative()]}>
+      {selected && (
+        <div css={[absoluteFromDirections({ top: 0, left: 0, right: 0 })]}>
+          <LinearProgress />
+        </div>
+      )}
       <CardContent sx={[flex1]}>
         <div css={[fullSize, relative()]}>
           {allowDelete && (
@@ -71,11 +81,13 @@ export const AnimationCard = ({
           disabled={!authStore.isLoggedIn}
           startIcon={<PlayArrow />}
           color="secondary"
-          onClick={onSelect}
+          onClick={onPlayOnTree}
         >
           Play on Tree
         </Button>
-        <Button startIcon={<OpenInBrowser />}>View in Editor</Button>
+        <Button onClick={onViewInEditor} startIcon={<OpenInBrowser />}>
+          View in Editor
+        </Button>
       </CardActions>
     </FlexColumn>
   </Card>
