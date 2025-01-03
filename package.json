@@ -8,7 +8,7 @@
     "docs": "typedoc --plugin typedoc-plugin-markdown src/editor/library.ts",
     "build-editor": "vite -c vite.editor.config.ts build",
     "build-app": "vite build",
-    "build": "npm run build-editor && npm run build-app",
+    "build": "yarn run build-editor && yarn run build-app",
     "upload": "gh-pages -d dist",
     "serve": "vite preview",
     "lint:check": "eslint .",
@@ -23,10 +23,12 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.1.1",
     "@monaco-editor/react": "^4.6.0",
     "@mui/base": "^5.0.0-beta.27",
     "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.20",
+    "firebase": "^11.1.0",
     "lz-string": "^1.5.0",
     "mobx": "^6.12.0",
     "mobx-react-lite": "^4.0.5",
@@ -35,7 +37,7 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-resizable-panels": "^1.0.0",
-    "rpi-ws281x-native": "^1.0.4",
+    "react-router": "^7.1.1",
     "three": "^0.159.0"
   },
   "devDependencies": {

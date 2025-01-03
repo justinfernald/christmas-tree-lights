@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useAppModel } from '../models/AppModel';
+import { useAppModel } from '../models/EditorModel';
 import { useEffect } from 'react';
 import { relative, absolute, fullSize } from '../styles';
 import { MainApp } from '../visualizer/display';

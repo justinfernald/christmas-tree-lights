@@ -3,7 +3,7 @@ import { PluginOption, defineConfig } from 'vite';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-async function TPGamesManifestPlugin(): Promise<PluginOption[]> {
+async function christmasManifestPlugin(): Promise<PluginOption[]> {
   return [
     {
       name: 'transform-file',
@@ -113,6 +113,6 @@ export default defineConfig({
         plugins: ['@emotion/babel-plugin'],
       },
     }),
-    TPGamesManifestPlugin(),
+    christmasManifestPlugin(),
   ],
 });

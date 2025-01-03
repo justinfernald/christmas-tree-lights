@@ -4,12 +4,12 @@ import {
   WorkerMessageTypes,
   WorkerToAppMessageTypes,
 } from '../visualizer/messages';
-import { AppModel } from './AppModel';
+import { EditorModel } from './EditorModel';
 
 export class AudioModel {
   audio: HTMLAudioElement | null = null;
 
-  constructor(private appModel: AppModel) {
+  constructor(private appModel: EditorModel) {
     reaction(() => this.appModel.worker, this.listenToMessages);
 
     makeAutoObservable(this, {}, { autoBind: true });

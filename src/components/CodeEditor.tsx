@@ -7,7 +7,7 @@ import { BaseViewModel, useViewModelConstructor } from '../utils/ViewModel';
 import { useQuery } from 'react-query';
 import { makeSimpleAutoObservable } from '../utils/mobx';
 import LZString from 'lz-string';
-import { useAppModel } from '../models/AppModel';
+import { useAppModel } from '../models/EditorModel';
 import { action } from 'mobx';
 import { Button } from './Button';
 import { AutoFixHighRounded } from '@mui/icons-material';

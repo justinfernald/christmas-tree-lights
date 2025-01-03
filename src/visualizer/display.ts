@@ -23,7 +23,7 @@ import locations from '../locations.json';
 import dotPng from './dot.png';
 import flarePng from './flare.png';
 import { Light } from '../utils/Light';
-import { AppModel } from '../models/AppModel';
+import { EditorModel } from '../models/EditorModel';
 import { reaction } from 'mobx';
 import { WorkerMessage, WorkerToAppMessageTypes } from './messages';
 import { debounce } from '../utils';
@@ -60,7 +60,7 @@ export class MainApp {
   destroyers: (() => void)[] = [];
 
   constructor(
-    public appModel: AppModel,
+    public appModel: EditorModel,
     public flare: boolean,
   ) {
     const listener = (
