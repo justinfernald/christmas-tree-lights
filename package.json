@@ -28,7 +28,6 @@
     "@mui/base": "^5.0.0-beta.27",
     "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.20",
-    "audic": "^3.0.2",
     "firebase": "^11.1.0",
     "lz-string": "^1.5.0",
     "mobx": "^6.12.0",
