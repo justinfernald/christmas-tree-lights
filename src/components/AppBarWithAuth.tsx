@@ -6,12 +6,15 @@ import { authStore } from '../App';
 import { FlexRow } from './Flex';
 import { useState } from 'react';
 import { LoginDialog } from './dialogs/LoginDialog';
+import { Code } from '@mui/icons-material';
 
 export const AppBarWithAuth = observer(
   ({
+    onViewEditor,
     onViewControlPanel,
     onViewMyAnimations,
   }: {
+    onViewEditor: () => void;
     onViewControlPanel?: () => void;
     onViewMyAnimations?: () => void;
   }) => {
@@ -30,7 +33,10 @@ export const AppBarWithAuth = observer(
               Control Panel
             </Typography>
             {authStore.isLoggedIn ? (
-              <FlexRow>
+              <FlexRow gap={5}>
+                <Button color="inherit" onClick={onViewEditor} startIcon={<Code />}>
+                  Editor
+                </Button>
                 {onViewControlPanel && (
                   <Button color="inherit" onClick={onViewControlPanel}>
                     Control Panel
@@ -46,10 +52,13 @@ export const AppBarWithAuth = observer(
                 </IconButton>
               </FlexRow>
             ) : (
-              <FlexRow>
-                <IconButton color="inherit" onClick={onLogin}>
-                  <LoginIcon />
-                </IconButton>
+              <FlexRow gap={5}>
+                <Button color="inherit" onClick={onViewEditor} startIcon={<Code />}>
+                  Editor
+                </Button>
+                <Button color="inherit" onClick={onLogin} startIcon={<LoginIcon />}>
+                  Login
+                </Button>
               </FlexRow>
             )}
           </Toolbar>

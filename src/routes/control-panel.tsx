@@ -32,7 +32,10 @@ export const ControlPanel = observer(() => {
 
   return (
     <FlexColumn css={flex1}>
-      <AppBarWithAuth onViewMyAnimations={navigateToProfile} />
+      <AppBarWithAuth
+        onViewMyAnimations={navigateToProfile}
+        onViewEditor={navigateToEditor}
+      />
       <FlexColumn css={[flex1, fullWidth]}>
         <BrightnessControl />
         <AnimationsList

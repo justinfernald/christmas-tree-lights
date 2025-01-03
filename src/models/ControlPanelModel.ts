@@ -1,5 +1,5 @@
 // Updated ControlPanelModel
-import { makeAutoObservable } from 'mobx';
+import { action, makeAutoObservable } from 'mobx';
 import { auth } from '../App';
 import {
   Animation,
@@ -26,15 +26,19 @@ export class ControlPanelModel {
   }
 
   subscribeToAnimations() {
-    subscribeToAnimations((updatedAnimations) => {
-      this.animations = updatedAnimations;
-    });
+    subscribeToAnimations(
+      action((updatedAnimations) => {
+        this.animations = updatedAnimations;
+      }),
+    );
   }
 
   subscribeToPlayerData() {
-    subscribeToMainPlayer((playerData) => {
-      this.playerData = playerData;
-    });
+    subscribeToMainPlayer(
+      action((playerData) => {
+        this.playerData = playerData;
+      }),
+    );
   }
 
   updateBrightness(brightness: number) {

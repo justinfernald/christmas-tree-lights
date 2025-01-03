@@ -2,7 +2,7 @@ import LZString from 'lz-string';
 
 import { observer } from 'mobx-react-lite';
 import { FlexColumn, FlexRow } from '../components/Flex';
-import { controlPanelModel } from '../App';
+import { authStore, controlPanelModel } from '../App';
 import { fullWidth, flex1 } from '../styles';
 
 import { AppBarWithAuth } from '../components/AppBarWithAuth';
@@ -11,6 +11,7 @@ import { BrightnessControl } from '../components/BrightnessControl';
 import { useNavigate } from 'react-router';
 import { Button } from '@mui/material';
 import { Create } from '@mui/icons-material';
+import { useEffect } from 'react';
 
 export const Profile = observer(() => {
   const navigate = useNavigate();
@@ -32,9 +33,18 @@ export const Profile = observer(() => {
     navigate(`/editor#${urlEncoded}`);
   };
 
+  useEffect(() => {
+    if (!authStore.isLoggedIn) {
+      navigateToControlPanel();
+    }
+  }, [authStore.isLoggedIn]);
+
   return (
     <FlexColumn css={flex1}>
-      <AppBarWithAuth onViewControlPanel={navigateToControlPanel} />
+      <AppBarWithAuth
+        onViewControlPanel={navigateToControlPanel}
+        onViewEditor={navigateToEditor}
+      />
       <FlexColumn css={[flex1, fullWidth]}>
         <BrightnessControl />
         <FlexRow center css={{ padding: 10 }}>
@@ -54,7 +64,7 @@ export const Profile = observer(() => {
             navigateToEditor(controlPanelModel.animationsMap.get(animationId)?.code);
           }}
           currentAnimationId={controlPanelModel.playerData?.animationId ?? null}
-          animations={controlPanelModel.animations}
+          animations={controlPanelModel.userAnimations}
         />
       </FlexColumn>
     </FlexColumn>

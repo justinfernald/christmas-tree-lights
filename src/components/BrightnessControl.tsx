@@ -3,8 +3,8 @@ import { fullWidth, paddingVertical, paddingHorizontal } from '../styles';
 import { FlexRow, FlexColumn } from './Flex';
 import { authStore, controlPanelModel } from '../App';
 import { useEffect, useState } from 'react';
-import { debounce } from '../utils';
 import { reaction } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 const useDebouncedBrightness = () => {
   const [brightness, setBrightness] = useState(
@@ -33,7 +33,7 @@ const useDebouncedBrightness = () => {
   };
 };
 
-export const BrightnessControl = () => {
+export const BrightnessControl = observer(() => {
   const { brightness, setBrightness, uploadBrightness } = useDebouncedBrightness();
 
   return (
@@ -59,4 +59,4 @@ export const BrightnessControl = () => {
       </FlexColumn>
     </FlexRow>
   );
-};
+});
