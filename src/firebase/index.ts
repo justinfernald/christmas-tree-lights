@@ -8,6 +8,7 @@ import {
   updateDoc,
   deleteDoc,
   DocumentData,
+  onSnapshot,
 } from 'firebase/firestore';
 import { db, auth } from '../App';
 
@@ -20,6 +21,28 @@ export interface Animation {
   code: string;
   createdAt: Date | null; // `null` if Firestore field is missing
   updatedAt: Date | null; // `null` if Firestore field is missing
+}
+
+export function subscribeToAnimations(callback: (animations: Animation[]) => void) {
+  const animationsCollection = collection(db, 'animations');
+
+  return onSnapshot(animationsCollection, (snapshot) => {
+    const animations: Animation[] = snapshot.docs.map((doc) => {
+      const data = doc.data() as DocumentData;
+
+      return {
+        id: doc.id,
+        ownerId: data.ownerId,
+        title: data.title,
+        description: data.description,
+        code: data.code,
+        createdAt: data.createdAt?.toDate() || null,
+        updatedAt: data.updatedAt?.toDate() || null,
+      };
+    });
+
+    callback(animations);
+  });
 }
 
 /**

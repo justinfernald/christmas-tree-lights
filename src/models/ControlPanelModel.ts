@@ -1,10 +1,12 @@
+// Updated ControlPanelModel
 import { makeAutoObservable } from 'mobx';
 import { auth } from '../App';
 import {
   Animation,
   createAnimation,
-  getAllAnimations,
+  deleteAnimation,
   updateAnimation,
+  subscribeToAnimations,
 } from '../firebase';
 
 export class ControlPanelModel {
@@ -13,11 +15,14 @@ export class ControlPanelModel {
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
 
-    this.fetchAnimations();
+    // Set up subscription to Firestore updates
+    this.subscribeToAnimations();
   }
 
-  async fetchAnimations() {
-    this.animations = await getAllAnimations();
+  subscribeToAnimations() {
+    subscribeToAnimations((updatedAnimations) => {
+      this.animations = updatedAnimations;
+    });
   }
 
   get userAnimations() {
@@ -36,25 +41,16 @@ export class ControlPanelModel {
 
   async createAnimation(animation: Animation) {
     // Save the animation to Firestore
-    createAnimation(animation);
-    // Update the local state
-    this.animations.push(animation);
+    await createAnimation(animation);
   }
 
   async deleteAnimation(id: string) {
     // Delete the animation from Firestore
-    this.deleteAnimation(id);
-    // Update the local state
-    this.animations = this.animations.filter((animation) => animation.id !== id);
+    await deleteAnimation(id);
   }
 
   async updateAnimation(id: string, updates: Partial<Animation>) {
     // Update the animation in Firestore
-    updateAnimation(id, updates);
-
-    // Update the local state
-    this.animations = this.animations.map((animation) =>
-      animation.id === id ? { ...animation, ...updates } : animation,
-    );
+    await updateAnimation(id, updates);
   }
 }

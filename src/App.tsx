@@ -17,6 +17,7 @@ import { AuthStore } from './models/AuthStore';
 import { observer } from 'mobx-react-lite';
 import { getFirestore } from 'firebase/firestore';
 import { ControlPanelModel } from './models/ControlPanelModel';
+import { Profile } from './routes/profile';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -50,6 +51,7 @@ export const App = observer(() => {
       <Routes>
         <Route element={<MainLayout />}>
           <Route index element={<ControlPanel />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="editor" element={<Editor />} />
           <Route path="*" element={<div>404</div>} />
         </Route>
