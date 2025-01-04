@@ -46,8 +46,6 @@ class UploadDialogViewModel extends BaseViewModel<UploadDialogProps> {
     return reaction(
       () => this.animation,
       (animation) => {
-        console.log({ animation });
-
         if (!animation) {
           return;
         }
