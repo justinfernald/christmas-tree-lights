@@ -18,7 +18,7 @@ import { authStore, controlPanelModel } from '../../App';
 import { FlexColumn } from '../Flex';
 import { UploadRounded } from '@mui/icons-material';
 import { useNavigate } from 'react-router';
-import { reaction } from 'mobx';
+import { action, reaction } from 'mobx';
 import { useEffect } from 'react';
 
 class UploadDialogViewModel extends BaseViewModel<UploadDialogProps> {
@@ -147,7 +147,7 @@ export const UploadDialog = observer((props: UploadDialogProps) => {
             label="Title"
             variant="standard"
             value={vm.animationData.title}
-            onChange={(e) => (vm.animationData.title = e.target.value)}
+            onChange={action((e) => (vm.animationData.title = e.target.value))}
             fullWidth
           />
           <TextField
@@ -155,7 +155,7 @@ export const UploadDialog = observer((props: UploadDialogProps) => {
             label="Description"
             variant="standard"
             value={vm.animationData.description}
-            onChange={(e) => (vm.animationData.description = e.target.value)}
+            onChange={action((e) => (vm.animationData.description = e.target.value))}
             fullWidth
             multiline
             rows={4}
