@@ -28,7 +28,12 @@ export const Profile = observer(() => {
 
     const urlEncoded = LZString.compressToEncodedURIComponent(code);
 
-    navigate(`/editor?edit=${editAnimationId}#${urlEncoded}`);
+    if (editAnimationId) {
+      navigate(`/editor?edit=${editAnimationId}#${urlEncoded}`);
+      return;
+    }
+
+    navigate(`/editor#${urlEncoded}`);
   };
 
   useEffect(() => {
