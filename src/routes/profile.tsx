@@ -20,9 +20,7 @@ export const Profile = observer(() => {
     navigate('/');
   };
 
-  const navigateToEditor = (code?: string) => {
-    console.log(controlPanelModel.animationsMap);
-
+  const navigateToEditor = (code?: string, editAnimationId?: string) => {
     if (!code) {
       navigate('/editor');
       return;
@@ -30,7 +28,7 @@ export const Profile = observer(() => {
 
     const urlEncoded = LZString.compressToEncodedURIComponent(code);
 
-    navigate(`/editor#${urlEncoded}`);
+    navigate(`/editor?edit=${editAnimationId}#${urlEncoded}`);
   };
 
   useEffect(() => {
@@ -59,10 +57,12 @@ export const Profile = observer(() => {
         <AnimationsList
           allowDelete
           onSelectAnimation={controlPanelModel.playAnimation}
-          onViewInEditor={(animationId) => {
-            console.log({ animationId });
-            navigateToEditor(controlPanelModel.animationsMap.get(animationId)?.code);
-          }}
+          onViewInEditor={(animationId, edit) =>
+            navigateToEditor(
+              controlPanelModel.animationsMap.get(animationId)?.code,
+              edit ? animationId : undefined,
+            )
+          }
           currentAnimationId={controlPanelModel.playerData?.animationId ?? null}
           animations={controlPanelModel.userAnimations}
         />

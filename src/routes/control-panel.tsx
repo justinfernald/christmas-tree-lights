@@ -17,9 +17,7 @@ export const ControlPanel = observer(() => {
     navigate('/profile');
   };
 
-  const navigateToEditor = (code?: string) => {
-    console.log({ code });
-
+  const navigateToEditor = (code?: string, editAnimationId?: string) => {
     if (!code) {
       navigate('/editor');
       return;
@@ -27,7 +25,7 @@ export const ControlPanel = observer(() => {
 
     const urlEncoded = LZString.compressToEncodedURIComponent(code);
 
-    navigate(`/editor#${urlEncoded}`);
+    navigate(`/editor?edit=${editAnimationId}#${urlEncoded}`);
   };
 
   return (
@@ -40,8 +38,11 @@ export const ControlPanel = observer(() => {
         <BrightnessControl />
         <AnimationsList
           onSelectAnimation={controlPanelModel.playAnimation}
-          onViewInEditor={(animationId) =>
-            navigateToEditor(controlPanelModel.animationsMap.get(animationId)?.code)
+          onViewInEditor={(animationId, edit) =>
+            navigateToEditor(
+              controlPanelModel.animationsMap.get(animationId)?.code,
+              edit ? animationId : undefined,
+            )
           }
           currentAnimationId={controlPanelModel.playerData?.animationId ?? null}
           animations={controlPanelModel.animations}

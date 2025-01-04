@@ -1,4 +1,4 @@
-import { PlayArrow, OpenInBrowser, Delete } from '@mui/icons-material';
+import { PlayArrow, OpenInBrowser, Delete, Edit } from '@mui/icons-material';
 import {
   Button,
   Card,
@@ -7,6 +7,7 @@ import {
   CardActions,
   LinearProgress,
   Tooltip,
+  IconButton,
 } from '@mui/material';
 import { authStore, controlPanelModel } from '../App';
 import {
@@ -17,7 +18,7 @@ import {
   relative,
   absoluteFromDirections,
 } from '../styles';
-import { FlexColumn } from './Flex';
+import { FlexColumn, FlexRow } from './Flex';
 import { Animation } from '../firebase';
 import { DeleteButton } from './DeleteButton';
 import { observer } from 'mobx-react-lite';
@@ -27,13 +28,13 @@ export const AnimationCard = observer(
     animation,
     onPlayOnTree,
     onViewInEditor,
-    allowDelete,
+    allowEdit,
     selected,
   }: {
     animation: Animation;
     onPlayOnTree: () => void;
-    onViewInEditor: () => void;
-    allowDelete?: boolean;
+    onViewInEditor: (edit: boolean) => void;
+    allowEdit?: boolean;
     selected: boolean;
   }) => (
     <Card variant="outlined" sx={[fullWidth, { height: 167, maxWidth: 400 }]}>
@@ -45,8 +46,8 @@ export const AnimationCard = observer(
         )}
         <CardContent sx={[flex1]}>
           <div css={[fullSize, relative()]}>
-            {allowDelete && (
-              <div
+            {allowEdit && (
+              <FlexRow
                 css={[
                   absoluteFromDirections({
                     top: 0,
@@ -55,12 +56,21 @@ export const AnimationCard = observer(
                   { zIndex: 1 },
                 ]}
               >
-                <DeleteButton
-                  onDelete={() => {
-                    controlPanelModel.deleteAnimation(animation.id);
-                  }}
-                />
-              </div>
+                <Tooltip title="Edit Animation">
+                  <IconButton onClick={() => onViewInEditor(true)}>
+                    <Edit />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete Animation">
+                  <div>
+                    <DeleteButton
+                      onDelete={() => {
+                        controlPanelModel.deleteAnimation(animation.id);
+                      }}
+                    />
+                  </div>
+                </Tooltip>
+              </FlexRow>
             )}
             <div css={[absolute(0, 0, 0, 0)]}>
               <FlexColumn css={[fullSize]}>
@@ -97,7 +107,7 @@ export const AnimationCard = observer(
               </Button>
             </div>
           </Tooltip>
-          <Button onClick={onViewInEditor} startIcon={<OpenInBrowser />}>
+          <Button onClick={() => onViewInEditor(false)} startIcon={<OpenInBrowser />}>
             View in Editor
           </Button>
         </CardActions>

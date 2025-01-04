@@ -12,7 +12,7 @@ export const AnimationsList = ({
   animations: Animation[];
   currentAnimationId: string | null;
   onSelectAnimation: (id: string) => void;
-  onViewInEditor: (id: string) => void;
+  onViewInEditor: (id: string, edit: boolean) => void;
   allowDelete?: boolean;
 }) => (
   <div css={[flex1, fullWidth, relative()]}>
@@ -35,8 +35,8 @@ export const AnimationsList = ({
             key={animation.id}
             animation={animation}
             onPlayOnTree={() => onSelectAnimation(animation.id)}
-            onViewInEditor={() => onViewInEditor(animation.id)}
-            allowDelete={allowDelete}
+            onViewInEditor={(edit) => onViewInEditor(animation.id, edit)}
+            allowEdit={allowDelete}
           />
         ))}
       </div>
